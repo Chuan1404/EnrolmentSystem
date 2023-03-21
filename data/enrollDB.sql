@@ -1,8 +1,8 @@
 
 -- CREATE DATABASE
-CREATE DATABASE enrollment_system DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE enrolment_system DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-USE enrollment_system;
+USE enrolment_system;
 
 -- CREATE TABLES
 
