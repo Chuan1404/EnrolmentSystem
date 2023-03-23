@@ -9,6 +9,7 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="header" value="/WEB-INF/components/header.jsp" />
         <put-attribute name="content" value="" />
         <put-attribute name="footer" value="/WEB-INF/components/footer.jsp" />
+        <put-attribute name="texteditor" value="" />
     </definition>
     
     <definition name="index" extends="base">
@@ -28,5 +29,12 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="header" value="" />
         <put-attribute name="content" value="/WEB-INF/pages/register.jsp" />
         <put-attribute name="footer" value="" />
+    </definition>
+    <definition name="article" extends="base">
+        <put-attribute name="title" value="Bài viết" />
+        <put-attribute name="header" value=""/>
+        <put-attribute name="content" value="/WEB-INF/pages/article.jsp"/>
+        <put-attribute name="footer" value=""/>
+        <!--<put-attribute name="texteditor" value="/WEB-INF/components/texteditor.jsp"/>-->
     </definition>
 </tiles-definitions>
