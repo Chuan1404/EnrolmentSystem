@@ -37,4 +37,5 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="footer" value=""/>
         <!--<put-attribute name="texteditor" value="/WEB-INF/components/texteditor.jsp"/>-->
     </definition>
+    
 </tiles-definitions>

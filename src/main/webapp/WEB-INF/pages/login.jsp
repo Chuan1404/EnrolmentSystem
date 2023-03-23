@@ -8,7 +8,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<section class="vh-100" style="background-color: #9A616D;">
+<main id="loginpage">
+    <section class="vh-100" style="background-color: #9A616D;">
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col col-xl-10">
@@ -73,6 +74,7 @@
     </div>
 </section>
 
+</main>
 <style>
     #facebook-btn::before {
         /*display: none;*/
