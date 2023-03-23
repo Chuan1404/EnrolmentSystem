@@ -41,7 +41,11 @@
     </body>
     
     <!-- JS here -->
+<<<<<<< HEAD
+    <c:url var="url" value="/assets/js" />
+=======
     <c:url var="url" value="/assets/js"/>
+>>>>>>> 84aefbd931caf296d833557ebd4f29e1c1fcc40d
     <script src="${url}/vendor/modernizr-3.5.0.min.js"></script>
     <!-- Jquery, Popper, Bootstrap -->
     <script src="${url}/vendor/jquery-1.12.4.min.js"></script>
@@ -75,5 +79,8 @@
     <!-- Jquery Plugins, main Jquery -->	
     <script src="${url}/plugins.js"></script>
     <script src="${url}/main.js"></script>
+<<<<<<< HEAD
+=======
     
+>>>>>>> 84aefbd931caf296d833557ebd4f29e1c1fcc40d
 </html>
