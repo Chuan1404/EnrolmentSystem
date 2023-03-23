@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
-<main>
+<main id="homepage">
     <!-- Trending Area Start -->
     <div class="trending-area fix pt-25 gray-bg">
         <div class="container">
