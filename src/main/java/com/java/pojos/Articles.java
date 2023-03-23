@@ -6,6 +6,7 @@ package com.java.pojos;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.UUID;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -79,6 +80,10 @@ public class Articles implements Serializable {
     @ManyToOne
     private Users userId;
 
+    {
+        id = UUID.randomUUID().toString();
+    }
+    
     public Articles() {
     }
 
