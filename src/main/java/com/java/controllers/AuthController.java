@@ -25,6 +25,11 @@ public class AuthController {
 
     @Autowired
     private UsersService usersService;
+    
+//    @GetMapping(value = "/login")
+//    public String login() {
+//        return "login";
+//    }
 
     @GetMapping(value = "/register")
     public String register(Model model) {

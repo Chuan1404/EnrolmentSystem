@@ -22,7 +22,7 @@
                             <div class="card-body p-4 p-lg-5 text-black">
 
                                 <c:url var="action" value="/auth/register"/> 
-                                <form:form method="post" action="${action}" modelAttribute="user">
+                                <form:form method="post" action="${action}" modelAttribute="user" enctype="multipart/form-data">
 
                                     <div class="d-flex align-items-center mb-3 pb-1">
                                         <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
@@ -50,14 +50,14 @@
                                         <form:input type="password" path="password" id="form2Example27" class="form-control form-control-lg" />
                                         <label class="form-label" for="form2Example27">Password</label>
                                     </div>
-                                        
+
                                     <div class="form-outline mb-4">
                                         <input type="password" name="confirm" id="confirmInput" class="form-control form-control-lg" />
                                         <label class="form-label" for="confirmInput">Confirm password</label>
                                     </div>
-                                        
+
                                     <div class="form-outline mb-4">
-                                        <form:input path="avatar" id="avatarInput" class="form-control form-control-lg" />
+                                        <form:input type="file" path="file" id="avatarInput" class="form-control form-control-lg" />
                                         <label class="form-label" for="avatarInput">Avartar</label>
                                     </div>
 
