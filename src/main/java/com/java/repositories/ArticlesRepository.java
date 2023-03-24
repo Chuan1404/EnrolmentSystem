@@ -4,14 +4,19 @@
  */
 package com.java.repositories;
 
+import com.java.enums.ArticleType;
 import com.java.pojos.Articles;
+import java.util.List;
 
 /**
  *
  * @author Cuong0311
  */
 public interface ArticlesRepository {
+
     Articles getArticleById(String id);
+
     boolean saveOrUpdateArticles(Articles article);
-    
+
+    public List<Articles> getListArticleNewest(ArticleType type, int amount);
 }

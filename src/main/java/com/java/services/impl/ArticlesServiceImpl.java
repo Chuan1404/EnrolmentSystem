@@ -4,9 +4,11 @@
  */
 package com.java.services.impl;
 
+import com.java.enums.ArticleType;
 import com.java.pojos.Articles;
 import com.java.repositories.ArticlesRepository;
 import com.java.services.ArticlesService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +29,11 @@ public class ArticlesServiceImpl implements ArticlesService {
     @Override
     public boolean saveOrUpdateArticles(Articles article) {
         return articlesRepository.saveOrUpdateArticles(article);
+    }
+
+    @Override
+    public List<Articles> getListArticleNewest(ArticleType type, int amount) {
+        return articlesRepository.getListArticleNewest(type, amount);
     }
     
 }

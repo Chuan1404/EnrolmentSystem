@@ -10,8 +10,9 @@
     <!-- Whats New Start -->
     <section class="whats-news-area pt-50 pb-20 gray-bg">
         <div class="container">
-         
-           <div class="row">
+
+
+            <div class="row">
                 <div class="col-lg-8">
                     <div class="whats-news-wrapper">
                         <!-- Heading & Nav Button -->
@@ -31,72 +32,49 @@
                                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">       
                                         <div class="row">
                                             <!-- Left Details Caption -->
-                                            <div class="col-xl-6 col-lg-12">
-                                                <div class="whats-news-single mb-40 mb-40">
-                                                    <div class="whates-img">
-                                                        <img src="<c:url value="/assets/img/gallery/whats_news_details1.png" />" alt="a">
-                                                    </div>
-                                                    <div class="whates-caption">
-                                                        <h4><a href="latest_news.html">Secretart for Economic Air plane that looks like</a></h4>
-                                                        <span>by Alice cloe   -   Jun 19, 2020</span>
-                                                        <p>Struggling to sell one multi-million dollar home currently on the market won’t stop actress and singer Jennifer Lopez.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <c:forEach items="${articles}" var="article" varStatus="loop">
+                                                <c:choose>
+                                                    <c:when test="${loop.index == 0}">
+                                                        <div class="col-xl-6 col-lg-12">
+                                                            <div class="whats-news-single mb-40 mb-40">
+                                                                <div class="whates-img">
+                                                                    <img src="${article.image}" alt="a">
+                                                                </div>
+                                                                <div class="whates-caption">
+                                                                    <h4><a href="latest_news.html">Secretart for Economic Air plane that looks like</a></h4>
+
+                                                                    <span>by Alice cloe   -   Jun 19, 2020</span>
+                                                                    <p>Struggling to sell one multi-million dollar home currently on the market won’t stop actress and singer Jennifer Lopez.</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <div class="col-xl-6 col-lg-12">
+                                                            <div class="row">
+                                                                <!-- single -->
+                                                                <div class="col-xl-12 col-lg-6 col-md-6 col-sm-10">
+                                                                    <div class="whats-right-single mb-20">
+                                                                        <div class="whats-right-img">
+                                                                            <img src="${article.image}" alt="">
+                                                                        </div>
+                                                                        <div class="whats-right-cap">
+                                                                            <span class="colorb">FASHION</span>
+                                                                            <h4><a href="latest_news.html">Portrait of group of friends ting eat. market in.</a></h4>
+                                                                            <p>Jun 19, 2020</p> 
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </c:otherwise>
+                                                </c:choose>
+
+
+                                            </c:forEach>
+
                                             <!-- Right single caption -->
-                                            <div class="col-xl-6 col-lg-12">
-                                                <div class="row">
-                                                    <!-- single -->
-                                                    <div class="col-xl-12 col-lg-6 col-md-6 col-sm-10">
-                                                        <div class="whats-right-single mb-20">
-                                                            <div class="whats-right-img">
-                                                                <img src="<c:url value="/assets/img/gallery/whats_right_img1.png" />" alt="">
-                                                            </div>
-                                                            <div class="whats-right-cap">
-                                                                <span class="colorb">FASHION</span>
-                                                                <h4><a href="latest_news.html">Portrait of group of friends ting eat. market in.</a></h4>
-                                                                <p>Jun 19, 2020</p> 
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xl-12 col-lg-6 col-md-6 col-sm-10">
-                                                        <div class="whats-right-single mb-20">
-                                                            <div class="whats-right-img">
-                                                                <img src="<c:url value="/assets/img/gallery/whats_right_img2.png"/>" alt="">
-                                                            </div>
-                                                            <div class="whats-right-cap">
-                                                                <span class="colorb">FASHION</span>
-                                                                <h4><a href="latest_news.html">Portrait of group of friends ting eat. market in.</a></h4>
-                                                                <p>Jun 19, 2020</p> 
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xl-12 col-lg-6 col-md-6 col-sm-10">
-                                                        <div class="whats-right-single mb-20">
-                                                            <div class="whats-right-img">
-                                                                <img src="<c:url value="/assets/img/gallery/whats_right_img3.png" />" alt="">
-                                                            </div>
-                                                            <div class="whats-right-cap">
-                                                                <span class="colorg">FASHION</span>
-                                                                <h4><a href="latest_news.html">Portrait of group of friends ting eat. market in.</a></h4>
-                                                                <p>Jun 19, 2020</p> 
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xl-12 col-lg-6 col-md-6 col-sm-10">
-                                                        <div class="whats-right-single mb-20">
-                                                            <div class="whats-right-img">
-                                                               <img src="<c:url value="/assets/img/gallery/whats_right_img4.png" />" alt="">
-                                                            </div>
-                                                            <div class="whats-right-cap">
-                                                                <span class="colorr">FASHION</span>
-                                                                <h4><a href="latest_news.html">Portrait of group of friends ting eat. market in.</a></h4>
-                                                                <p>Jun 19, 2020</p> 
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -109,6 +87,7 @@
                         <img src="assets/img/gallery/body_card1.png" alt="">
                     </div>
                 </div>
+
                 <div class="col-lg-4">
                     <!-- Most Recent Area -->
                     <div class="most-recent-area">
@@ -151,6 +130,8 @@
                     </div>
                 </div>
             </div>
+
+
         </div>
     </section>
 </main>
