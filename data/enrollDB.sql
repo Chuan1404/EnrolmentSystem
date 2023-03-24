@@ -11,7 +11,7 @@ CREATE TABLE `users` (
     `username` VARCHAR(50) UNIQUE NOT NULL,
     `password` VARCHAR(50) NOT NULL,
     `name` VARCHAR(50) NOT NULL,
-    `avatar` VARCHAR(200) NOT NULL,
+    `avatar` TEXT NOT NULL,
     `email` VARCHAR(100) NOT NULL,
     `user_role` VARCHAR(30) NOT NULL,
     PRIMARY KEY (`id`)
@@ -21,6 +21,8 @@ CREATE TABLE `articles`(
 	`id` VARCHAR(50) NOT NULL,
     `title` VARCHAR(50) NOT NULL,
     `content` TEXT NOT NULL,
+    `description` TEXT NOT NULL,
+    `image` TEXT NOT NULL,
     `created_date` DATE NOT NULL,
     `update_date` DATE NOT NULL,
     `article_type` VARCHAR(100) NOT NULL,
@@ -84,9 +86,9 @@ INSERT INTO `comments` (`id`, `content`, `created_date`, `user_id`, `base_commen
 INSERT INTO `comments` (`id`, `content`, `created_date`, `user_id`, `base_comment_id`) VALUES ('2', 'Mình tên là Florentilo', '2023-03-22', 'UgT5veP8Nc8HUoGva1Kc', '1');
 
 
-INSERT INTO `articles` (`id`, `title`, `content`, `created_date`, `update_date`, `article_type`, `user_id`) VALUES ('XRddcyw24gYJ40miY0xc', 'Tuyển sinh đại học chính quy', '<h1>THÔNG TIN TUYỂN SINH CẦN CHÚ Ý </h1>', '2023-02-28', '2023-03-01', 'CHINHQUY', 'UgT5veP8Nc8HUoGva1Kc');
-INSERT INTO `articles` (`id`, `title`, `content`, `created_date`, `update_date`, `article_type`, `user_id`) VALUES ('mwrybLN4ScPZDTZUgu1S', 'Tuyển sinh văn bằng 2', '<h1>THÔNG TIN TUYỂN SINH VĂN BẰNG 2</h1>', '2023-02-01', '2023-02-20', 'VB2', 'I4esDB8GDWMcVW40uA6x');
-INSERT INTO `articles` (`id`, `title`, `content`, `created_date`, `update_date`, `article_type`, `user_id`) VALUES ('cMgQIwJuYNX6A6G1HfFu', 'Thông tin khoa quản trị kinh doanh', '<h1>Tìm hiểu về quản trị kinh doanh</h1>', '2002-11-19', '2023-03-03', 'KHOA', 'UgT5veP8Nc8HUoGva1Kc');
+INSERT INTO `articles` (`id`, `title`, `content`, `description`, `image`, `created_date`, `update_date`, `article_type`, `user_id`) VALUES ('XRddcyw24gYJ40miY0xc', 'Tuyển sinh đại học chính quy', '<h1>THÔNG TIN TUYỂN SINH CẦN CHÚ Ý </h1>', '<p>Struggling to sell one multi-million dollar home currently on the market won’t stop actress and singer Jennifer Lopez.</p>', 'https://res.cloudinary.com/dis95mx4d/image/upload/v1668643889/sample.jpg', '2023-02-28', '2023-03-01', 'CHINHQUY', 'UgT5veP8Nc8HUoGva1Kc');
+INSERT INTO `articles` (`id`, `title`, `content`, `description`, `image`, `created_date`, `update_date`, `article_type`, `user_id`) VALUES ('mwrybLN4ScPZDTZUgu1S', 'Tuyển sinh văn bằng 2', '<h1>THÔNG TIN TUYỂN SINH VĂN BẰNG 2</h1>', '<p>Struggling to sell one multi-million dollar home currently on the market won’t stop actress and singer Jennifer Lopez.</p>', 'https://res.cloudinary.com/dis95mx4d/image/upload/v1668643889/sample.jpg', '2023-02-01', '2023-02-20', 'VB2', 'I4esDB8GDWMcVW40uA6x');
+INSERT INTO `articles` (`id`, `title`, `content`, `description`, `image`, `created_date`, `update_date`, `article_type`, `user_id`) VALUES ('cMgQIwJuYNX6A6G1HfFu', 'Thông tin khoa quản trị kinh doanh', '<h1>Tìm hiểu về quản trị kinh doanh</h1>', '<p>Struggling to sell one multi-million dollar home currently on the market won’t stop actress and singer Jennifer Lopez.</p>', 'https://res.cloudinary.com/dis95mx4d/image/upload/v1668643889/sample.jpg', '2002-11-19', '2023-03-03', 'KHOA', 'UgT5veP8Nc8HUoGva1Kc');
 
 
 INSERT INTO `faculties` (`id`, `name`, `article_id`) VALUES ('1', 'Quản trị kinh doanh', 'XRddcyw24gYJ40miY0xc');
