@@ -5,6 +5,6 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<main id="article-detailpage">
-    <h1>article-detailpage</h1>
+<main id="enrolment-detailpage">
+    <h1>enrolment-detailpage</h1>
 </main>

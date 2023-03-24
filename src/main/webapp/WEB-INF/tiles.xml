@@ -25,7 +25,7 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
     </definition>-->
     
     <definition name="register" extends="base">
-        <put-attribute name="title" value="Đăng ký" />
+        <put-attribute name="title" value="Resgister" />
         <put-attribute name="header" value="" />
         <put-attribute name="content" value="/WEB-INF/pages/register.jsp" />
         <put-attribute name="footer" value="" />
@@ -37,5 +37,8 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="footer" value=""/>
         <!--<put-attribute name="texteditor" value="/WEB-INF/components/texteditor.jsp"/>-->
     </definition>
-    
+    <definition name="enrolment" extends="base">
+        <put-attribute name="title" value="Enrolment" />
+        <put-attribute name="content" value="/WEB-INF/pages/enrolment.jsp"/>
+    </definition>
 </tiles-definitions>

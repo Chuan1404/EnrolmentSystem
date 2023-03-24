@@ -4,6 +4,7 @@
     Author     : AnChuPC
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <footer>
@@ -17,7 +18,7 @@
                             <div class="single-footer-caption mb-30">
                                 <!-- logo -->
                                 <div class="footer-logo">
-                                    <a href="index.html"><img src="assets/img/logo/logo2_footer.png" alt=""></a>
+                                    <a href="index.html"><img src="<c:url value="/assets/img/logo/logo2_footer.png" />" alt=""></a>
                                 </div>
                                 <div class="footer-tittle">
                                     <div class="footer-pera">
@@ -37,7 +38,7 @@
                             <!-- Popular post -->
                             <div class="whats-right-single mb-20">
                                 <div class="whats-right-img">
-                                    <img src="assets/img/gallery/footer_post1.png" alt="">
+                                    <img src="<c:url value="/assets/img/gallery/footer_post1.png" />" alt="">
                                 </div>
                                 <div class="whats-right-cap">
                                     <h4><a href="latest_news.html">Scarlett’s disappointment at latest accolade</a></h4>
@@ -47,7 +48,7 @@
                             <!-- Popular post -->
                             <div class="whats-right-single mb-20">
                                 <div class="whats-right-img">
-                                    <img src="assets/img/gallery/footer_post2.png" alt="">
+                                     <img src="<c:url value="/assets/img/gallery/footer_post2.png" />" alt="">
                                 </div>
                                 <div class="whats-right-cap">
                                     <h4><a href="latest_news.html">Scarlett’s disappointment at latest accolade</a></h4>
@@ -57,7 +58,7 @@
                             <!-- Popular post -->
                             <div class="whats-right-single mb-20">
                                 <div class="whats-right-img">
-                                    <img src="assets/img/gallery/footer_post3.png" alt="">
+                                     <img src="<c:url value="/assets/img/gallery/footer_post3.png" />" alt="">
                                 </div>
                                 <div class="whats-right-cap">
                                     <h4><a href="latest_news.html">Scarlett’s disappointment at latest accolade</a></h4>
@@ -69,7 +70,7 @@
                     <div class="col-xl-3 col-lg-3 col-md-5 col-sm-7">
                         <div class="single-footer-caption mb-50">
                             <div class="banner">
-                                <img src="assets/img/gallery/body_card4.png" alt="">
+                                 <img src="<c:url value="/assets/img/gallery/body_card4.png" />" alt="">
                             </div>
                         </div>
                     </div>
