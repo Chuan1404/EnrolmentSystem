@@ -84,7 +84,7 @@ CREATE TABLE `homepage` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`content` TEXT NOT NULL,
 	`banner_id` INT NOT NULL,
-	`video` VARCHAR(255) DEFAULT NULL,
+	`video` VARCHAR(50) DEFAULT NULL,
 	PRIMARY KEY (`id`),
 	CONSTRAINT fk_homepage_banner_id_banners FOREIGN KEY (`banner_id`) REFERENCES `banners` (`id`) ON DELETE CASCADE,
 	CONSTRAINT uq_homepage_banner_id UNIQUE(`banner_id`)
