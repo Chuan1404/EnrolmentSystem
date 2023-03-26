@@ -30,16 +30,18 @@
         <link rel="stylesheet" href="<c:url value="/css/themify-icons.css" />">
         <link rel="stylesheet" href="<c:url value="/css/slick.css" />">
         <link rel="stylesheet" href="<c:url value="/css/nice-select.css" />">
+        <link rel="stylesheet" href="<c:url value="/css/comment.css" />">
         <link rel="stylesheet" href="<c:url value="/css/style.css" />">
 
     </head>
     <body>
         <tiles:insertAttribute name="header" />
         <tiles:insertAttribute name="content" />
+        <tiles:insertAttribute name="comment" />
         <tiles:insertAttribute name="footer" />
         <tiles:insertAttribute name="texteditor"/>
     </body>
-    
+
     <!-- JS here -->
 
     <c:url var="url" value="/assets/js" />
@@ -68,14 +70,14 @@
     <script src="${url}/jquery.scrollUp.min.js"></script>
     <script src="${url}/jquery.nice-select.min.js"></script>
     <script src="${url}/jquery.sticky.js"></script>
-    
+
     <!-- contact js -->
     <script src="${url}/contact.js"></script>
     <script src="${url}/jquery.form.js"></script>
     <script src="${url}/jquery.validate.min.js"></script>
     <script src="${url}/mail-script.js"></script>
     <script src="${url}/jquery.ajaxchimp.min.js"></script>
-    
+
     <!-- Jquery Plugins, main Jquery -->	
     <script src="${url}/plugins.js"></script>
     <script src="${url}/main.js"></script>
