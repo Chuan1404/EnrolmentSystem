@@ -8,6 +8,7 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="title" value="" />
         <put-attribute name="header" value="/WEB-INF/components/header.jsp" />
         <put-attribute name="content" value="" />
+        <put-attribute name="comment" value="" />
         <put-attribute name="footer" value="/WEB-INF/components/footer.jsp" />
         <put-attribute name="texteditor" value="" />
     </definition>
@@ -25,7 +26,7 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
     </definition>-->
     
     <definition name="register" extends="base">
-        <put-attribute name="title" value="Đăng ký" />
+        <put-attribute name="title" value="Resgister" />
         <put-attribute name="header" value="" />
         <put-attribute name="content" value="/WEB-INF/pages/register.jsp" />
         <put-attribute name="footer" value="" />
@@ -33,9 +34,17 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
     <definition name="article" extends="base">
         <put-attribute name="title" value="Bài viết" />
         <put-attribute name="header" value=""/>
-        <put-attribute name="content" value="/WEB-INF/components/article.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/pages/article.jsp"/>
         <put-attribute name="footer" value=""/>
         <!--<put-attribute name="texteditor" value="/WEB-INF/components/texteditor.jsp"/>-->
     </definition>
-    
+    <definition name="enrolment" extends="base">
+        <put-attribute name="title" value="Enrolment" />
+        <put-attribute name="content" value="/WEB-INF/pages/enrolment.jsp"/>
+    </definition>
+    <definition name="enrolment-detail" extends="base">
+        <put-attribute name="title" value="Enrolment" />
+        <put-attribute name="content" value="/WEB-INF/pages/enrolment-detail.jsp"/>
+        <put-attribute name="comment" value="/WEB-INF/components/comment.jsp" />
+    </definition>
 </tiles-definitions>

@@ -61,6 +61,18 @@ public class Articles implements Serializable {
     private String content;
     @Basic(optional = false)
     @NotNull
+    @Lob
+    @Size(min = 1, max = 65535)
+    @Column(name = "description")
+    private String description;
+    @Basic(optional = false)
+    @NotNull
+    @Lob
+    @Size(min = 1, max = 65535)
+    @Column(name = "image")
+    private String image;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "created_date")
     @Temporal(TemporalType.DATE)
     private Date createdDate;
@@ -91,10 +103,12 @@ public class Articles implements Serializable {
         this.id = id;
     }
 
-    public Articles(String id, String title, String content, Date createdDate, Date updateDate, String articleType) {
+    public Articles(String id, String title, String content, String description, String image, Date createdDate, Date updateDate, String articleType) {
         this.id = id;
         this.title = title;
         this.content = content;
+        this.description = description;
+        this.image = image;
         this.createdDate = createdDate;
         this.updateDate = updateDate;
         this.articleType = articleType;
@@ -122,6 +136,22 @@ public class Articles implements Serializable {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public Date getCreatedDate() {

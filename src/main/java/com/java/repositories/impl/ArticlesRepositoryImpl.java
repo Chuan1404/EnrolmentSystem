@@ -4,8 +4,10 @@
  */
 package com.java.repositories.impl;
 
+import com.java.enums.ArticleType;
 import com.java.pojos.Articles;
 import com.java.repositories.ArticlesRepository;
+import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -24,7 +26,8 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
-public class ArticlesRepositoryImpl implements ArticlesRepository{
+public class ArticlesRepositoryImpl implements ArticlesRepository {
+
     @Autowired
     private LocalSessionFactoryBean sessionFactory;
 
@@ -46,11 +49,25 @@ public class ArticlesRepositoryImpl implements ArticlesRepository{
         Session s = sessionFactory.getObject().getCurrentSession();
         try {
             s.save(article);
-        }
-        catch (HibernateException ex) {
+        } catch (HibernateException ex) {
             return false;
         }
         return true;
     }
-    
+
+    @Override
+    public List<Articles> getListArticleNewest(ArticleType type, int amount) {
+        Session s = sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = s.getCriteriaBuilder();
+        CriteriaQuery<Articles> query = builder.createQuery(Articles.class);
+        Root root = query.from(Articles.class);
+
+        query.select(root);
+        query.where(builder.equal(root.get("articleType").as(String.class), type.name()));
+        
+        Query q = s.createQuery(query);
+        q.setMaxResults(amount);
+        return q.getResultList();
+    }
+
 }
