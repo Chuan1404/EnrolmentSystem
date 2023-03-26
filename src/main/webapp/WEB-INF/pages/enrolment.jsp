@@ -40,11 +40,11 @@
                                                             <img src="${article.data[0].image}" alt="a">
                                                         </div>
                                                         <div class="whates-caption">
-                                                            <!--<h4><a href="latest_news.html">Secretart for Economic Air plane that looks like</a></h4>-->
-                                                            ${article.data[0].title}
+                                                            <h4><a href="${article.data[0].id}"> ${article.data[0].title}</a></h4>
+                                                           
                                                             <span>by Alice cloe   -   Jun 19, 2020</span>
-                                                            <!--<p>Struggling to sell one multi-million dollar home currently on the market won’t stop actress and singer Jennifer Lopez.</p>-->
-                                                            ${article.data[0].description}
+                                                            <p>${article.data[0].description}</p>
+                                                            
                                                         </div>
                                                     </div>
                                                 </div>
@@ -59,8 +59,8 @@
                                                                 </div>
                                                                 <div class="whats-right-cap">
                                                                     <span class="colorb">FASHION</span>
-                                                                    <!--<h4><a href="latest_news.html">Portrait of group of friends ting eat. market in.</a></h4>-->
-                                                                    ${article.data.get(i).title}
+                                                                    <h4><a href="${article.data.get(i).id}">${article.data.get(i).title}</a></h4>
+                                                                    
                                                                     <p>Jun 19, 2020</p> 
                                                                 </div>
                                                             </div>
@@ -69,6 +69,11 @@
                                                         <% }%>
 
                                                     </div>
+                                                    <div class="row">
+                                                        <div class="col-xl-12 col-lg-6 col-md-6 col-sm-10 text-right">
+                                                            <a href="" style="color: #000000">Xem thêm >></a>
+                                                        </div>
+                                                    </div>            
                                                 </div>
 
                                                 <!-- Right single caption -->
@@ -80,55 +85,54 @@
                                 </div>
                             </div>
                         </div>
-
-                    <!-- Banner -->
-                    <div class="banner-one mt-20 mb-30">
-                        <img src="assets/img/gallery/body_card1.png" alt="">
-                    </div>
-                </div>
-
-                <div class="col-lg-4">
-                    <!-- Most Recent Area -->
-                    <div class="most-recent-area">
-                        <!-- Section Tittle -->
-                        <div class="small-tittle mb-20">
-                            <h4>Most Recent</h4>
+                        <!-- Banner -->
+                        <div class="banner-one mt-20 mb-30">
+                            <img src="assets/img/gallery/body_card1.png" alt="">
                         </div>
-                        <!-- Details -->
-                        <div class="most-recent mb-40">
-                            <div class="most-recent-img">
-                                <img src="<c:url value="/assets/img/gallery/most_recent.png" />" alt="">
-                                <div class="most-recent-cap">
-                                    <span class="bgbeg">Vogue</span>
-                                    <h4><a href="latest_news.html">What to Wear: 9+ Cute Work <br>
-                                            Outfits to Wear This.</a></h4>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <!-- Most Recent Area -->
+                        <div class="most-recent-area">
+                            <!-- Section Tittle -->
+                            <div class="small-tittle mb-20">
+                                <h4>Most Recent</h4>
+                            </div>
+                            <!-- Details -->
+                            <div class="most-recent mb-40">
+                                <div class="most-recent-img">
+                                    <img src="<c:url value="/assets/img/gallery/most_recent.png" />" alt="">
+                                    <div class="most-recent-cap">
+                                        <span class="bgbeg">Vogue</span>
+                                        <h4><a href="latest_news.html">What to Wear: 9+ Cute Work <br>
+                                                Outfits to Wear This.</a></h4>
+                                        <p>Jhon  |  2 hours ago</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Single -->
+                            <div class="most-recent-single">
+                                <div class="most-recent-images">
+                                    <img src="<c:url value="/assets/img/gallery/most_recent1.png" />" alt="">
+                                </div>
+                                <div class="most-recent-capt">
+                                    <h4><a href="latest_news.html">Scarlett’s disappointment at latest accolade</a></h4>
                                     <p>Jhon  |  2 hours ago</p>
                                 </div>
                             </div>
-                        </div>
-                        <!-- Single -->
-                        <div class="most-recent-single">
-                            <div class="most-recent-images">
-                                <img src="<c:url value="/assets/img/gallery/most_recent1.png" />" alt="">
-                            </div>
-                            <div class="most-recent-capt">
-                                <h4><a href="latest_news.html">Scarlett’s disappointment at latest accolade</a></h4>
-                                <p>Jhon  |  2 hours ago</p>
-                            </div>
-                        </div>
-                        <!-- Single -->
-                        <div class="most-recent-single">
-                            <div class="most-recent-images">
-                                <img src="<c:url value="/assets/img/gallery/most_recent2.png" />" alt="">
-                            </div>
-                            <div class="most-recent-capt">
-                                <h4><a href="latest_news.html">Most Beautiful Things to Do in Sidney with Your BF</a></h4>
-                                <p>Jhon  |  3 hours ago</p>
+                            <!-- Single -->
+                            <div class="most-recent-single">
+                                <div class="most-recent-images">
+                                    <img src="<c:url value="/assets/img/gallery/most_recent2.png" />" alt="">
+                                </div>
+                                <div class="most-recent-capt">
+                                    <h4><a href="latest_news.html">Most Beautiful Things to Do in Sidney with Your BF</a></h4>
+                                    <p>Jhon  |  3 hours ago</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                                                </c:forEach>
+                </c:forEach>
 
             </div>
 
