@@ -41,4 +41,8 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="title" value="Enrolment" />
         <put-attribute name="content" value="/WEB-INF/pages/enrolment.jsp"/>
     </definition>
+    <definition name="enrolment-detail" extends="base">
+        <put-attribute name="title" value="Enrolment" />
+        <put-attribute name="content" value="/WEB-INF/pages/enrolment-detail.jsp"/>
+    </definition>
 </tiles-definitions>
