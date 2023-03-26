@@ -4,45 +4,25 @@
     Author     : AnChuPC
 --%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<c:url var="url" value="/"/>
+
 <header>
     <!-- Header Start -->
     <div class="header-area">
         <div class="main-header ">
-            <div class="header-top black-bg d-none d-sm-block">
-                <div class="container">
-                    <div class="col-xl-12">
-                        <div class="row d-flex justify-content-between align-items-center">
-                            <div class="header-info-left">
-                                <ul>     
-                                    <li class="title"><span class="flaticon-energy"></span> trending-title</li>
-                                    <li>Class property employ ancho red multi level mansion</li>
-                                </ul>
-                            </div>
-                            <div class="header-info-right">
-                                <ul class="header-date">
-                                    <li><span class="flaticon-calendar"></span> +880166 253 232</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="header-mid gray-bg">
                 <div class="container">
                     <div class="row d-flex align-items-center">
                         <!-- Logo -->
                         <div class="col-xl-3 col-lg-3 col-md-3 d-none d-md-block">
                             <div class="logo">
-                                <a href="${url}"><img src="${url}assets/img/logo/logo.png" alt=""></a>
+                                <a href="index.html"><img src="assets/img/logo/logo.png" alt=""></a>
                             </div>
                         </div>
                         <div class="col-xl-9 col-lg-9 col-md-9">
                             <div class="header-banner f-right ">
-                                <img src="${url}assets/img/gallery/header_card.png" alt="">
+                                <img src="assets/img/gallery/header_card.png" alt="">
                             </div>
                         </div>
                     </div>
@@ -54,14 +34,16 @@
                         <div class="col-xl-8 col-lg-8 col-md-12 header-flex">
                             <!-- sticky -->
                             <div class="sticky-logo">
-                                <a href="index.html"><img src="${url}assets/img/logo/logo.png" alt=""></a>
+                                <a href="index.html"><img src="assets/img/logo/logo.png" alt=""></a>
                             </div>
                             <!-- Main-menu -->
                             <div class="main-menu d-none d-md-block">
                                 <nav>                  
                                     <ul id="navigation">
-                                        <li><a href="${url}">Home</a></li>
-                                        <li><a href="${url}enrolment/">Enrolment</a></li>
+                                        <li><a href="index.html">TRANG CHỦ</a></li>
+                                        
+                                        <li><a href="categori.html">THÔNG TIN TUYỂN SINH</a></li>
+                                            <li><a href="latest_news.html">THÔNG TIN KHOA</a></li>
 <!--                                        <li><a href="#">Pages</a>
                                             <ul class="submenu">
                                                 <li><a href="blog.html">Blog</a></li>
@@ -69,6 +51,7 @@
                                                 <li><a href="elements.html">Element</a></li>
                                             </ul>
                                         </li>-->
+                                        
                                     </ul>
                                 </nav>
                             </div>

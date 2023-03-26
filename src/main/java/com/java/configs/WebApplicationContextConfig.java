@@ -45,6 +45,8 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
                 .addResourceLocations("/resources/assets/img/");
         registry.addResourceHandler("/assets/js/**")
                 .addResourceLocations("/resources/assets/js/");
+        registry.addResourceHandler("/video/**")
+                .addResourceLocations("/resources/assets/video/");
 
     }
 
