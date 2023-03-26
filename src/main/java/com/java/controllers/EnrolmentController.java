@@ -7,7 +7,10 @@ package com.java.controllers;
 import com.java.enums.ArticleType;
 import com.java.pojos.Articles;
 import com.java.services.ArticlesService;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,16 +24,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping(value = "/enrolment")
 public class EnrolmentController {
-    
+
     @Autowired
     private ArticlesService articlesService;
-    
+
     @GetMapping(value = "/")
     public String index(Model model) {
-        List<Articles> listArticles = articlesService.getListArticleNewest(ArticleType.CHINH_QUY, 5);
-        System.out.println(listArticles);
-        
-        model.addAttribute("articles", listArticles);
+        List<Map<String, Object>> articleList = new ArrayList<>();
+        for (ArticleType type : ArticleType.values()) {
+            if (type != ArticleType.HOME) {
+                Map<String, Object> map = new HashMap<>();
+                map.put("title", ArticleType.convertToString(type));
+                map.put("data", articlesService.getListArticleNewest(type, 5));
+
+                articleList.add(map);
+            }
+        }
+        model.addAttribute("articleList", articleList);
         return "enrolment";
     }
 }
