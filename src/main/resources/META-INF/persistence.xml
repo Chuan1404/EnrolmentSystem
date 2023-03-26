@@ -8,6 +8,9 @@
     <class>com.java.pojos.Users</class>
     <class>com.java.pojos.Faculties</class>
     <class>com.java.pojos.Questions</class>
+    <class>com.java.pojos.Homepage</class>
+    <class>com.java.pojos.Images</class>
+    <class>com.java.pojos.Banners</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/enrolment_system?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
