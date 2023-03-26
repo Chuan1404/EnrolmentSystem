@@ -63,7 +63,9 @@ public class ArticlesRepositoryImpl implements ArticlesRepository {
         Root root = query.from(Articles.class);
 
         query.select(root);
-        query.where(builder.equal(root.get("articleType").as(String.class), type.name()));
+        query.where(builder.equal(root.get("articleType").as(String.class), type.toString()));
+        
+        
         
         Query q = s.createQuery(query);
         q.setMaxResults(amount);

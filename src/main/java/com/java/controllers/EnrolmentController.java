@@ -33,24 +33,21 @@ public class EnrolmentController {
     public String index(Model model) {
         List<Map<String, Object>> articleList = new ArrayList<>();
         for (ArticleType type : ArticleType.values()) {
-            if (type != ArticleType.HOME) {
-                Map<String, Object> map = new HashMap<>();
-                map.put("title", ArticleType.convertToString(type));
-                map.put("data", articlesService.getListArticleNewest(type, 5));
-
-                articleList.add(map);
-            }
+            Map<String, Object> map = new HashMap<>();
+            map.put("title", ArticleType.convertToString(type));
+            map.put("data", articlesService.getListArticleNewest(type, 5));
+            articleList.add(map);
         }
         model.addAttribute("articleList", articleList);
         return "enrolment";
     }
-    
+
     @GetMapping(value = "/{id}")
     public String detail(Model model, @PathVariable(value = "id") String id) {
         Articles article = articlesService.getArticleById(id);
-        
+
         model.addAttribute("article", article);
-        
+
         return "enrolment-detail";
     }
 }

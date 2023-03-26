@@ -1,6 +1,6 @@
 <%-- 
     Document   : base
-    Created on : Mar 20, 2023, 12:33:26 PM
+    Created on : Mar 26, 2023, 3:07:50 PM
     Author     : AnChuPC
 --%>
 
@@ -32,20 +32,13 @@
         <link rel="stylesheet" href="<c:url value="/css/nice-select.css" />">
         <link rel="stylesheet" href="<c:url value="/css/comment.css" />">
         <link rel="stylesheet" href="<c:url value="/css/style.css" />">
-
     </head>
     <body>
-        <tiles:insertAttribute name="header" />
+        <%--<tiles:insertAttribute name="content" />--%>
         <tiles:insertAttribute name="content" />
-        <tiles:insertAttribute name="comment" />
-        <tiles:insertAttribute name="footer" />
-        <tiles:insertAttribute name="texteditor"/>
     </body>
-
-    <!-- JS here -->
-
-    <c:url var="url" value="/assets/js" />
-
+    
+    <c:url var="url" value="/assets/js"/>
     <script src="${url}/vendor/modernizr-3.5.0.min.js"></script>
     <!-- Jquery, Popper, Bootstrap -->
     <script src="${url}/vendor/jquery-1.12.4.min.js"></script>
@@ -79,5 +72,4 @@
     <!-- Jquery Plugins, main Jquery -->	
     <script src="${url}/plugins.js"></script>
     <script src="${url}/main.js"></script>
-
 </html>

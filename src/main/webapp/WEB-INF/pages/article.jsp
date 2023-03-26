@@ -13,21 +13,17 @@
     <form:textarea path="content"></form:textarea> <!--the form:textarea phai khong co value o trong  -->
     <form:button type="submit" value="GUI"/>
 </form:form>
-    
-    <!-- import thu vien -->
+
+<!-- import thu vien -->
 <script src="https://cdn.tiny.cloud/1/hkiir3w66qsfdv856ttemmqztxxfkcpgkr1ebc69har0t88n/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 
 <script>
     tinymce.init({
-      selector: 'textarea#content', // chon textarea de sua
-       plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tableofcontents footnotes mergetags autocorrect typography inlinecss',
-      toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | emoticons charmap | removeformat'
-     
-      
+        selector: 'textarea#content', // chon textarea de sua
+        plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tableofcontents footnotes mergetags autocorrect typography inlinecss',
+        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | emoticons charmap | removeformat'
     });
-    
-   
-  </script>
-    
-    
+</script>
+
+
 

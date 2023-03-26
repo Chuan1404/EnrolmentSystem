@@ -47,4 +47,13 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="content" value="/WEB-INF/pages/enrolment-detail.jsp"/>
         <put-attribute name="comment" value="/WEB-INF/components/comment.jsp" />
     </definition>
+    
+    <!--Admin page here-->
+    <definition name="admin-base" template="/WEB-INF/components/admin-base.jsp">
+        <put-attribute name="title" value="Admin page"/>
+        <put-attribute name="content" value=""/>
+    </definition>
+    <definition name="admin-article" extends="admin-base">
+        <put-attribute name="content" value="/WEB-INF/admin/article.jsp"/>
+    </definition>
 </tiles-definitions>

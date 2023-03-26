@@ -41,33 +41,31 @@
                                                         </div>
                                                         <div class="whates-caption">
                                                             <h4><a href="${article.data[0].id}"> ${article.data[0].title}</a></h4>
-                                                           
+
                                                             <span>by Alice cloe   -   Jun 19, 2020</span>
                                                             <p>${article.data[0].description}</p>
-                                                            
+
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-6 col-lg-12">
                                                     <div class="row">
-                                                        <% for (int i = 1; i < 5; i++) {%>
-                                                        <!-- single -->
-                                                        <div class="col-xl-12 col-lg-6 col-md-6 col-sm-10">
-                                                            <div class="whats-right-single mb-20">
-                                                                <div class="whats-right-img">
-                                                                    <img src="${article.data.get(i).image}" alt="">
-                                                                </div>
-                                                                <div class="whats-right-cap">
-                                                                    <span class="colorb">FASHION</span>
-                                                                    <h4><a href="${article.data.get(i).id}">${article.data.get(i).title}</a></h4>
-                                                                    
-                                                                    <p>Jun 19, 2020</p> 
+                                                        <c:forEach items="${article.data}" var="item" begin="1">
+                                                            <!-- single -->
+                                                            <div class="col-xl-12 col-lg-6 col-md-6 col-sm-10">
+                                                                <div class="whats-right-single mb-20">
+                                                                    <div class="whats-right-img">
+                                                                        <img src="${item.image}" alt="">
+                                                                    </div>
+                                                                    <div class="whats-right-cap">
+                                                                        <span class="colorb">FASHION</span>
+                                                                        <h4><a href="${item.id}">${item.title}</a></h4>
+
+                                                                        <p>Jun 19, 2020</p> 
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-
-                                                        <% }%>
-
+                                                        </c:forEach>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-xl-12 col-lg-6 col-md-6 col-sm-10 text-right">
