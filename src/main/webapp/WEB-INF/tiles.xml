@@ -59,4 +59,7 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
     <definition name="admin-article" extends="admin-base">
         <put-attribute name="content" value="/WEB-INF/admin/article.jsp"/>
     </definition>
+    <definition name="admin-homepage" extends="admin-base">
+        <put-attribute name="content" value="/WEB-INF/admin/homepage.jsp"/>
+    </definition>
 </tiles-definitions>
