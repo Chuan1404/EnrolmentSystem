@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -42,6 +43,19 @@ public class EnrolmentController {
         return "enrolment";
     }
 
+    @GetMapping(value = "/type/{type}")
+    public String type(Model model, @PathVariable(value = "type") String type, @RequestParam(value = "page", required = false) String page) {
+
+        Map<String, String> params = new HashMap<>();
+        params.put("articleType", type);
+
+        List articleList = articlesService.getArticles(params);
+
+        model.addAttribute("articleType", articleList);
+
+        return "enrolment-list";
+    }
+
     @GetMapping(value = "/{id}")
     public String detail(Model model, @PathVariable(value = "id") String id) {
         Articles article = articlesService.getArticleById(id);
@@ -50,4 +64,5 @@ public class EnrolmentController {
 
         return "enrolment-detail";
     }
+
 }

@@ -69,7 +69,7 @@
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-xl-12 col-lg-6 col-md-6 col-sm-10 text-right">
-                                                            <a href="" style="color: #000000">Xem thêm >></a>
+                                                            <a href="<c:url value="/enrolment/type/${article.data[0].articleType}" />" style="color: #000000">Xem thêm >></a>
                                                         </div>
                                                     </div>            
                                                 </div>

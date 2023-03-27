@@ -5,7 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri= "http://java.sun.com/jsp/jstl/core" %>
 
+<c:url var="url" value="/" />
 <footer>
     <!-- Footer Start-->
     <div class="footer-main footer-bg">
@@ -17,7 +19,7 @@
                             <div class="single-footer-caption mb-30">
                                 <!-- logo -->
                                 <div class="footer-logo">
-                                    <a href="index.html"><img src="assets/img/logo/logo.png" alt=""></a>
+                                    <a href="index.html"><img src="${url}assets/img/logo/logo.png" alt=""></a>
                                     <h3 class="text-light">Trường Đại học Mở thành phố Hồ Chí Minh</h3>
                                 </div>
                                 <div class="footer-tittle">
@@ -34,7 +36,7 @@
                     <div class="col-xl-9 col-lg-9 col-md-7 col-sm-4">
                         <div class="single-footer-caption mb-50">
                             <div class="banner">
-                                <img src="assets/img/gallery/tuyen_sinh.png" alt="">
+                                <img src="${url}assets/img/gallery/tuyen_sinh.png" alt="">
                             </div>
                         </div>
                     </div>

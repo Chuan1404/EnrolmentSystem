@@ -7,10 +7,13 @@ package com.java.repositories.impl;
 import com.java.enums.ArticleType;
 import com.java.pojos.Articles;
 import com.java.repositories.ArticlesRepository;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.hibernate.HibernateException;
@@ -64,11 +67,52 @@ public class ArticlesRepositoryImpl implements ArticlesRepository {
 
         query.select(root);
         query.where(builder.equal(root.get("articleType").as(String.class), type.toString()));
-        
-        
-        
+
         Query q = s.createQuery(query);
         q.setMaxResults(amount);
+        return q.getResultList();
+    }
+
+    @Override
+    public Long getTotalRow(ArticleType type) {
+        Session s = sessionFactory.getObject().getCurrentSession();
+
+        Query q = s.createQuery("select count(*) from Articles a");
+        return (Long) q.getSingleResult();
+    }
+
+    @Override
+    public List<Articles> getArticles(Map<String, String> params) {
+        Session s = sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = s.getCriteriaBuilder();
+        CriteriaQuery<Articles> query = builder.createQuery(Articles.class);
+        Root root = query.from(Articles.class);
+        query.select(root);
+        
+        List<Predicate> predicateList = new ArrayList<>();
+        int limit = 10;
+
+        if (params.get("articleType") != null) {
+            String type = params.get("articleType");
+            Predicate p = builder.equal(root.get("articleType").as(String.class), type);
+            predicateList.add(p);
+        }
+
+        query.where(predicateList.toArray(Predicate[]::new));
+
+        Query q = s.createQuery(query);
+        q.setMaxResults(limit);
+
+        if (params.get("page") != null) {
+            int page = Integer.parseInt(params.get("page"));
+            int startIndex = (page - 1) * limit;
+            int totalArticles = Integer.parseInt(params.get("totalArticles"));
+
+            if (startIndex < totalArticles) {
+                q.setFirstResult(startIndex + 1);
+            }
+        }
+
         return q.getResultList();
     }
 

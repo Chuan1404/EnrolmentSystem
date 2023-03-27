@@ -1,10 +1,13 @@
-<%-- 
+    <%-- 
     Document   : header
     Created on : Mar 20, 2023, 12:35:34 PM
     Author     : AnChuPC
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri= "http://java.sun.com/jsp/jstl/core" %>
+
+<c:url var="url" value="/" />
 <!DOCTYPE html>
 
 <header>
@@ -17,12 +20,12 @@
                         <!-- Logo -->
                         <div class="col-xl-3 col-lg-3 col-md-3 d-none d-md-block">
                             <div class="logo">
-                                <a href="index.html"><img src="assets/img/logo/logo.png" alt=""></a>
+                                <a href="${url}"><img src="${url}assets/img/logo/logo.png" alt=""></a>
                             </div>
                         </div>
                         <div class="col-xl-9 col-lg-9 col-md-9">
                             <div class="header-banner f-right ">
-                                <img src="assets/img/gallery/header_card.png" alt="">
+                                <img src="${url}assets/img/gallery/header_card.png" alt="">
                             </div>
                         </div>
                     </div>
@@ -34,7 +37,7 @@
                         <div class="col-xl-8 col-lg-8 col-md-12 header-flex">
                             <!-- sticky -->
                             <div class="sticky-logo">
-                                <a href="index.html"><img src="assets/img/logo/logo.png" alt=""></a>
+                                <a href="index.html"><img src="${url}assets/img/logo/logo.png" alt=""></a>
                             </div>
                             <!-- Main-menu -->
                             <div class="main-menu d-none d-md-block">
@@ -42,7 +45,7 @@
                                     <ul id="navigation">
                                         <li><a href="index.html">TRANG CHỦ</a></li>
                                         
-                                        <li><a href="categori.html">THÔNG TIN TUYỂN SINH</a></li>
+                                        <li><a href="${url}enrolment/">THÔNG TIN TUYỂN SINH</a></li>
                                             <li><a href="latest_news.html">THÔNG TIN KHOA</a></li>
 <!--                                        <li><a href="#">Pages</a>
                                             <ul class="submenu">

@@ -7,6 +7,7 @@ package com.java.repositories;
 import com.java.enums.ArticleType;
 import com.java.pojos.Articles;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -15,8 +16,13 @@ import java.util.List;
 public interface ArticlesRepository {
 
     Articles getArticleById(String id);
-
+    
     boolean saveOrUpdateArticles(Articles article);
 
     public List<Articles> getListArticleNewest(ArticleType type, int amount);
+    
+    public Long getTotalRow(ArticleType type);
+    
+    public List<Articles> getArticles(Map<String, String> params);
+    
 }

@@ -9,6 +9,7 @@ import com.java.pojos.Articles;
 import com.java.repositories.ArticlesRepository;
 import com.java.services.ArticlesService;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,5 +36,16 @@ public class ArticlesServiceImpl implements ArticlesService {
     public List<Articles> getListArticleNewest(ArticleType type, int amount) {
         return articlesRepository.getListArticleNewest(type, amount);
     }
+
+    @Override
+    public Long getTotalRow(ArticleType type) {
+        return articlesRepository.getTotalRow(type);
+    }
+
+    @Override
+    public List<Articles> getArticles(Map<String, String> params) {
+        return articlesRepository.getArticles(params);
+    }
+    
     
 }
