@@ -6,10 +6,12 @@ package com.java.pojos;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -39,8 +41,8 @@ public class Banners implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bannerId")
-    private Collection<Images> imagesCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bannerId", fetch = FetchType.EAGER)
+    private List<Images> imagesCollection;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "bannerId")
     private Homepage homepage;
 
@@ -60,11 +62,11 @@ public class Banners implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Images> getImagesCollection() {
+    public List<Images> getImagesCollection() {
         return imagesCollection;
     }
 
-    public void setImagesCollection(Collection<Images> imagesCollection) {
+    public void setImagesCollection(List<Images> imagesCollection) {
         this.imagesCollection = imagesCollection;
     }
 

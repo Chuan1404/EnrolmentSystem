@@ -16,9 +16,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -47,6 +49,8 @@ public class Images implements Serializable {
     @JoinColumn(name = "banner_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Banners bannerId;
+    @Transient
+    private MultipartFile file;
 
     public Images() {
     }
@@ -107,6 +111,20 @@ public class Images implements Serializable {
     @Override
     public String toString() {
         return "com.java.pojos.Images[ id=" + id + " ]";
+    }
+
+    /**
+     * @return the file
+     */
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    /**
+     * @param file the file to set
+     */
+    public void setFile(MultipartFile file) {
+        this.file = file;
     }
     
 }
