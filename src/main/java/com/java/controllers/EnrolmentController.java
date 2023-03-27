@@ -33,10 +33,17 @@ public class EnrolmentController {
     @GetMapping(value = "/")
     public String index(Model model) {
         List<Map<String, Object>> articleList = new ArrayList<>();
+
+        // Params
+        Map<String, String> params = new HashMap<>();
+        params.put("limit", "5");
+        
         for (ArticleType type : ArticleType.values()) {
             Map<String, Object> map = new HashMap<>();
+            
+            params.put("articleType", type.toString());
             map.put("title", ArticleType.convertToString(type));
-            map.put("data", articlesService.getListArticleNewest(type, 5));
+            map.put("data", articlesService.getArticles(params));
             articleList.add(map);
         }
         model.addAttribute("articleList", articleList);
@@ -49,9 +56,26 @@ public class EnrolmentController {
         Map<String, String> params = new HashMap<>();
         params.put("articleType", type);
 
+        // Tổng số lượng Article thuộc type = type
+        Long totalArticles = articlesService.getTotalRow(ArticleType.valueOf(type));
+        params.put("totalArticles", totalArticles.toString());
+
+        // Set limit
+        params.put("limit", "10");
+
+        // Mặc định page = 1
+        if (page != null) {
+            params.put("page", page);
+        } else {
+            params.put("page", "1");
+        }
+
+        // Danh sách arcicles theo params
         List articleList = articlesService.getArticles(params);
 
-        model.addAttribute("articleType", articleList);
+        model.addAttribute("articleList", articleList);
+        model.addAttribute("totalPage", Math.ceil((double) totalArticles / Integer.parseInt(params.get("limit"))));
+        model.addAttribute("currentPage", Integer.parseInt(params.get("page")));
 
         return "enrolment-list";
     }

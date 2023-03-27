@@ -19,9 +19,10 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ArticlesServiceImpl implements ArticlesService {
+
     @Autowired
     private ArticlesRepository articlesRepository;
-    
+
     @Override
     public Articles getArticleById(String id) {
         return articlesRepository.getArticleById(id);
@@ -33,11 +34,6 @@ public class ArticlesServiceImpl implements ArticlesService {
     }
 
     @Override
-    public List<Articles> getListArticleNewest(ArticleType type, int amount) {
-        return articlesRepository.getListArticleNewest(type, amount);
-    }
-
-    @Override
     public Long getTotalRow(ArticleType type) {
         return articlesRepository.getTotalRow(type);
     }
@@ -46,6 +42,5 @@ public class ArticlesServiceImpl implements ArticlesService {
     public List<Articles> getArticles(Map<String, String> params) {
         return articlesRepository.getArticles(params);
     }
-    
-    
+
 }

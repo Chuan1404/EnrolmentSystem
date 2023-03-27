@@ -19,8 +19,6 @@ public interface ArticlesRepository {
     
     boolean saveOrUpdateArticles(Articles article);
 
-    public List<Articles> getListArticleNewest(ArticleType type, int amount);
-    
     public Long getTotalRow(ArticleType type);
     
     public List<Articles> getArticles(Map<String, String> params);

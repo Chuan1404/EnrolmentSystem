@@ -58,26 +58,12 @@ public class ArticlesRepositoryImpl implements ArticlesRepository {
         return true;
     }
 
-    @Override
-    public List<Articles> getListArticleNewest(ArticleType type, int amount) {
-        Session s = sessionFactory.getObject().getCurrentSession();
-        CriteriaBuilder builder = s.getCriteriaBuilder();
-        CriteriaQuery<Articles> query = builder.createQuery(Articles.class);
-        Root root = query.from(Articles.class);
-
-        query.select(root);
-        query.where(builder.equal(root.get("articleType").as(String.class), type.toString()));
-
-        Query q = s.createQuery(query);
-        q.setMaxResults(amount);
-        return q.getResultList();
-    }
 
     @Override
     public Long getTotalRow(ArticleType type) {
         Session s = sessionFactory.getObject().getCurrentSession();
 
-        Query q = s.createQuery("select count(*) from Articles a");
+        Query q = s.createQuery("select count(*) from Articles a where a.articleType like '%" + type.toString() + "%'");
         return (Long) q.getSingleResult();
     }
 
@@ -90,8 +76,12 @@ public class ArticlesRepositoryImpl implements ArticlesRepository {
         query.select(root);
         
         List<Predicate> predicateList = new ArrayList<>();
+        
+        // limit
         int limit = 10;
+        if(params.get("limit") != null) limit = Integer.parseInt(params.get("limit"));
 
+        // article type
         if (params.get("articleType") != null) {
             String type = params.get("articleType");
             Predicate p = builder.equal(root.get("articleType").as(String.class), type);
@@ -100,6 +90,7 @@ public class ArticlesRepositoryImpl implements ArticlesRepository {
 
         query.where(predicateList.toArray(Predicate[]::new));
 
+        // Query
         Query q = s.createQuery(query);
         q.setMaxResults(limit);
 
@@ -109,7 +100,7 @@ public class ArticlesRepositoryImpl implements ArticlesRepository {
             int totalArticles = Integer.parseInt(params.get("totalArticles"));
 
             if (startIndex < totalArticles) {
-                q.setFirstResult(startIndex + 1);
+                q.setFirstResult(startIndex);
             }
         }
 

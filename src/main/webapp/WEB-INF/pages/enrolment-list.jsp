@@ -9,6 +9,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:url  var="url" value="/" />
+
+
 <!DOCTYPE html>
 
 <main id="enrolment-list">
@@ -34,17 +36,16 @@
                                     <!-- card one -->
                                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">       
                                         <div class="row">
-                                            <c:forEach items="${articleType}" var="a">
+                                            <c:forEach items="${articleList}" var="a">
                                                 <div class="col-xl-6 col-lg-6 col-md-6">
                                                     <div class="whats-news-single mb-40 mb-40">
                                                         <div class="whates-img">
                                                             <img src="${a.image}" alt="">
                                                         </div>
                                                         <div class="whates-caption whates-caption2">
-                                                            <h4><a href="#">Secretart for Economic Air
-                                                                    plane that looks like</a></h4>
+                                                            <h4><a href="${url}enrolment/${a.id}">${a.title}</a></h4>
                                                             <span>by Alice cloe   -   Jun 19, 2020</span>
-                                                            <p>Struggling to sell one multi-million dollar home currently on the market won’t stop actress and singer Jennifer Lopez.</p>
+                                                            <p>${a.description}</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -122,9 +123,17 @@
                                         <path fill-rule="evenodd"  fill="rgb(221, 221, 221)" d="M8.142,13.118 L6.973,14.135 L0.127,7.646 L0.127,6.623 L6.973,0.132 L8.087,1.153 L2.683,6.413 L23.309,6.413 L23.309,7.856 L2.683,7.856 L8.142,13.118 Z"/>
                                         </svg>
                                         </span></a></li>
-                                <li class="page-item active"><a class="page-link" href="#">01</a></li>
-                                <li class="page-item"><a class="page-link" href="#">02</a></li>
-                                <li class="page-item"><a class="page-link" href="#">03</a></li>
+
+                                <c:forEach begin="1" end="${totalPage}" varStatus="loop">
+                                    <c:choose>
+                                        <c:when test="${loop.index < 10}">
+                                            <li class="page-item <c:if test="${loop.index == currentPage}">active</c:if>"><a class="page-link" href="?page=${loop.index}">0${loop.index}</a></li>
+                                            </c:when>
+                                            <c:otherwise>
+                                            <li class="page-item <c:if test="${loop.index == currentPage}">active</c:if>"><a class="page-link" href="?page=${loop.index}">${loop.index}</a></li>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </c:forEach>
                                 <li class="page-item"><a class="page-link" href="#">
                                         <!-- SVG iocn -->
                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="40px" height="15px">
