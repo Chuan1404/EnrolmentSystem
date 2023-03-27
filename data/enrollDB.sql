@@ -15,7 +15,7 @@ CREATE TABLE `users` (
     `email` VARCHAR(100) NOT NULL,
     `user_role` VARCHAR(30) NOT NULL,
     PRIMARY KEY (`id`)
-);
+) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE `articles`(
 	`id` VARCHAR(50) NOT NULL,
@@ -29,7 +29,7 @@ CREATE TABLE `articles`(
     `user_id` VARCHAR(50) DEFAULT NULL,
     PRIMARY KEY (`id`),
     CONSTRAINT fk_articles_user_id_users FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL
-);
+) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE `comments` (
 	`id` INT NOT NULL AUTO_INCREMENT,
@@ -40,7 +40,7 @@ CREATE TABLE `comments` (
     PRIMARY KEY (`id`),
     CONSTRAINT fk_comment_user_id_users FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
     CONSTRAINT fk_comments_base_comment_id_comments FOREIGN KEY(`base_comment_id`) REFERENCES `comments` (`id`) ON DELETE CASCADE
-);
+) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE `faculties` (
 	`id` INT NOT NULL AUTO_INCREMENT,
@@ -49,7 +49,7 @@ CREATE TABLE `faculties` (
     PRIMARY KEY(`id`),
     CONSTRAINT fk_faculties_article_id_articles FOREIGN KEY (`article_id`) REFERENCES `articles` (`id`),
     CONSTRAINT uq_faculties_article_id UNIQUE (`article_id`)
-);
+) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE `livestreams` (
 	`id` INT NOT NULL AUTO_INCREMENT,
@@ -61,7 +61,7 @@ CREATE TABLE `livestreams` (
     `start_question_time` TIME DEFAULT NULL,
     `end_question_time` TIME DEFAULT NULL,
     PRIMARY KEY (`id`)
-);
+) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 
@@ -73,12 +73,12 @@ CREATE TABLE `questions` (
     PRIMARY KEY (`id`),
     CONSTRAINT fk_questions_user_id_users FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
     CONSTRAINT fk_questions_livestream_id_livestreams FOREIGN KEY (`livestream_id`) REFERENCES `livestreams` (`id`) ON DELETE CASCADE
-);
+) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE `banners` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	PRIMARY KEY (`id`)
-);
+) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE `homepage` (
 	`id` INT NOT NULL AUTO_INCREMENT,
@@ -88,7 +88,7 @@ CREATE TABLE `homepage` (
 	PRIMARY KEY (`id`),
 	CONSTRAINT fk_homepage_banner_id_banners FOREIGN KEY (`banner_id`) REFERENCES `banners` (`id`) ON DELETE CASCADE,
 	CONSTRAINT uq_homepage_banner_id UNIQUE(`banner_id`)
-);
+) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 
@@ -98,7 +98,7 @@ CREATE TABLE `images` (
 	`banner_id` INT NOT NULL,
 	PRIMARY KEY (`id`),
 	CONSTRAINT fk_images_banner_id_banners FOREIGN KEY (`banner_id`) REFERENCES `banners` (`id`) ON DELETE CASCADE
-);
+) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 
