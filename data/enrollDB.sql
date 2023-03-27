@@ -75,6 +75,34 @@ CREATE TABLE `questions` (
     CONSTRAINT fk_questions_livestream_id_livestreams FOREIGN KEY (`livestream_id`) REFERENCES `livestreams` (`id`) ON DELETE CASCADE
 );
 
+CREATE TABLE `banners` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `homepage` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`content` TEXT NOT NULL,
+	`banner_id` INT NOT NULL,
+	`video` VARCHAR(50) DEFAULT NULL,
+	PRIMARY KEY (`id`),
+	CONSTRAINT fk_homepage_banner_id_banners FOREIGN KEY (`banner_id`) REFERENCES `banners` (`id`) ON DELETE CASCADE,
+	CONSTRAINT uq_homepage_banner_id UNIQUE(`banner_id`)
+);
+
+
+
+CREATE TABLE `images` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`url` VARCHAR(300) NOT NULL,
+	`banner_id` INT NOT NULL,
+	PRIMARY KEY (`id`),
+	CONSTRAINT fk_images_banner_id_banners FOREIGN KEY (`banner_id`) REFERENCES `banners` (`id`) ON DELETE CASCADE
+);
+
+
+
+
 -- INSERT DATA
 
 INSERT INTO `users` (`id`, `username`, `password`, `name`, `avatar`, `email`, `user_role`) VALUES ('I4esDB8GDWMcVW40uA6x', 'cuong.nt', '123456', 'Nguyễn Tấn Cường', 'https://res.cloudinary.com/dis95mx4d/image/upload/v1668643889/sample.jpg', '2051052016@ou.edu.vn', 'THISINH');
@@ -147,6 +175,15 @@ VALUES ('mwrybLN4ScPZDTZUgu1i', 'Secretart for Economic Air plane that looks lik
 
 
 
+-- UPDATE (NGAY 27-03-2023)
+INSERT INTO `banners` () VALUES();
+INSERT INTO `homepage` (content, banner_id, video) VALUES('<h1>THONG TIN TRANG CHU</h1>', 1, '8iuLXODzL04');
+INSERT INTO `images` (url, banner_id) VALUES('https://res.cloudinary.com/dis95mx4d/image/upload/v1668643930/cld-sample-5.jpg', 1);
+INSERT INTO `images` (url, banner_id) VALUES('https://res.cloudinary.com/dis95mx4d/image/upload/v1668643930/cld-sample-4.jpg', 1);
+INSERT INTO `images` (url, banner_id) VALUES('https://res.cloudinary.com/dis95mx4d/image/upload/v1668643929/cld-sample-2.jpg', 1);
+INSERT INTO `images` (url, banner_id) VALUES('https://res.cloudinary.com/dis95mx4d/image/upload/v1668643928/cld-sample.jpg', 1);
+INSERT INTO `images` (url, banner_id) VALUES('https://res.cloudinary.com/dis95mx4d/image/upload/v1668643928/cld-sample.jpg', 1);
+-- END UPDATE
 
 
 INSERT INTO `faculties` (`id`, `name`, `article_id`) VALUES ('1', 'Quản trị kinh doanh', 'XRddcyw24gYJ40miY0xc');
