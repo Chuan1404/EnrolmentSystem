@@ -4,6 +4,7 @@
  */
 package com.java.controllers;
 
+import com.cloudinary.Cloudinary;
 import com.java.pojos.Users;
 import com.java.services.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,7 @@ public class AuthController {
 
     @Autowired
     private UsersService usersService;
+    
     
 //    @GetMapping(value = "/login")
 //    public String login() {

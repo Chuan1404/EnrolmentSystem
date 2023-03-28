@@ -4,6 +4,7 @@
  */
 package com.java.controllers;
 
+import com.cloudinary.Cloudinary;
 import com.java.enums.ArticleType;
 import com.java.pojos.Articles;
 import com.java.pojos.Users;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -32,27 +34,42 @@ public class AdminArticleController {
 
     @Autowired
     private ArticlesService articleService;
-    
-     @Autowired
+
+    @Autowired
+    private Cloudinary cloudinary;
+
+    @Autowired
     private UsersService usersService;
 
     @GetMapping(value = "/")
     public String index(Model model) {
 
+        List<Articles> articles = articleService.getArticles(null);
+        
         model.addAttribute("article", new Articles());
-
+        model.addAttribute("articles", articles);
         model.addAttribute("articleType", ArticleType.values());
         return "admin-article";
     }
 
     @PostMapping(value = "/")
     public String addArticle(Model model, @ModelAttribute Articles article) {
+        
         article.setCreatedDate(new Date());
         article.setUpdateDate(new Date());
         article.setUserId(usersService.getUserById("BxST2aBzsduwWLw1cxEQ"));
         article.setImage("https://oga.hcmiu.edu.vn/wp-content/uploads/2020/11/122042029_3431112680290873_3369717683792004619_n.png");
         articleService.saveOrUpdateArticles(article);
 
-        return "index";
+        return "admin-article";
+    }
+    
+    @GetMapping(value = "/{id}")
+    public String updateArticle(Model model, @PathVariable(value = "id") String id) {
+        Articles article = articleService.getArticleById(id);
+        
+        model.addAttribute("article", article);
+         model.addAttribute("articleType", ArticleType.values());
+        return "admin-article";
     }
 }

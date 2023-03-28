@@ -4,10 +4,13 @@
  */
 package com.java.services.impl;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.java.enums.ArticleType;
 import com.java.pojos.Articles;
 import com.java.repositories.ArticlesRepository;
 import com.java.services.ArticlesService;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +26,9 @@ public class ArticlesServiceImpl implements ArticlesService {
     @Autowired
     private ArticlesRepository articlesRepository;
 
+//    @Autowired
+//    private Cloudinary cloudinary;
+
     @Override
     public Articles getArticleById(String id) {
         return articlesRepository.getArticleById(id);
@@ -30,6 +36,14 @@ public class ArticlesServiceImpl implements ArticlesService {
 
     @Override
     public boolean saveOrUpdateArticles(Articles article) {
+//        if (!article.getFile().isEmpty()) {
+//            try {
+//                Map res = this.cloudinary.uploader().upload(article.getFile().getBytes(), ObjectUtils.asMap("resource_type", "auto"));
+//                article.setImage(res.get("secure_url").toString());
+//            } catch (IOException ex) {
+//            }
+//        }
+
         return articlesRepository.saveOrUpdateArticles(article);
     }
 

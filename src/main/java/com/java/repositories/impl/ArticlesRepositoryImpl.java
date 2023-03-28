@@ -40,6 +40,7 @@ public class ArticlesRepositoryImpl implements ArticlesRepository {
         CriteriaBuilder builder = s.getCriteriaBuilder();
         CriteriaQuery<Articles> query = builder.createQuery(Articles.class);
         Root root = query.from(Articles.class);
+
         Predicate p = builder.equal(root.get("id"), id);
         query.where(p);
         Query q = s.createQuery(query);
@@ -58,7 +59,6 @@ public class ArticlesRepositoryImpl implements ArticlesRepository {
         return true;
     }
 
-
     @Override
     public Long getTotalRow(ArticleType type) {
         Session s = sessionFactory.getObject().getCurrentSession();
@@ -74,18 +74,22 @@ public class ArticlesRepositoryImpl implements ArticlesRepository {
         CriteriaQuery<Articles> query = builder.createQuery(Articles.class);
         Root root = query.from(Articles.class);
         query.select(root);
-        
-        List<Predicate> predicateList = new ArrayList<>();
-        
-        // limit
-        int limit = 10;
-        if(params.get("limit") != null) limit = Integer.parseInt(params.get("limit"));
 
-        // article type
-        if (params.get("articleType") != null) {
-            String type = params.get("articleType");
-            Predicate p = builder.equal(root.get("articleType").as(String.class), type);
-            predicateList.add(p);
+        List<Predicate> predicateList = new ArrayList<>();
+
+        int limit = 10;
+        if (params != null) {
+
+            // limit
+            if (params.get("limit") != null) {
+                limit = Integer.parseInt(params.get("limit"));
+            }
+            // article type
+            if (params.get("articleType") != null) {
+                String type = params.get("articleType");
+                Predicate p = builder.equal(root.get("articleType").as(String.class), type);
+                predicateList.add(p);
+            }
         }
 
         query.where(predicateList.toArray(Predicate[]::new));
@@ -94,7 +98,7 @@ public class ArticlesRepositoryImpl implements ArticlesRepository {
         Query q = s.createQuery(query);
         q.setMaxResults(limit);
 
-        if (params.get("page") != null) {
+        if (params != null && params.get("page") != null) {
             int page = Integer.parseInt(params.get("page"));
             int startIndex = (page - 1) * limit;
             int totalArticles = Integer.parseInt(params.get("totalArticles"));
