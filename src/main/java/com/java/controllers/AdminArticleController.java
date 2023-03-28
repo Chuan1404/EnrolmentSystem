@@ -12,7 +12,9 @@ import com.java.services.ArticlesService;
 import com.java.services.UsersService;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.hibernate.HibernateError;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -42,19 +45,28 @@ public class AdminArticleController {
     private UsersService usersService;
 
     @GetMapping(value = "/")
-    public String index(Model model) {
+    public String index(Model model, @RequestParam(required = false) Map<String, String> params) {
+        Long totalArticle = articleService.getTotalRow(null);
 
-        List<Articles> articles = articleService.getArticles(null);
-        
+        params.put("limit", "10");
+        params.put("totalArticles", totalArticle.toString());
+        if (params.get("page") == null) {
+            params.put("page", "1");
+        }
+
+        List<Articles> articles = articleService.getArticles(params);
+        System.out.println(totalArticle);
         model.addAttribute("article", new Articles());
         model.addAttribute("articles", articles);
         model.addAttribute("articleType", ArticleType.values());
+        model.addAttribute("totalPage", Math.ceil((double) totalArticle / Integer.parseInt(params.get("limit"))));
+        model.addAttribute("currentPage", Integer.parseInt(params.get("page")));
         return "admin-article";
     }
 
     @PostMapping(value = "/")
     public String addArticle(Model model, @ModelAttribute Articles article) {
-        
+
         article.setCreatedDate(new Date());
         article.setUpdateDate(new Date());
         article.setUserId(usersService.getUserById("BxST2aBzsduwWLw1cxEQ"));
@@ -63,13 +75,13 @@ public class AdminArticleController {
 
         return "admin-article";
     }
-    
+
     @GetMapping(value = "/{id}")
     public String updateArticle(Model model, @PathVariable(value = "id") String id) {
         Articles article = articleService.getArticleById(id);
-        
+
         model.addAttribute("article", article);
-         model.addAttribute("articleType", ArticleType.values());
+        model.addAttribute("articleType", ArticleType.values());
         return "admin-article";
     }
 }

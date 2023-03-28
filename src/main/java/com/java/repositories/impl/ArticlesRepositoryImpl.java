@@ -62,8 +62,14 @@ public class ArticlesRepositoryImpl implements ArticlesRepository {
     @Override
     public Long getTotalRow(ArticleType type) {
         Session s = sessionFactory.getObject().getCurrentSession();
+        Query q;
+        if (type != null) {
+            q = s.createQuery("select count(*) from Articles a where a.articleType like '%" + type.toString() + "%'");
+        }
+        else {
+            q = s.createQuery("select count(*) from Articles a");
+        }
 
-        Query q = s.createQuery("select count(*) from Articles a where a.articleType like '%" + type.toString() + "%'");
         return (Long) q.getSingleResult();
     }
 

@@ -47,7 +47,7 @@
 
 
             <c:choose>
-                <c:when test="${not empty article.id}">
+                <c:when test="${not empty article.title}">
                     <button type="submit" class="btn btn-dark bg-dark update-btn">Update</button>
                 </c:when>
                 <c:otherwise>
@@ -94,6 +94,45 @@
                 </tbody>
             </table>
         </div>
+    </c:if>
+    <c:if test="${not empty totalPage}">
+        <div class="pagination-area  gray-bg pb-45">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="single-wrap">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-start">
+                                    <li class="page-item"><a class="page-link" href="#">
+                                            <!-- SVG icon -->
+                                            <svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="15px">
+                                            <path fill-rule="evenodd"  fill="rgb(221, 221, 221)" d="M8.142,13.118 L6.973,14.135 L0.127,7.646 L0.127,6.623 L6.973,0.132 L8.087,1.153 L2.683,6.413 L23.309,6.413 L23.309,7.856 L2.683,7.856 L8.142,13.118 Z"/>
+                                            </svg>
+                                            </span></a></li>
+
+                                    <c:forEach begin="1" end="${totalPage}" varStatus="loop">
+                                        <c:choose>
+                                            <c:when test="${loop.index < 10}">
+                                                <li class="page-item <c:if test="${loop.index == currentPage}">active</c:if>"><a class="page-link" href="?page=${loop.index}">0${loop.index}</a></li>
+                                                </c:when>
+                                                <c:otherwise>
+                                                <li class="page-item <c:if test="${loop.index == currentPage}">active</c:if>"><a class="page-link" href="?page=${loop.index}">${loop.index}</a></li>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </c:forEach>
+                                    <li class="page-item"><a class="page-link" href="#">
+                                            <!-- SVG iocn -->
+                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="40px" height="15px">
+                                            <path fill-rule="evenodd"  fill="rgb(255, 11, 11)" d="M31.112,13.118 L32.281,14.136 L39.127,7.646 L39.127,6.624 L32.281,0.132 L31.167,1.154 L36.571,6.413 L0.491,6.413 L0.491,7.857 L36.571,7.857 L31.112,13.118 Z"/>
+                                            </svg>
+                                            </span></a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
     </c:if>
 
 </main>
