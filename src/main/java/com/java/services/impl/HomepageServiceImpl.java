@@ -5,9 +5,11 @@
 package com.java.services.impl;
 
 import com.cloudinary.Cloudinary;
+import com.java.pojos.Banners;
 import com.java.pojos.Homepage;
 import com.java.repositories.BannersRepository;
 import com.java.repositories.HomepageRepository;
+import com.java.services.BannersService;
 import com.java.services.HomepageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +25,7 @@ public class HomepageServiceImpl implements HomepageService{
     private HomepageRepository homepageRepository;
     
     @Autowired
-    private BannersRepository bannersRepository;
+    private BannersService bannerService;
     
     @Override
     public Homepage getHomepage() {
@@ -32,9 +34,8 @@ public class HomepageServiceImpl implements HomepageService{
 
     @Override
     public boolean updateHomepage(Homepage home) {
-        System.out.println(home.getBannerId());
-        if (!bannersRepository.updateBanner(home.getBannerId())) {
-            
+        Banners banner = home.getBannerId();
+        if (!bannerService.updateBanner(banner)) {
             return false;
         }
         return homepageRepository.updateHomepage(home);
