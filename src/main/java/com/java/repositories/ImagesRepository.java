@@ -13,4 +13,5 @@ import java.util.List;
  */
 public interface ImagesRepository {
     List<Images> getImagesByBannerId(int bannerId);
+    boolean updateImage(Images img);
 }

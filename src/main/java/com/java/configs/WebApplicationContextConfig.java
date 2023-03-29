@@ -70,6 +70,7 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
                         "api_secret", "fAo8C1iNLRZXBjyRD2nBk4JMu4Q",
                         "secure", true));
         return cloudinary;
+       
     }
     
     @Bean

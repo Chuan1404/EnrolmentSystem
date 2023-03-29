@@ -1,13 +1,11 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.java.repositories.impl;
 
-import com.java.pojos.Homepage;
-import com.java.repositories.HomepageRepository;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaQuery;
+import com.java.pojos.Banners;
+import com.java.repositories.BannersRepository;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,27 +19,18 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
-public class HomepageRepositoryImpl implements HomepageRepository{
+public class BannersRepositoryImpl implements BannersRepository{
 
     @Autowired
     private LocalSessionFactoryBean sessionFactory;
     
     @Override
-    public Homepage getHomepage() {
-        Session s = sessionFactory.getObject().getCurrentSession();
-        CriteriaQuery<Homepage> q = s.getCriteriaBuilder().createQuery(Homepage.class);
-        q.from(Homepage.class);
-        Query query = s.createQuery(q);
-        return (Homepage) query.getSingleResult();
-    }
-
-    @Override
-    public boolean updateHomepage(Homepage home) {
+    public boolean updateBanner(Banners banner) {
         Session s = sessionFactory.getObject().getCurrentSession();
         try {
-            s.update(home);
+            s.update(banner);
             return true;
-        } catch(HibernateException ex) {
+        } catch (HibernateException ex) {
             ex.printStackTrace();
             return false;
         }

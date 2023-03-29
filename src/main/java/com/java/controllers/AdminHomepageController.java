@@ -46,7 +46,10 @@ public class AdminHomepageController {
     @PostMapping("/update")
     public String updateHomepage(Model model, @ModelAttribute("homepage") Homepage home) {
         
+        if (this.homepageService.updateHomepage(home))
+            return "redirect:/admin/homepage";
+        else model.addAttribute("errMsg", "SOMETHING WENT WRONG!");
 
-        return "redirect:/admin/homepage/";
+        return "admin-homepage";
     }
 }

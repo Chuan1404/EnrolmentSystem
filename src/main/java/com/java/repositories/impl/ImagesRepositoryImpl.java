@@ -9,6 +9,7 @@ import com.java.repositories.ImagesRepository;
 import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -26,6 +27,7 @@ public class ImagesRepositoryImpl implements ImagesRepository{
     @Autowired
     private LocalSessionFactoryBean sessionFactory;
     
+    
     @Override
     public List<Images> getImagesByBannerId(int bannerId) {
         Session s = sessionFactory.getObject().getCurrentSession();
@@ -33,6 +35,18 @@ public class ImagesRepositoryImpl implements ImagesRepository{
         q.from(Images.class);
         Query query = s.createQuery(q);
         return query.getResultList();
+    }
+
+    @Override
+    public boolean updateImage(Images img) {
+        Session s = sessionFactory.getObject().getCurrentSession();
+        try {
+            s.update(img);
+            return true;
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+            return false;
+        }
     }
     
 }

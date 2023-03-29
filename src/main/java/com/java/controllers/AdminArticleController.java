@@ -9,7 +9,7 @@ import com.java.enums.ArticleType;
 import com.java.pojos.Articles;
 import com.java.pojos.Users;
 import com.java.services.ArticlesService;
-import com.java.services.UsersService;
+//import com.java.services.UsersService;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -41,8 +41,8 @@ public class AdminArticleController {
     @Autowired
     private Cloudinary cloudinary;
 
-    @Autowired
-    private UsersService usersService;
+//    @Autowired
+//    private UsersService usersService;
 
     @GetMapping(value = "/")
     public String index(Model model, @RequestParam(required = false) Map<String, String> params) {
@@ -69,7 +69,7 @@ public class AdminArticleController {
 
         article.setCreatedDate(new Date());
         article.setUpdateDate(new Date());
-        article.setUserId(usersService.getUserById("BxST2aBzsduwWLw1cxEQ"));
+//        article.setUserId(usersService.getUserById("BxST2aBzsduwWLw1cxEQ"));
         article.setImage("https://oga.hcmiu.edu.vn/wp-content/uploads/2020/11/122042029_3431112680290873_3369717683792004619_n.png");
         articleService.saveOrUpdateArticles(article);
 
