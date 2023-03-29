@@ -191,12 +191,41 @@ VALUES ('mwrybLN4ScPZDTZUgu1i', 'Secretart for Economic Air plane that looks lik
 
 -- UPDATE (NGAY 27-03-2023)
 INSERT INTO `banners` () VALUES();
-INSERT INTO `homepage` (content, banner_id, video) VALUES('<h1>THONG TIN TRANG CHU</h1>', 1, '8iuLXODzL04');
-INSERT INTO `images` (url, banner_id) VALUES('https://res.cloudinary.com/dis95mx4d/image/upload/v1668643930/cld-sample-5.jpg', 1);
-INSERT INTO `images` (url, banner_id) VALUES('https://res.cloudinary.com/dis95mx4d/image/upload/v1668643930/cld-sample-4.jpg', 1);
-INSERT INTO `images` (url, banner_id) VALUES('https://res.cloudinary.com/dis95mx4d/image/upload/v1668643929/cld-sample-2.jpg', 1);
-INSERT INTO `images` (url, banner_id) VALUES('https://res.cloudinary.com/dis95mx4d/image/upload/v1668643928/cld-sample.jpg', 1);
-INSERT INTO `images` (url, banner_id) VALUES('https://res.cloudinary.com/dis95mx4d/image/upload/v1668643928/cld-sample.jpg', 1);
+INSERT INTO `homepage` (content, banner_id, video) VALUES('<h1 style="text-align: center;"><strong><span style="font-size: 36pt;">GIỚI THI&Ecirc;̣U CHUNG</span></strong></h1>
+<p style="text-align: justify; line-height: 1.5;"><span style="font-size: 14pt;">Được th&agrave;nh lập v&agrave;o năm 1990 v&agrave; trở th&agrave;nh trường đại học c&ocirc;ng lập từ&nbsp;năm 2006, đến nay Trường Đại học Mở Th&agrave;nh phố Hồ Ch&iacute; Minh l&agrave; trường đại học đa ng&agrave;nh trực thuộc Bộ Gi&aacute;o dục v&agrave; Đ&agrave;o tạo, c&oacute; nhiệm vụ đ&agrave;o tạo đại học v&agrave; sau đại học, với c&aacute;c h&igrave;nh thức đ&agrave;o tạo&nbsp;ch&iacute;nh quy v&agrave; gi&aacute;o dục thường xuy&ecirc;n, đ&agrave;o tạo c&aacute;c điểm vệ tinh ,&hellip;nhằm đ&aacute;p ứng nhu cầu học tập đa dạng của x&atilde; hội, g&oacute;p phần tăng&nbsp;cường đội ngũ c&aacute;n bộ khoa học-kỹ thuật cho đất nước.</span></p>
+<p style="text-align: justify;">&nbsp;</p>
+<hr>
+<p style="text-align: justify;">&nbsp;</p>
+<p style="text-align: center;"><strong><span style="font-size: 36pt;">SỨ MẠNG</span></strong></p>
+<p style="text-align: justify; line-height: 1.5;"><span style="font-size: 14pt;">Sứ mạng ch&iacute;nh của Trường Đại học Mở TP.HCM l&agrave; g&oacute;p phần th&uacute;c đẩy x&atilde; hội học tập ph&aacute;t triển th&ocirc;ng qua việc truyền tải tri thức bằng c&aacute;c phương thức linh hoạt v&agrave; thuận tiện nhất cho người học.</span></p>
+<p style="text-align: justify;">&nbsp;</p>
+<hr>
+<p style="text-align: justify;">&nbsp;</p>
+<p style="text-align: center;"><strong><span style="font-size: 36pt;">TẦM NH&Igrave;N</span></strong></p>
+<p style="text-align: justify; line-height: 1.5;"><span style="font-size: 14pt;">Trường Đại học Mở TP.HCM phấn đấu đến năm 2023 trở th&agrave;nh trường đại học c&ocirc;ng lập đa ng&agrave;nh h&agrave;ng đầu ở Việt Nam với định hướng ứng dụng, phổ cập kiến thức v&agrave; phục vụ cộng đồng; trong đ&oacute; hoạt động đ&agrave;o tạo từ xa ph&aacute;t triển ngang tầm khu vực.</span></p>
+<p style="text-align: justify;">&nbsp;</p>
+<hr>
+<p style="text-align: justify;">&nbsp;</p>
+<p style="text-align: center;"><strong><span style="font-size: 36pt;">GI&Aacute; TRỊ CỐT L&Otilde;I</span></strong></p>
+<p style="text-align: center; line-height: 1.5;"><em><span style="font-size: 14pt;">Mở rộng tri thức</span></em></p>
+<p style="text-align: justify; line-height: 1.5;"><span style="font-size: 14pt;">C&aacute;c phương thức đ&agrave;o tạo đa dạng v&agrave; linh hoạt, ph&ugrave; hợp với người học ở mọi nơi với nền tảng kiến thức v&agrave; điều kiện học tập kh&aacute;c nhau.</span></p>
+<p style="text-align: justify; line-height: 1.5;"><span style="font-size: 14pt;">Phương ch&acirc;m giảng dạy l&agrave; l&agrave;m cho kiến thức trở th&agrave;nh đơn giản, dễ hiểu v&agrave; hữu dụng.</span></p>
+<p style="text-align: justify; line-height: 1.5;">&nbsp;</p>
+<p style="text-align: center; line-height: 1.5;"><em><span style="font-size: 14pt;">Gắn kết thực tiễn</span></em></p>
+<p style="text-align: justify; line-height: 1.5;"><span style="font-size: 14pt;">Kiến thức được giảng dạy k&egrave;m theo hướng dẫn &aacute;p dụng trong thực tiễn c&ocirc;ng việc của người học. </span><span style="font-size: 14pt;">Chương tr&igrave;nh đ&agrave;o tạo được cập nhật theo những y&ecirc;u cầu ph&aacute;t sinh từ thực tế.</span></p>
+<p style="text-align: justify; line-height: 1.5;">&nbsp;</p>
+<p style="text-align: center; line-height: 1.5;"><em><span style="font-size: 14pt;">Phục vụ cộng đồng</span></em></p>
+<p style="text-align: justify; line-height: 1.5;"><span style="font-size: 14pt;">C&aacute;c hoạt động đ&agrave;o tạo v&agrave; nghi&ecirc;n cứu phục vụ cho cộng đồng v&agrave; lợi &iacute;ch x&atilde; hội.<br>Giảng vi&ecirc;n, sinh vi&ecirc;n v&agrave; đội ngũ c&aacute;n bộ nh&acirc;n vi&ecirc;n nh&agrave; trường tham gia t&iacute;ch cực c&aacute;c hoạt động cộng đồng.</span></p>
+<p style="text-align: justify; line-height: 1.5;">&nbsp;</p>
+<p style="text-align: center; line-height: 1.5;"><em><span style="font-size: 14pt;">Chuy&ecirc;n nghiệp, hiệu quả, s&aacute;ng tạo v&agrave; th&acirc;n thiện</span></em></p>
+<p style="text-align: justify; line-height: 1.5;"><span style="font-size: 14pt;">Đội ngũ chuy&ecirc;n nghiệp với khả năng thực hiện th&agrave;nh thạo c&ocirc;ng việc giảng dạy, nghi&ecirc;n cứu v&agrave; tổ chức đ&agrave;o tạo với hiệu quả cao nhất.</span></p>
+<p style="text-align: justify; line-height: 1.5;"><span style="font-size: 14pt;"><br>Tư duy s&aacute;ng tạo được thể hiện với tinh thần đổi mới c&aacute;ch nghĩ, c&aacute;ch l&agrave;m, biến th&aacute;ch thức th&agrave;nh cơ hội.</span></p>
+<p style="text-align: justify; line-height: 1.5;"><span style="font-size: 14pt;"><br>M&ocirc;i trường l&agrave;m việc v&agrave; học tập th&acirc;n thiện với th&aacute;i độ hợp t&aacute;c, t&ocirc;n trọng lẫn nhau để c&ugrave;ng đạt mục ti&ecirc;u.</span></p>', 1, '_4QK81DnsEI');
+INSERT INTO `images` (url, banner_id) VALUES('https://res.cloudinary.com/dttbj4ypm/image/upload/v1680126613/acrpuucftens5dkdfed7.png', 1);
+INSERT INTO `images` (url, banner_id) VALUES('https://res.cloudinary.com/dttbj4ypm/image/upload/v1680128108/rbbk8fgkq6c4dhfmzgdj.png', 1);
+INSERT INTO `images` (url, banner_id) VALUES('https://res.cloudinary.com/dttbj4ypm/image/upload/v1680128112/xs0gwboryz3sv3ppclq0.png', 1);
+INSERT INTO `images` (url, banner_id) VALUES('https://res.cloudinary.com/dttbj4ypm/image/upload/v1680128117/jwdubghax4qhb0ggqbg4.png', 1);
+INSERT INTO `images` (url, banner_id) VALUES('https://res.cloudinary.com/dttbj4ypm/image/upload/v1680128123/zcegdbbncc4bjjbh0knv.png', 1);
 -- END UPDATE
 
 
