@@ -12,4 +12,5 @@ import com.java.pojos.Homepage;
  */
 public interface HomepageRepository {
     Homepage getHomepage();
+    boolean updateHomepage(Homepage home);
 }

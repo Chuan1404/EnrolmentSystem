@@ -26,8 +26,8 @@ public class ArticlesServiceImpl implements ArticlesService {
     @Autowired
     private ArticlesRepository articlesRepository;
 
-//    @Autowired
-//    private Cloudinary cloudinary;
+    @Autowired
+    private Cloudinary cloudinary;
 
     @Override
     public Articles getArticleById(String id) {
@@ -36,13 +36,13 @@ public class ArticlesServiceImpl implements ArticlesService {
 
     @Override
     public boolean saveOrUpdateArticles(Articles article) {
-//        if (!article.getFile().isEmpty()) {
-//            try {
-//                Map res = this.cloudinary.uploader().upload(article.getFile().getBytes(), ObjectUtils.asMap("resource_type", "auto"));
-//                article.setImage(res.get("secure_url").toString());
-//            } catch (IOException ex) {
-//            }
-//        }
+        if (!article.getFile().isEmpty()) {
+            try {
+                Map res = this.cloudinary.uploader().upload(article.getFile().getBytes(), ObjectUtils.asMap("resource_type", "auto"));
+                article.setImage(res.get("secure_url").toString());
+            } catch (IOException ex) {
+            }
+        }
 
         return articlesRepository.saveOrUpdateArticles(article);
     }

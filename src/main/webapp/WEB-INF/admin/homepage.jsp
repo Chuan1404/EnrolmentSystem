@@ -11,6 +11,9 @@
 <main class="admin-homepage">
 
     <h1 class="text-center">ADMIN HOMEPAGE</h1>
+    <c:if test="${errMsg != null}">
+        <div class="alert alert-danger">${errMSG}</div>
+    </c:if>
     <div class="container py-5">
         <c:url value="/admin/homepage/update" var="action"/>
         <form:form class="col-8 mx-auto" method="post" action="${action}" modelAttribute="homepage" enctype="multipart/form-data">
