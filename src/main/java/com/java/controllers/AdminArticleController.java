@@ -9,6 +9,7 @@ import com.java.enums.ArticleType;
 import com.java.pojos.Articles;
 import com.java.pojos.Users;
 import com.java.services.ArticlesService;
+import com.java.services.UsersService;
 //import com.java.services.UsersService;
 import java.util.ArrayList;
 import java.util.Date;
@@ -20,6 +21,7 @@ import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,10 +41,11 @@ public class AdminArticleController {
     private ArticlesService articleService;
 
     @Autowired
+    private UsersService userService;
+    
+    @Autowired
     private Cloudinary cloudinary;
 
-//    @Autowired
-//    private UsersService usersService;
 
     @GetMapping(value = "/")
     public String index(Model model, @RequestParam(required = false) Map<String, String> params) {
@@ -65,15 +68,16 @@ public class AdminArticleController {
     }
 
     @PostMapping(value = "/")
-    public String addArticle(Model model, @ModelAttribute Articles article) {
-
+    public String addArticle(Model model, @ModelAttribute Articles article, BindingResult result) {
+        Users user = userService.getUserById("BxST2aBzsduwWLw1cxEQ");
+        
         article.setCreatedDate(new Date());
         article.setUpdateDate(new Date());
-//        article.setUserId(usersService.getUserById("BxST2aBzsduwWLw1cxEQ"));
-        article.setImage("https://oga.hcmiu.edu.vn/wp-content/uploads/2020/11/122042029_3431112680290873_3369717683792004619_n.png");
+        article.setUserId(user);
+        
         articleService.saveOrUpdateArticles(article);
 
-        return "admin-article";
+        return "redirect:/admin/article/";
     }
 
     @GetMapping(value = "/{id}")

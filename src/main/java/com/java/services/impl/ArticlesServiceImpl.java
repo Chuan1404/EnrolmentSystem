@@ -36,7 +36,7 @@ public class ArticlesServiceImpl implements ArticlesService {
 
     @Override
     public boolean saveOrUpdateArticles(Articles article) {
-        if (!article.getFile().isEmpty()) {
+        if (article.getFile() != null) {
             try {
                 Map res = this.cloudinary.uploader().upload(article.getFile().getBytes(), ObjectUtils.asMap("resource_type", "auto"));
                 article.setImage(res.get("secure_url").toString());

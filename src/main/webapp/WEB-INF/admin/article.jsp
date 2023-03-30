@@ -13,7 +13,7 @@
 <main class="admin-article">
     <div class="container py-5">
         <c:url value="/admin/article/" var="action"/>
-        <form:form class="col-8 mx-auto" method="post" action="${action}" modelAttribute="article">
+        <form:form class="col-8 mx-auto" method="post" action="${action}" modelAttribute="article" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="title">Title</label>
                 <form:input path="title" class="form-control" placeholder="Input title here" />
@@ -42,7 +42,7 @@
             </c:if>
             <div class="form-group input-group mb-3">
                 <label for="file">Image</label>
-                <input type="file" class="form-control-file" id="file">
+                <form:input type="file" path="file" class="form-control-file" id="file" />
             </div>
 
 
