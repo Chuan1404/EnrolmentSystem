@@ -47,7 +47,7 @@ public class AdminHomepageController {
     public String updateHomepage(Model model, @ModelAttribute("homepage") Homepage home) {
         
         if (this.homepageService.updateHomepage(home))
-            return "redirect:/admin/homepage";
+            return "redirect:/admin/homepage/";
         else model.addAttribute("errMsg", "SOMETHING WENT WRONG!");
 
         return "admin-homepage";

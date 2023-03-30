@@ -36,7 +36,10 @@
     </div>
 
     <section>
-        ${home.content}
+        <div class="container mt-5">
+            ${home.content}
+        </div>
+        
     </section>
     <!--Recent Articles End -->
     <!-- Start Video Area -->

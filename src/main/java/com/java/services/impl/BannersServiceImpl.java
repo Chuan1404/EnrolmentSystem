@@ -10,6 +10,8 @@ import com.java.pojos.Images;
 import com.java.repositories.BannersRepository;
 import com.java.repositories.ImagesRepository;
 import com.java.services.BannersService;
+import com.java.services.ImagesService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,15 +26,17 @@ public class BannersServiceImpl implements BannersService{
     private BannersRepository bannersRepository;
     
     @Autowired
-    private ImagesRepository imagesRepository;
+    private ImagesService imagesService;
     
 
     @Override
     public boolean updateBanner(Banners banner) {
-        for (Images img : banner.getImagesCollection()) {
+        List<Images> images = banner.getImagesCollection();
+        System.out.println(images);
+        for (Images img : images) {
             img.setBannerId(banner);
-            System.out.println(img.getBannerId());
-            if (!this.imagesRepository.updateImage(img))
+            System.out.println(img.getFile());
+            if (!this.imagesService.updateImages(img))
                 return false;
         }
         
