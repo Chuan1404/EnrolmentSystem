@@ -46,7 +46,7 @@
                                         <li><a href="index.html">TRANG CHỦ</a></li>
                                         
                                         <li><a href="${url}enrolment/">THÔNG TIN TUYỂN SINH</a></li>
-                                            <li><a href="latest_news.html">THÔNG TIN KHOA</a></li>
+                                            <li><a href="${url}faculty/">THÔNG TIN KHOA</a></li>
 <!--                                        <li><a href="#">Pages</a>
                                             <ul class="submenu">
                                                 <li><a href="blog.html">Blog</a></li>
