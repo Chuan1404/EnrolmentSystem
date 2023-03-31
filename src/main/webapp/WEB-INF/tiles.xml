@@ -51,6 +51,14 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="title" value="Enrolment List" />
         <put-attribute name="content" value="/WEB-INF/pages/enrolment-list.jsp"/>
     </definition>
+    <definition name="faculty" extends="base">
+        <put-attribute name="title" value="Faculty"/>
+        <put-attribute name="content" value="/WEB-INF/pages/faculty.jsp"/>
+    </definition>
+    <definition name="faculty-detail" extends="base">
+        <put-attribute name="title" value="Faculty Detail"/>
+        <put-attribute name="content" value="/WEB-INF/pages/faculty-detail.jsp"/>
+    </definition>
     <!--Admin page here-->
     <definition name="admin-base" template="/WEB-INF/components/admin-base.jsp">
         <put-attribute name="title" value="Admin page"/>
@@ -62,4 +70,5 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
     <definition name="admin-homepage" extends="admin-base">
         <put-attribute name="content" value="/WEB-INF/admin/homepage.jsp"/>
     </definition>
+    
 </tiles-definitions>

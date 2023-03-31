@@ -28,11 +28,11 @@
                 <form:hidden path="bannerId.id" value="${homepage.bannerId.id}"/>
                 
                 <c:forEach items="${homepage.bannerId.imagesCollection}" var="image" varStatus="status">
-                    <div class="col-2">
+                    <div class="col-4 px-5">
                         <label for="bannerId.imagesCollection[${status.index}].file">Image ${status.index + 1}</label>
                         <img src="${image.url}" width="120"/>
                         
-                        <form:input type="file" path="bannerId.imagesCollection[${status.index}].file" />
+                        <form:input class="mt-3" type="file" path="bannerId.imagesCollection[${status.index}].file" />
                         <form:hidden path="bannerId.imagesCollection[${status.index}].id" value="${image.id}"/>
                         <form:hidden path="bannerId.imagesCollection[${status.index}].url" value="${image.url}"/>
                     </div>
@@ -43,7 +43,7 @@
                 <label for="content">Content</label>
                 <form:textarea path="content" class="form-control" rows="3" id="content"></form:textarea>
                 </div>
-                <button type="submit" class="btn btn-primary">Update</button>
+                <button type="submit" class="mx-auto btn btn-primary">Update</button>
 
         </form:form>
 
