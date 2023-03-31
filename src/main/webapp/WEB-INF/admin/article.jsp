@@ -82,11 +82,13 @@
                             <td>${a.description}</td>
                             <td>${a.articleType}</td>
                             <td>${a.createdDate}</td>
+                            
                             <td class="d-flex">
                                 <a href="${url}${a.id}">
                                     <button class="btn btn-dark bg-dark col update-btn">Update</button>
                                 </a>
-                                <button class="btn col">Delete</button>
+
+                                <button class="btn col" onclick="deleteArticle('<c:url value="/api/article/${a.id}" />')">Delete</button>
                             </td>
                         </tr>
                     </c:forEach>
@@ -144,10 +146,12 @@
 <script src="https://cdn.tiny.cloud/1/hkiir3w66qsfdv856ttemmqztxxfkcpgkr1ebc69har0t88n/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 
 <script>
-    tinymce.init({
-        selector: 'textarea#content', // chon textarea de sua
-        plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tableofcontents footnotes mergetags autocorrect typography inlinecss',
-        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | emoticons charmap | removeformat'
-    });
+                                    tinymce.init({
+                                        selector: 'textarea#content', // chon textarea de sua
+                                        plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tableofcontents footnotes mergetags autocorrect typography inlinecss',
+                                        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | emoticons charmap | removeformat'
+                                    });
 </script>
 
+<c:url var="url" value="/assets/js" />
+<script src="${url}/pages/article.js" />

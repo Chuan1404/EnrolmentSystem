@@ -15,9 +15,11 @@ import java.util.Map;
  */
 public interface ArticlesService {
 
-    Articles getArticleById(String id);
+    public Articles getArticleById(String id);
 
-    boolean saveOrUpdateArticles(Articles article);
+    public boolean saveOrUpdateArticles(Articles article);
+    
+    public boolean deleteArticle(String id);
 
     public Long getTotalRow(ArticleType type);
     

@@ -57,4 +57,9 @@ public class ArticlesServiceImpl implements ArticlesService {
         return articlesRepository.getArticles(params);
     }
 
+    @Override
+    public boolean deleteArticle(String id) {
+        return articlesRepository.deleteArticle(id);
+    }
+
 }

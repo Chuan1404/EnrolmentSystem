@@ -117,4 +117,18 @@ public class ArticlesRepositoryImpl implements ArticlesRepository {
         return q.getResultList();
     }
 
+    @Override
+    public boolean deleteArticle(String id) {
+        Session session = sessionFactory.getObject().getCurrentSession();
+        
+        Articles article = this.getArticleById(id);
+        
+        try {
+            session.delete(article);
+            return true;
+        } catch(HibernateException err) {
+            return false;
+        }
+    }
+
 }

@@ -4,3 +4,13 @@
  */
 
 
+function deleteArticle(endPoint) {
+    if (confirm("Xác nhận xóa?"))
+        fetch(endPoint, {
+            method: "delete"
+        })
+                .then(() => {
+                    location.reload();
+                }
+                );
+}
