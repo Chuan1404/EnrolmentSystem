@@ -5,7 +5,7 @@
 package com.java.pojos;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,12 +16,10 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -80,15 +78,12 @@ public class Users implements Serializable {
     @Column(name = "user_role")
     private String userRole;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
-    private Set<Comments> commentsSet;
+    private Collection<Comments> commentsCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
-    private Set<Questions> questionsSet;
+    private Collection<Questions> questionsCollection;
     @OneToMany(mappedBy = "userId")
-    private Set<Articles> articlesSet;
+    private Collection<Articles> articlesCollection;
 
-    @Transient
-    private MultipartFile file;
-    
     public Users() {
     }
 
@@ -163,30 +158,30 @@ public class Users implements Serializable {
     }
 
     @XmlTransient
-    public Set<Comments> getCommentsSet() {
-        return commentsSet;
+    public Collection<Comments> getCommentsCollection() {
+        return commentsCollection;
     }
 
-    public void setCommentsSet(Set<Comments> commentsSet) {
-        this.commentsSet = commentsSet;
-    }
-
-    @XmlTransient
-    public Set<Questions> getQuestionsSet() {
-        return questionsSet;
-    }
-
-    public void setQuestionsSet(Set<Questions> questionsSet) {
-        this.questionsSet = questionsSet;
+    public void setCommentsCollection(Collection<Comments> commentsCollection) {
+        this.commentsCollection = commentsCollection;
     }
 
     @XmlTransient
-    public Set<Articles> getArticlesSet() {
-        return articlesSet;
+    public Collection<Questions> getQuestionsCollection() {
+        return questionsCollection;
     }
 
-    public void setArticlesSet(Set<Articles> articlesSet) {
-        this.articlesSet = articlesSet;
+    public void setQuestionsCollection(Collection<Questions> questionsCollection) {
+        this.questionsCollection = questionsCollection;
+    }
+
+    @XmlTransient
+    public Collection<Articles> getArticlesCollection() {
+        return articlesCollection;
+    }
+
+    public void setArticlesCollection(Collection<Articles> articlesCollection) {
+        this.articlesCollection = articlesCollection;
     }
 
     @Override
@@ -212,20 +207,6 @@ public class Users implements Serializable {
     @Override
     public String toString() {
         return "com.java.pojos.Users[ id=" + id + " ]";
-    }
-
-    /**
-     * @return the file
-     */
-    public MultipartFile getFile() {
-        return file;
-    }
-
-    /**
-     * @param file the file to set
-     */
-    public void setFile(MultipartFile file) {
-        this.file = file;
     }
     
 }

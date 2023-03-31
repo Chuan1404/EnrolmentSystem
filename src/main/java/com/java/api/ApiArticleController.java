@@ -23,7 +23,5 @@ public class ApiArticleController {
     @DeleteMapping(value = "/api/article/{id}")
     private void deleteArticle(@PathVariable(value = "id") String id) {
         boolean res = articlesService.deleteArticle(id);
-        
-        System.out.println("DELETE");
     }
 }

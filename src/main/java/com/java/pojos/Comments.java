@@ -5,8 +5,8 @@
 package com.java.pojos;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
-import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -58,7 +58,7 @@ public class Comments implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date createdDate;
     @OneToMany(mappedBy = "baseCommentId")
-    private Set<Comments> commentsSet;
+    private Collection<Comments> commentsCollection;
     @JoinColumn(name = "base_comment_id", referencedColumnName = "id")
     @ManyToOne
     private Comments baseCommentId;
@@ -104,12 +104,12 @@ public class Comments implements Serializable {
     }
 
     @XmlTransient
-    public Set<Comments> getCommentsSet() {
-        return commentsSet;
+    public Collection<Comments> getCommentsCollection() {
+        return commentsCollection;
     }
 
-    public void setCommentsSet(Set<Comments> commentsSet) {
-        this.commentsSet = commentsSet;
+    public void setCommentsCollection(Collection<Comments> commentsCollection) {
+        this.commentsCollection = commentsCollection;
     }
 
     public Comments getBaseCommentId() {

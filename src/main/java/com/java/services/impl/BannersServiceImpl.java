@@ -31,7 +31,8 @@ public class BannersServiceImpl implements BannersService{
 
     @Override
     public boolean updateBanner(Banners banner) {
-        List<Images> images = banner.getImagesCollection();
+//        List<Images> images = banner.getImagesCollection();
+        List<Images> images = (List<Images>) banner.getImagesCollection();
         System.out.println(images);
         for (Images img : images) {
             img.setBannerId(banner);

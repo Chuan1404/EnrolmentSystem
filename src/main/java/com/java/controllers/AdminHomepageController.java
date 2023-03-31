@@ -27,28 +27,32 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping("/admin/homepage")
 public class AdminHomepageController {
+
     @Autowired
     private HomepageService homepageService;
     @Autowired
     private ImagesService imagesService;
-    
+
     @GetMapping("/")
     public String adminHomepage(Model model) {
         Homepage home = homepageService.getHomepage();
-       
+
         model.addAttribute("homepage", home);
-        List<Images> images = home.getBannerId().getImagesCollection();
+//        List<Images> images = home.getBannerId().getImagesCollection();
+        List<Images> images = (List<Images>) home.getBannerId().getImagesCollection();
 
 //        System.out.println(home.getBannerId().getImagesCollection().toString());
         return "admin-homepage";
     }
-    
+
     @PostMapping("/update")
     public String updateHomepage(Model model, @ModelAttribute("homepage") Homepage home) {
-        
-        if (this.homepageService.updateHomepage(home))
+
+        if (this.homepageService.updateHomepage(home)) {
             return "redirect:/admin/homepage/";
-        else model.addAttribute("errMsg", "SOMETHING WENT WRONG!");
+        } else {
+            model.addAttribute("errMsg", "SOMETHING WENT WRONG!");
+        }
 
         return "admin-homepage";
     }

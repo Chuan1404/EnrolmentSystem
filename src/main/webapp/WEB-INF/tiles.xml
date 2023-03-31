@@ -51,6 +51,14 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="title" value="Enrolment List" />
         <put-attribute name="content" value="/WEB-INF/pages/enrolment-list.jsp"/>
     </definition>
+    <definition name="livestream" extends="base">
+        <put-attribute name="title" value="Livestream" />
+        <put-attribute name="content" value="/WEB-INF/pages/livestream.jsp"/>
+    </definition>
+    <definition name="livestream-detail" extends="base">
+        <put-attribute name="title" value="Livestream" />
+        <put-attribute name="content" value="/WEB-INF/pages/livestream-detail.jsp"/>
+    </definition>
     <!--Admin page here-->
     <definition name="admin-base" template="/WEB-INF/components/admin-base.jsp">
         <put-attribute name="title" value="Admin page"/>

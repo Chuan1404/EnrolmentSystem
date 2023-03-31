@@ -5,8 +5,8 @@
 package com.java.pojos;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
-import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -59,6 +59,14 @@ public class Livestreams implements Serializable {
     @Size(max = 65535)
     @Column(name = "description")
     private String description;
+    @Lob
+    @Size(max = 65535)
+    @Column(name = "image")
+    private String image;
+    @Lob
+    @Size(max = 65535)
+    @Column(name = "link")
+    private String link;
     @Basic(optional = false)
     @NotNull
     @Column(name = "start_time")
@@ -80,7 +88,7 @@ public class Livestreams implements Serializable {
     @Temporal(TemporalType.TIME)
     private Date endQuestionTime;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "livestreamId")
-    private Set<Questions> questionsSet;
+    private Collection<Questions> questionsCollection;
 
     public Livestreams() {
     }
@@ -119,6 +127,22 @@ public class Livestreams implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
     }
 
     public Date getStartTime() {
@@ -162,12 +186,12 @@ public class Livestreams implements Serializable {
     }
 
     @XmlTransient
-    public Set<Questions> getQuestionsSet() {
-        return questionsSet;
+    public Collection<Questions> getQuestionsCollection() {
+        return questionsCollection;
     }
 
-    public void setQuestionsSet(Set<Questions> questionsSet) {
-        this.questionsSet = questionsSet;
+    public void setQuestionsCollection(Collection<Questions> questionsCollection) {
+        this.questionsCollection = questionsCollection;
     }
 
     @Override

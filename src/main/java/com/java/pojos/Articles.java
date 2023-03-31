@@ -6,7 +6,6 @@ package com.java.pojos;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.UUID;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -37,7 +36,6 @@ import org.springframework.web.multipart.MultipartFile;
 @NamedQueries({
     @NamedQuery(name = "Articles.findAll", query = "SELECT a FROM Articles a"),
     @NamedQuery(name = "Articles.findById", query = "SELECT a FROM Articles a WHERE a.id = :id"),
-    @NamedQuery(name = "Articles.findByTitle", query = "SELECT a FROM Articles a WHERE a.title = :title"),
     @NamedQuery(name = "Articles.findByCreatedDate", query = "SELECT a FROM Articles a WHERE a.createdDate = :createdDate"),
     @NamedQuery(name = "Articles.findByUpdateDate", query = "SELECT a FROM Articles a WHERE a.updateDate = :updateDate"),
     @NamedQuery(name = "Articles.findByArticleType", query = "SELECT a FROM Articles a WHERE a.articleType = :articleType")})
@@ -52,7 +50,8 @@ public class Articles implements Serializable {
     private String id;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 50)
+    @Lob
+    @Size(min = 1, max = 65535)
     @Column(name = "title")
     private String title;
     @Basic(optional = false)
@@ -93,13 +92,9 @@ public class Articles implements Serializable {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne
     private Users userId;
-    
-    @Transient
-    private MultipartFile file;
 
-    {
-        id = UUID.randomUUID().toString();
-    }
+   @Transient
+   private MultipartFile file;
     
     public Articles() {
     }
