@@ -18,7 +18,7 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="content" value="/WEB-INF/pages/index.jsp" />
     </definition>
     
-<!--    <definition name="login" extends="base">
+    <!--    <definition name="login" extends="base">
         <put-attribute name="title" value="Đăng ký" />
         <put-attribute name="header" value="" />
         <put-attribute name="content" value="/WEB-INF/pages/login.jsp" />
@@ -57,7 +57,8 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
     </definition>
     <definition name="livestream-detail" extends="base">
         <put-attribute name="title" value="Livestream" />
-        <put-attribute name="content" value="/WEB-INF/pages/livestream-detail.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/pages/livestream-detail.jsp" />
+    </definition>
     <definition name="faculty" extends="base">
         <put-attribute name="title" value="Faculty"/>
         <put-attribute name="content" value="/WEB-INF/pages/faculty.jsp"/>
