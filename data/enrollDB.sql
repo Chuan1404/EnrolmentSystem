@@ -103,8 +103,6 @@ CREATE TABLE `images` (
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
-
-
 -- INSERT DATA
 
 INSERT INTO `users` (`id`, `username`, `password`, `name`, `avatar`, `email`, `user_role`) VALUES ('I4esDB8GDWMcVW40uA6x', 'cuong.nt', '123456', 'Nguyễn Tấn Cường', 'https://res.cloudinary.com/dis95mx4d/image/upload/v1668643889/sample.jpg', '2051052016@ou.edu.vn', 'THISINH');
@@ -191,6 +189,26 @@ VALUES ('mwrybLN4ScPZDTZUgu1i', 'Secretart for Economic Air plane that looks lik
 
 
 
+-- KHOA
+INSERT INTO `articles` (`id`, `title`, `content`, `description`, `image`, `created_date`, `update_date`, `article_type`, `user_id`) 
+VALUES ('zWVCv5qWGw3T9qvpiMIT', 'Secretart for Economic Air plane that looks like', '<h4><a href="latest_news.html">Secretart for Economic Air plane that looks like', 'Struggling to sell one multi-million dollar home currently on the market won’t stop actress and singer Jennifer Lopez.', 'https://res.cloudinary.com/dttbj4ypm/image/upload/v1679664554/whats_news_details4_y3jbdo.png', '2002-11-19', '2023-03-03', 'KHOA', 'UgT5veP8Nc8HUoGva1Kc');
+
+INSERT INTO `articles` (`id`, `title`, `content`, `description`, `image`, `created_date`, `update_date`, `article_type`, `user_id`) 
+VALUES ('zWVCv5qWGw3T9qvpiMIU', 'Secretart for Economic Air plane that looks like', '<h4><a href="latest_news.html">Secretart for Economic Air plane that looks like', 'Struggling to sell one multi-million dollar home currently on the market won’t stop actress and singer Jennifer Lopez.', 'https://res.cloudinary.com/dttbj4ypm/image/upload/v1679664554/whats_news_details4_y3jbdo.png', '2002-11-19', '2023-03-03', 'KHOA', 'UgT5veP8Nc8HUoGva1Kc');
+
+INSERT INTO `articles` (`id`, `title`, `content`, `description`, `image`, `created_date`, `update_date`, `article_type`, `user_id`) 
+VALUES ('zWVCv5qWGw3T9qvpiMIV', 'Secretart for Economic Air plane that looks like', '<h4><a href="latest_news.html">Secretart for Economic Air plane that looks like', 'Struggling to sell one multi-million dollar home currently on the market won’t stop actress and singer Jennifer Lopez.', 'https://res.cloudinary.com/dttbj4ypm/image/upload/v1679664554/whats_news_details4_y3jbdo.png', '2002-11-19', '2023-03-03', 'KHOA', 'UgT5veP8Nc8HUoGva1Kc');
+
+INSERT INTO `articles` (`id`, `title`, `content`, `description`, `image`, `created_date`, `update_date`, `article_type`, `user_id`) 
+VALUES ('zWVCv5qWGw3T9qvpiMIW', 'Secretart for Economic Air plane that looks like', '<h4><a href="latest_news.html">Secretart for Economic Air plane that looks like', 'Struggling to sell one multi-million dollar home currently on the market won’t stop actress and singer Jennifer Lopez.', 'https://res.cloudinary.com/dttbj4ypm/image/upload/v1679664554/whats_news_details4_y3jbdo.png', '2002-11-19', '2023-03-03', 'KHOA', 'UgT5veP8Nc8HUoGva1Kc');
+
+INSERT INTO `articles` (`id`, `title`, `content`, `description`, `image`, `created_date`, `update_date`, `article_type`, `user_id`) 
+VALUES ('zWVCv5qWGw3T9qvpiMIX', 'Secretart for Economic Air plane that looks like', '<h4><a href="latest_news.html">Secretart for Economic Air plane that looks like', 'Struggling to sell one multi-million dollar home currently on the market won’t stop actress and singer Jennifer Lopez.', 'https://res.cloudinary.com/dttbj4ypm/image/upload/v1679664554/whats_news_details4_y3jbdo.png', '2002-11-19', '2023-03-03', 'KHOA', 'UgT5veP8Nc8HUoGva1Kc');
+
+INSERT INTO `articles` (`id`, `title`, `content`, `description`, `image`, `created_date`, `update_date`, `article_type`, `user_id`) 
+VALUES ('zWVCv5qWGw3T9qvpiMIY', 'Secretart for Economic Air plane that looks like', '<h4><a href="latest_news.html">Secretart for Economic Air plane that looks like', 'Struggling to sell one multi-million dollar home currently on the market won’t stop actress and singer Jennifer Lopez.', 'https://res.cloudinary.com/dttbj4ypm/image/upload/v1679664554/whats_news_details4_y3jbdo.png', '2002-11-19', '2023-03-03', 'KHOA', 'UgT5veP8Nc8HUoGva1Kc');
+
+
 -- UPDATE (NGAY 27-03-2023)
 INSERT INTO `banners` () VALUES();
 INSERT INTO `homepage` (content, banner_id, video) VALUES('<h1 style="text-align: center;"><strong><span style="font-size: 36pt;">GIỚI THI&Ecirc;̣U CHUNG</span></strong></h1>
@@ -231,7 +249,12 @@ INSERT INTO `images` (url, banner_id) VALUES('https://res.cloudinary.com/dttbj4y
 -- END UPDATE
 
 
-INSERT INTO `faculties` (`id`, `name`, `article_id`) VALUES ('1', 'Quản trị kinh doanh', 'XRddcyw24gYJ40miY0xc');
+INSERT INTO `faculties` (`id`, `name`, `article_id`) VALUES ('1', 'Quản trị kinh doanh', 'zWVCv5qWGw3T9qvpiMIT');
+INSERT INTO `faculties` (`id`, `name`, `article_id`) VALUES ('2', 'Công nghệ thông tin', 'zWVCv5qWGw3T9qvpiMIU');
+INSERT INTO `faculties` (`id`, `name`, `article_id`) VALUES ('3', 'Kinh tế - Quản lí công', 'zWVCv5qWGw3T9qvpiMIV');
+INSERT INTO `faculties` (`id`, `name`, `article_id`) VALUES ('4', 'Đông Nam Á', 'zWVCv5qWGw3T9qvpiMIW');
+INSERT INTO `faculties` (`id`, `name`, `article_id`) VALUES ('5', 'Ngoại ngữ ', 'zWVCv5qWGw3T9qvpiMIX');
+INSERT INTO `faculties` (`id`, `name`, `article_id`) VALUES ('6', 'Xây dựng', 'zWVCv5qWGw3T9qvpiMIY');
 
 INSERT INTO `livestreams` (`id`, `title`,`description`, `image`, `link`, `start_time`, `start_date`, `duration`, `start_question_time`, `end_question_time`) 
 VALUES ('1', 'Tư vấn tuyển sinh ngành công nghệ thông tin', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout', 'https://res.cloudinary.com/dttbj4ypm/image/upload/v1680272340/ztsqjeir1bowet4s3rs7.png', 'https://www.facebook.com/watch/live/?ref=watch_permalink&v=1341649012941254', '9:00:00', '2023-03-20', '55', '9:15:00', '9:25:00');
