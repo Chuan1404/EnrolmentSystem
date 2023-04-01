@@ -13,38 +13,30 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author AnChuPC
+ * @author jackc
  */
 @Entity
-@Table(name = "faculties")
+@Table(name = "majors")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Faculties.findAll", query = "SELECT f FROM Faculties f"),
-    @NamedQuery(name = "Faculties.findById", query = "SELECT f FROM Faculties f WHERE f.id = :id"),
-    @NamedQuery(name = "Faculties.findByName", query = "SELECT f FROM Faculties f WHERE f.name = :name")})
-public class Faculties implements Serializable {
+    @NamedQuery(name = "Majors.findAll", query = "SELECT m FROM Majors m"),
+    @NamedQuery(name = "Majors.findById", query = "SELECT m FROM Majors m WHERE m.id = :id"),
+    @NamedQuery(name = "Majors.findByName", query = "SELECT m FROM Majors m WHERE m.name = :name")})
+public class Majors implements Serializable {
 
-    @OneToMany(mappedBy = "faculty")
-    private Set<Majors> majorsSet;
-
-    @Size(max = 50)
-    @Column(name = "video")
-    private String video;
-    @Size(max = 100)
-    @Column(name = "url")
-    private String url;
+    @OneToMany(mappedBy = "major")
+    private Set<Points> pointsSet;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -52,25 +44,18 @@ public class Faculties implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
+    @Size(max = 100)
     @Column(name = "name")
     private String name;
-    @JoinColumn(name = "article_id", referencedColumnName = "id")
-    @OneToOne(optional = false)
-    private Articles articleId;
+    @JoinColumn(name = "faculty_id", referencedColumnName = "id")
+    @ManyToOne
+    private Faculties faculty;
 
-    public Faculties() {
+    public Majors() {
     }
 
-    public Faculties(Integer id) {
+    public Majors(Integer id) {
         this.id = id;
-    }
-
-    public Faculties(Integer id, String name) {
-        this.id = id;
-        this.name = name;
     }
 
     public Integer getId() {
@@ -89,12 +74,12 @@ public class Faculties implements Serializable {
         this.name = name;
     }
 
-    public Articles getArticleId() {
-        return articleId;
+    public Faculties getFaculty() {
+        return faculty;
     }
 
-    public void setArticleId(Articles articleId) {
-        this.articleId = articleId;
+    public void setFaculty(Faculties faculty) {
+        this.faculty = faculty;
     }
 
     @Override
@@ -107,10 +92,10 @@ public class Faculties implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Faculties)) {
+        if (!(object instanceof Majors)) {
             return false;
         }
-        Faculties other = (Faculties) object;
+        Majors other = (Majors) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -119,32 +104,16 @@ public class Faculties implements Serializable {
 
     @Override
     public String toString() {
-        return "com.java.pojos.Faculties[ id=" + id + " ]";
-    }
-
-    public String getVideo() {
-        return video;
-    }
-
-    public void setVideo(String video) {
-        this.video = video;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
+        return "com.java.pojos.Majors[ id=" + id + " ]";
     }
 
     @XmlTransient
-    public Set<Majors> getMajorsSet() {
-        return majorsSet;
+    public Set<Points> getPointsSet() {
+        return pointsSet;
     }
 
-    public void setMajorsSet(Set<Majors> majorsSet) {
-        this.majorsSet = majorsSet;
+    public void setPointsSet(Set<Points> pointsSet) {
+        this.pointsSet = pointsSet;
     }
     
 }

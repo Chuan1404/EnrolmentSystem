@@ -15,7 +15,7 @@ CREATE TABLE `users` (
     `email` VARCHAR(100) NOT NULL,
     `user_role` VARCHAR(30) NOT NULL,
     PRIMARY KEY (`id`)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `articles`(
 	`id` VARCHAR(50) NOT NULL,
@@ -29,7 +29,7 @@ CREATE TABLE `articles`(
     `user_id` VARCHAR(50) DEFAULT NULL,
     PRIMARY KEY (`id`),
     CONSTRAINT fk_articles_user_id_users FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL
-) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `comments` (
 	`id` INT NOT NULL AUTO_INCREMENT,
@@ -40,16 +40,18 @@ CREATE TABLE `comments` (
     PRIMARY KEY (`id`),
     CONSTRAINT fk_comment_user_id_users FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
     CONSTRAINT fk_comments_base_comment_id_comments FOREIGN KEY(`base_comment_id`) REFERENCES `comments` (`id`) ON DELETE CASCADE
-) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `faculties` (
 	`id` INT NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(50) NOT NULL,
     `article_id` VARCHAR(50) NOT NULL,
+    `video` VARCHAR(50) DEFAULT NULL,
+    `url` VARCHAR(100) DEFAULT NULL,
     PRIMARY KEY(`id`),
     CONSTRAINT fk_faculties_article_id_articles FOREIGN KEY (`article_id`) REFERENCES `articles` (`id`),
     CONSTRAINT uq_faculties_article_id UNIQUE (`article_id`)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `livestreams` (
 	`id` INT NOT NULL AUTO_INCREMENT,
@@ -63,7 +65,7 @@ CREATE TABLE `livestreams` (
     `start_question_time` TIME DEFAULT NULL,
     `question_duration` INT NOT NULL,
     PRIMARY KEY (`id`)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
@@ -75,12 +77,12 @@ CREATE TABLE `questions` (
     PRIMARY KEY (`id`),
     CONSTRAINT fk_questions_user_id_users FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
     CONSTRAINT fk_questions_livestream_id_livestreams FOREIGN KEY (`livestream_id`) REFERENCES `livestreams` (`id`) ON DELETE CASCADE
-) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `banners` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	PRIMARY KEY (`id`)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `homepage` (
 	`id` INT NOT NULL AUTO_INCREMENT,
@@ -90,7 +92,7 @@ CREATE TABLE `homepage` (
 	PRIMARY KEY (`id`),
 	CONSTRAINT fk_homepage_banner_id_banners FOREIGN KEY (`banner_id`) REFERENCES `banners` (`id`) ON DELETE CASCADE,
 	CONSTRAINT uq_homepage_banner_id UNIQUE(`banner_id`)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
@@ -100,7 +102,35 @@ CREATE TABLE `images` (
 	`banner_id` INT NOT NULL,
 	PRIMARY KEY (`id`),
 	CONSTRAINT fk_images_banner_id_banners FOREIGN KEY (`banner_id`) REFERENCES `banners` (`id`) ON DELETE CASCADE
-) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `majors` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(100) DEFAULT NULL,
+	`faculty_id` INT DEFAULT NULL,
+	PRIMARY KEY (`id`),
+	CONSTRAINT fk_majors_faculty_id_faculties FOREIGN KEY (`faculty_id`) REFERENCES `faculties` (`id`) ON DELETE CASCADE
+) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `points` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`year` INT DEFAULT NULL,
+	`point` FLOAT DEFAULT NULL,
+	`major_id` INT DEFAULT NULL,
+	PRIMARY KEY(`id`),
+	CONSTRAINT fk_points_major_id_majors FOREIGN KEY (`major_id`) REFERENCES `majors` (`id`) ON DELETE CASCADE
+ ) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+
+-- CREATE TABLE `majors_points` (
+-- 	`id` INT NOT NULL AUTO_INCREMENT,
+-- 	`major_id` INT DEFAULT NULL,
+-- 	`point_id` INT DEFAULT NULL,
+-- 	PRIMARY KEY (`id`),
+-- 	CONSTRAINT fk_majors_points_major_id_majors FOREIGN KEY (`major_id`) REFERENCES `majors` (`id`) ON DELETE CASCADE,
+-- 	CONSTRAINT fk_majors_points_point_id_points FOREIGN KEY (`point_id`) REFERENCES `points` (`id`) ON DELETE CASCADE
+-- )DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 -- INSERT DATA
@@ -249,12 +279,12 @@ INSERT INTO `images` (url, banner_id) VALUES('https://res.cloudinary.com/dttbj4y
 -- END UPDATE
 
 
-INSERT INTO `faculties` (`id`, `name`, `article_id`) VALUES ('1', 'Quản trị kinh doanh', 'zWVCv5qWGw3T9qvpiMIT');
-INSERT INTO `faculties` (`id`, `name`, `article_id`) VALUES ('2', 'Công nghệ thông tin', 'zWVCv5qWGw3T9qvpiMIU');
-INSERT INTO `faculties` (`id`, `name`, `article_id`) VALUES ('3', 'Kinh tế - Quản lí công', 'zWVCv5qWGw3T9qvpiMIV');
-INSERT INTO `faculties` (`id`, `name`, `article_id`) VALUES ('4', 'Đông Nam Á', 'zWVCv5qWGw3T9qvpiMIW');
-INSERT INTO `faculties` (`id`, `name`, `article_id`) VALUES ('5', 'Ngoại ngữ ', 'zWVCv5qWGw3T9qvpiMIX');
-INSERT INTO `faculties` (`id`, `name`, `article_id`) VALUES ('6', 'Xây dựng', 'zWVCv5qWGw3T9qvpiMIY');
+INSERT INTO `faculties` (`id`, `name`, `article_id`, `video`, `url`) VALUES ('1', 'Quản trị kinh doanh', 'zWVCv5qWGw3T9qvpiMIT', '6F6RGmVvfdM','http://it.ou.edu.vn');
+INSERT INTO `faculties` (`id`, `name`, `article_id`, `video`, `url`) VALUES ('2', 'Công nghệ thông tin', 'zWVCv5qWGw3T9qvpiMIU', '6F6RGmVvfdM','http://it.ou.edu.vn');
+INSERT INTO `faculties` (`id`, `name`, `article_id`, `video`, `url`) VALUES ('3', 'Kinh tế - Quản lí công', 'zWVCv5qWGw3T9qvpiMIV', '6F6RGmVvfdM','http://it.ou.edu.vn');
+INSERT INTO `faculties` (`id`, `name`, `article_id`, `video`, `url`) VALUES ('4', 'Đông Nam Á', 'zWVCv5qWGw3T9qvpiMIW', '6F6RGmVvfdM','http://it.ou.edu.vn');
+INSERT INTO `faculties` (`id`, `name`, `article_id`, `video`, `url`) VALUES ('5', 'Ngoại ngữ ', 'zWVCv5qWGw3T9qvpiMIX', '6F6RGmVvfdM','http://it.ou.edu.vn');
+INSERT INTO `faculties` (`id`, `name`, `article_id`, `video`, `url`) VALUES ('6', 'Xây dựng', 'zWVCv5qWGw3T9qvpiMIY', '6F6RGmVvfdM','http://it.ou.edu.vn');
 
 INSERT INTO `livestreams` (`id`, `title`,`description`, `image`, `link`, `start_time`, `start_date`, `duration`, `start_question_time`, `question_duration`) 
 VALUES ('1', 'Tư vấn tuyển sinh ngành công nghệ thông tin', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout', 'https://res.cloudinary.com/dttbj4ypm/image/upload/v1680272340/ztsqjeir1bowet4s3rs7.png', 'https://www.facebook.com/watch/live/?ref=watch_permalink&v=1341649012941254', '9:00:00', '2023-03-20', '55', '9:15:00', '30');
@@ -264,3 +294,22 @@ INSERT INTO `livestreams` (`id`, `title`,`description`, `image`, `link`, `start_
 VALUES ('3', 'Tư vấn tuyển sinh ngành công nghệ thông tin', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout', 'https://res.cloudinary.com/dttbj4ypm/image/upload/v1680272340/ztsqjeir1bowet4s3rs7.png', 'https://www.facebook.com/watch/live/?ref=watch_permalink&v=1341649012941254', '9:00:00', '2023-03-20', '55', '9:15:00', '30');
 
 INSERT INTO `questions` (`id`, `content`, `user_id`, `livestream_id`) VALUES ('1', 'Dự đoán điểm năm nay ?', 'BxST2aBzsduwWLw1cxEQ', '1');
+
+INSERT INTO `majors` (`name`, `faculty_id`) VALUES('Công nghệ thông tin', 2);
+INSERT INTO `majors` (`name`, `faculty_id`) VALUES('Khoa học máy tính', 2);
+INSERT INTO `majors` (`name`, `faculty_id`) VALUES('Hệ thống thông tin quản lý', 2);
+INSERT INTO `points` (`year`, `point`, `major_id`) VALUES(2022, 23.50, 3);
+INSERT INTO `points` (`year`, `point`, `major_id`) VALUES(2021, 25.90, 3);
+INSERT INTO `points` (`year`, `point`, `major_id`) VALUES(2020, 23.20, 3);
+INSERT INTO `points` (`year`, `point`, `major_id`) VALUES(2019, 18.90, 3);
+INSERT INTO `points` (`year`, `point`, `major_id`) VALUES(2018, null , 3);
+
+
+
+
+
+
+
+
+
+
