@@ -13,8 +13,8 @@ public enum ArticleType {
     LIEN_THONG, // hệ liên thông
     CAO_HOC, // hệ cao học,
     THAC_SI, // hệ thạc sĩ,
-    TU_XA; // đào tạo từ xa
-
+    TU_XA, // đào tạo từ xa
+    KHOA; // thông tin khoa
     public static String convertToString(ArticleType type) {
         if (type == CHINH_QUY) {
             return "THÔNG TIN TUYỂN SINH ĐẠI HỌC CHÍNH QUY";
@@ -30,6 +30,9 @@ public enum ArticleType {
         }
         if (type == TU_XA) {
             return "THÔNG TIN TUYỂN SINH TỪ XA";
+        }
+        if (type == KHOA){
+            return "THÔNG TIN KHOA";
         }
 
         return "Không có tiêu đề phù hợp";
