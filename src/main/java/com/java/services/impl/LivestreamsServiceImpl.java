@@ -31,5 +31,10 @@ public class LivestreamsServiceImpl implements LivestreamsService{
     public Livestreams getLiveStreamById(String id) {
         return livestreamsRepository.getLiveStreamById(id);
     }
+
+    @Override
+    public boolean addOrUpdateLivestream(Livestreams livestream) {
+        return false;
+    }
     
 }

@@ -1,7 +1,7 @@
-    <%-- 
-    Document   : header
-    Created on : Mar 20, 2023, 12:35:34 PM
-    Author     : AnChuPC
+<%-- 
+Document   : header
+Created on : Mar 20, 2023, 12:35:34 PM
+Author     : AnChuPC
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -43,18 +43,19 @@
                             <div class="main-menu d-none d-md-block">
                                 <nav>                  
                                     <ul id="navigation">
-                                        <li><a href="index.html">TRANG CHỦ</a></li>
-                                        
+                                        <li><a href="/">TRANG CHỦ</a></li>
+
                                         <li><a href="${url}enrolment/">THÔNG TIN TUYỂN SINH</a></li>
-                                            <li><a href="${url}faculty/">THÔNG TIN KHOA</a></li>
-<!--                                        <li><a href="#">Pages</a>
-                                            <ul class="submenu">
-                                                <li><a href="blog.html">Blog</a></li>
-                                                <li><a href="blog_details.html">Blog Details</a></li>
-                                                <li><a href="elements.html">Element</a></li>
-                                            </ul>
-                                        </li>-->
-                                        
+                                        <li><a href="${url}faculty/">THÔNG TIN KHOA</a></li>
+                                        <li><a href="${url}livestream/">Thông tin Livestream</a></li>
+                                        <!--                                        <li><a href="#">Pages</a>
+                                                                                    <ul class="submenu">
+                                                                                        <li><a href="blog.html">Blog</a></li>
+                                                                                        <li><a href="blog_details.html">Blog Details</a></li>
+                                                                                        <li><a href="elements.html">Element</a></li>
+                                                                                    </ul>
+                                                                                </li>-->
+
                                     </ul>
                                 </nav>
                             </div>

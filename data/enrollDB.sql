@@ -61,7 +61,7 @@ CREATE TABLE `livestreams` (
     `start_date` DATE NOT NULL,
     `duration` INT NOT NULL,
     `start_question_time` TIME DEFAULT NULL,
-    `end_question_time` TIME DEFAULT NULL,
+    `question_duration` INT NOT NULL,
     PRIMARY KEY (`id`)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -256,11 +256,11 @@ INSERT INTO `faculties` (`id`, `name`, `article_id`) VALUES ('4', 'Đông Nam Á
 INSERT INTO `faculties` (`id`, `name`, `article_id`) VALUES ('5', 'Ngoại ngữ ', 'zWVCv5qWGw3T9qvpiMIX');
 INSERT INTO `faculties` (`id`, `name`, `article_id`) VALUES ('6', 'Xây dựng', 'zWVCv5qWGw3T9qvpiMIY');
 
-INSERT INTO `livestreams` (`id`, `title`,`description`, `image`, `link`, `start_time`, `start_date`, `duration`, `start_question_time`, `end_question_time`) 
-VALUES ('1', 'Tư vấn tuyển sinh ngành công nghệ thông tin', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout', 'https://res.cloudinary.com/dttbj4ypm/image/upload/v1680272340/ztsqjeir1bowet4s3rs7.png', 'https://www.facebook.com/watch/live/?ref=watch_permalink&v=1341649012941254', '9:00:00', '2023-03-20', '55', '9:15:00', '9:25:00');
-INSERT INTO `livestreams` (`id`, `title`,`description`, `image`, `link`, `start_time`, `start_date`, `duration`, `start_question_time`, `end_question_time`) 
-VALUES ('2', 'Tư vấn tuyển sinh ngành công nghệ thông tin', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout', 'https://res.cloudinary.com/dttbj4ypm/image/upload/v1680272340/ztsqjeir1bowet4s3rs7.png', 'https://www.facebook.com/watch/live/?ref=watch_permalink&v=1341649012941254', '9:00:00', '2023-03-20', '55', '9:15:00', '9:25:00');
-INSERT INTO `livestreams` (`id`, `title`,`description`, `image`, `link`, `start_time`, `start_date`, `duration`, `start_question_time`, `end_question_time`) 
-VALUES ('3', 'Tư vấn tuyển sinh ngành công nghệ thông tin', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout', 'https://res.cloudinary.com/dttbj4ypm/image/upload/v1680272340/ztsqjeir1bowet4s3rs7.png', 'https://www.facebook.com/watch/live/?ref=watch_permalink&v=1341649012941254', '9:00:00', '2023-03-20', '55', '9:15:00', '9:25:00');
+INSERT INTO `livestreams` (`id`, `title`,`description`, `image`, `link`, `start_time`, `start_date`, `duration`, `start_question_time`, `question_duration`) 
+VALUES ('1', 'Tư vấn tuyển sinh ngành công nghệ thông tin', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout', 'https://res.cloudinary.com/dttbj4ypm/image/upload/v1680272340/ztsqjeir1bowet4s3rs7.png', 'https://www.facebook.com/watch/live/?ref=watch_permalink&v=1341649012941254', '9:00:00', '2023-03-20', '55', '9:15:00', '30');
+INSERT INTO `livestreams` (`id`, `title`,`description`, `image`, `link`, `start_time`, `start_date`, `duration`, `start_question_time`, `question_duration`) 
+VALUES ('2', 'Tư vấn tuyển sinh ngành công nghệ thông tin', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout', 'https://res.cloudinary.com/dttbj4ypm/image/upload/v1680272340/ztsqjeir1bowet4s3rs7.png', 'https://www.facebook.com/watch/live/?ref=watch_permalink&v=1341649012941254', '9:00:00', '2023-03-20', '55', '9:15:00', '30');
+INSERT INTO `livestreams` (`id`, `title`,`description`, `image`, `link`, `start_time`, `start_date`, `duration`, `start_question_time`, `question_duration`) 
+VALUES ('3', 'Tư vấn tuyển sinh ngành công nghệ thông tin', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout', 'https://res.cloudinary.com/dttbj4ypm/image/upload/v1680272340/ztsqjeir1bowet4s3rs7.png', 'https://www.facebook.com/watch/live/?ref=watch_permalink&v=1341649012941254', '9:00:00', '2023-03-20', '55', '9:15:00', '30');
 
 INSERT INTO `questions` (`id`, `content`, `user_id`, `livestream_id`) VALUES ('1', 'Dự đoán điểm năm nay ?', 'BxST2aBzsduwWLw1cxEQ', '1');

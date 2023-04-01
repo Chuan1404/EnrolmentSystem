@@ -15,4 +15,5 @@ import java.util.Map;
 public interface LivestreamsService {
     public List<Livestreams> getLivestreams(Map<String, String> params);
     public Livestreams getLiveStreamById(String id);
+    public boolean addOrUpdateLivestream(Livestreams livestream);
 }

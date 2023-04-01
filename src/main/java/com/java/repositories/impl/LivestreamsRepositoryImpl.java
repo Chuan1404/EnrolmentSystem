@@ -12,6 +12,7 @@ import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import org.hibernate.HibernateError;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -57,6 +58,18 @@ public class LivestreamsRepositoryImpl implements LivestreamsRepository{
         
         Query q = session.createQuery(query);
         return (Livestreams) q.getSingleResult();
+    }
+
+    @Override
+    public boolean addOrUpdateLivestream(Livestreams livestream) {
+        Session session = sessionFactory.getObject().getCurrentSession();
+        
+        try {
+             session.save(livestream);
+             return true;
+        } catch(HibernateError err) {
+            return false;
+        }
     }
     
 }

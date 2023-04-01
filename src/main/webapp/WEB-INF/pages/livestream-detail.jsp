@@ -16,7 +16,7 @@
                 <div class="col-lg-10 mx-auto posts-list">
                     <div class="single-post text-center">
                         <div class="feature-img">
-                            <img class="img-fluid" src="${livestream.image}" alt="">
+                            <img class="img-fluid w-100" src="${livestream.image}" alt="">
                         </div>
                         <div class="blog_details">
                             <h2>${livestream.title}
