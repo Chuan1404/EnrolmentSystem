@@ -48,10 +48,10 @@
 
             <c:choose>
                 <c:when test="${not empty article.title}">
-                    <button type="submit" class="btn btn-dark bg-dark update-btn">Update</button>
+                    <button type="submit" class="genric-btn primary update-btn">Update</button>
                 </c:when>
                 <c:otherwise>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="genric-btn danger e-large">Submit</button>
                 </c:otherwise>
             </c:choose>
         </form:form>
@@ -85,10 +85,10 @@
                             
                             <td class="d-flex">
                                 <a href="${url}${a.id}">
-                                    <button class="btn btn-dark bg-dark col update-btn">Update</button>
+                                    <button class="genric-btn primary circle update-btn">Update</button>
                                 </a>
 
-                                <button class="btn col" onclick="deleteArticle('<c:url value="/api/article/${a.id}" />')">Delete</button>
+                                <button class="genric-btn danger circle update-btn col" onclick="deleteArticle('<c:url value="/api/article/${a.id}" />')">Delete</button>
                             </td>
                         </tr>
                     </c:forEach>

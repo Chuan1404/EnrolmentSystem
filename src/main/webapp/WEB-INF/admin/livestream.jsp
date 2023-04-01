@@ -7,6 +7,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <main id="admin-livestream">
     <div class="container py-5">
@@ -24,25 +26,29 @@
                 <label for="link">Link</label>
                 <form:input class="form-control" path="link" placeholder="Input link here" />
             </div>
+            
             <div class="form-group">
-                <label for="link">Ngày livestream</label>
+                <label for="startDate">Ngày livestream</label>
                 <form:input path="startDate" class="form-control" type="date" />
             </div>
             <div class="form-group">
-                <label for="link">Giờ livestream</label>
+                <label for="startTime">Giờ livestream</label>
                 <form:input path="startTime" class="form-control" type="time" />
             </div>
             <div class="form-group">
-                <label for="link">Thời lượng livestream (phút)</label>
+                <label for="duration">Thời lượng livestream (phút)</label>
                 <form:input path="duration" class="form-control" type="number" />
             </div>
             <div class="form-group">
-                <label for="link">Giờ bắt đầu đặt câu hỏi (trong lúc livestream)</label>
+                <label for="startQuestionTime">Giờ bắt đầu đặt câu hỏi (trong lúc livestream)</label>
                 <form:input path="startQuestionTime" class="form-control" type="time" />
+            </div>            <div class="form-group">
+                <label for="duration">Thời lượng livestream (phút)</label>
+                <form:input path="duration" class="form-control" type="number" />
             </div>
             <div class="form-group">
-                <label for="link">Giờ kết thúc đặt câu hỏi (trong lúc livestream)</label>
-                <form:input path="endQuestionTime" class="form-control" type="time" />
+                <label for="questionDuration">Giờ kết thúc đặt câu hỏi (trong lúc livestream)</label>
+                <form:input path="questionDuration" class="form-control" type="number" />
             </div>
 
             <c:if test="${not empty livestream.image}">
@@ -93,7 +99,7 @@
                             <td>${l.description}</td>
                             <td>${l.duration}</td>
                             <td>${l.startDate} ${l.startTime}</td>
-                            <td>${l.startQuestionTime} ${l.endQuestionTime}</td>
+                            <td>${l.startQuestionTime} ${l.questionDuration}</td>
                             <td class="d-flex">
                                 <a href="${url}${l.id}">
                                     <button class="genric-btn primary circle update-btn">Update</button>

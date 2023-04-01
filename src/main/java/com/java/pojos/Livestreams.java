@@ -5,10 +5,8 @@
 package com.java.pojos;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,7 +15,6 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -25,7 +22,7 @@ import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -43,7 +40,7 @@ import org.springframework.web.multipart.MultipartFile;
     @NamedQuery(name = "Livestreams.findByStartDate", query = "SELECT l FROM Livestreams l WHERE l.startDate = :startDate"),
     @NamedQuery(name = "Livestreams.findByDuration", query = "SELECT l FROM Livestreams l WHERE l.duration = :duration"),
     @NamedQuery(name = "Livestreams.findByStartQuestionTime", query = "SELECT l FROM Livestreams l WHERE l.startQuestionTime = :startQuestionTime"),
-    @NamedQuery(name = "Livestreams.findByEndQuestionTime", query = "SELECT l FROM Livestreams l WHERE l.endQuestionTime = :endQuestionTime")})
+    @NamedQuery(name = "Livestreams.findByQuestionDuration", query = "SELECT l FROM Livestreams l WHERE l.questionDuration = :questionDuration")})
 public class Livestreams implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -73,11 +70,13 @@ public class Livestreams implements Serializable {
     @NotNull
     @Column(name = "start_time")
     @Temporal(TemporalType.TIME)
+    @DateTimeFormat(pattern = "HH:mm")
     private Date startTime;
     @Basic(optional = false)
     @NotNull
     @Column(name = "start_date")
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date startDate;
     @Basic(optional = false)
     @NotNull
@@ -85,12 +84,12 @@ public class Livestreams implements Serializable {
     private int duration;
     @Column(name = "start_question_time")
     @Temporal(TemporalType.TIME)
+    @DateTimeFormat(pattern = "HH:mm")
     private Date startQuestionTime;
-    @Column(name = "end_question_time")
-    @Temporal(TemporalType.TIME)
-    private Date endQuestionTime;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "livestreamId")
-    private Collection<Questions> questionsCollection;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "question_duration")
+    private int questionDuration;
 
     @Transient
     private MultipartFile file;
@@ -102,12 +101,13 @@ public class Livestreams implements Serializable {
         this.id = id;
     }
 
-    public Livestreams(Integer id, String title, Date startTime, Date startDate, int duration) {
+    public Livestreams(Integer id, String title, Date startTime, Date startDate, int duration, int questionDuration) {
         this.id = id;
         this.title = title;
         this.startTime = startTime;
         this.startDate = startDate;
         this.duration = duration;
+        this.questionDuration = questionDuration;
     }
 
     public Integer getId() {
@@ -182,21 +182,12 @@ public class Livestreams implements Serializable {
         this.startQuestionTime = startQuestionTime;
     }
 
-    public Date getEndQuestionTime() {
-        return endQuestionTime;
+    public int getQuestionDuration() {
+        return questionDuration;
     }
 
-    public void setEndQuestionTime(Date endQuestionTime) {
-        this.endQuestionTime = endQuestionTime;
-    }
-
-    @XmlTransient
-    public Collection<Questions> getQuestionsCollection() {
-        return questionsCollection;
-    }
-
-    public void setQuestionsCollection(Collection<Questions> questionsCollection) {
-        this.questionsCollection = questionsCollection;
+    public void setQuestionDuration(int questionDuration) {
+        this.questionDuration = questionDuration;
     }
 
     @Override
