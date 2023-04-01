@@ -37,6 +37,7 @@ public class AdminLivestreamController {
     
     @PostMapping(value = "/")
     public String addLivestream(Model model, @ModelAttribute(value = "livestream") Livestreams livestream) {
-        return "redirect:/admin/livestream/";
+        if(livestreamsService.addOrUpdateLivestream(livestream))
+           return "redirect:/admin/livestream/";
     }
 }
