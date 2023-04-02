@@ -4,11 +4,16 @@
  */
 package com.java.services.impl;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.java.pojos.Livestreams;
 import com.java.repositories.LivestreamsRepository;
 import com.java.services.LivestreamsService;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,11 +22,14 @@ import org.springframework.stereotype.Service;
  * @author AnChuPC
  */
 @Service
-public class LivestreamsServiceImpl implements LivestreamsService{
+public class LivestreamsServiceImpl implements LivestreamsService {
 
     @Autowired
     private LivestreamsRepository livestreamsRepository;
-    
+
+    @Autowired
+    private Cloudinary cloudinary;
+
     @Override
     public List<Livestreams> getLivestreams(Map<String, String> params) {
         return livestreamsRepository.getLivestreams(params);
@@ -34,7 +42,21 @@ public class LivestreamsServiceImpl implements LivestreamsService{
 
     @Override
     public boolean addOrUpdateLivestream(Livestreams livestream) {
-        return false;
+        if (livestream.getFile() != null) {
+            try {
+                Map res = cloudinary.uploader().upload(livestream.getFile().getBytes(), ObjectUtils.asMap("resource_type", "auto"));
+                livestream.setImage(res.get("secure_url").toString());
+            } catch (IOException ex) {
+                Logger.getLogger(LivestreamsServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        return livestreamsRepository.addOrUpdateLivestream(livestream);
     }
-    
+
+    @Override
+    public boolean deleteLivestream(String id) {
+        return livestreamsRepository.deleteLivestream(id);
+    }
+
 }

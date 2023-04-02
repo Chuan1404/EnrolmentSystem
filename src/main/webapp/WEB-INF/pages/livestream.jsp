@@ -19,8 +19,9 @@
                             <article class="blog_item">
                                 <div class="blog_item_img">
                                     <img class="card-img rounded-0" src="${l.image}" alt="">
+                                    
                                     <a href="#" class="blog_item_date">
-                                        <h3>${l.startDate.getDate()}</h3>
+                                        <h3><c:if test="${l.startDate.getDate() < 10}">0</c:if>${l.startDate.getDate()}</h3>
                                         <p>Tháng ${l.startDate.getMonth() + 1}</p>
                                     </a>
                                 </div>

@@ -36,7 +36,6 @@ import org.springframework.web.multipart.MultipartFile;
     @NamedQuery(name = "Livestreams.findAll", query = "SELECT l FROM Livestreams l"),
     @NamedQuery(name = "Livestreams.findById", query = "SELECT l FROM Livestreams l WHERE l.id = :id"),
     @NamedQuery(name = "Livestreams.findByTitle", query = "SELECT l FROM Livestreams l WHERE l.title = :title"),
-    @NamedQuery(name = "Livestreams.findByStartTime", query = "SELECT l FROM Livestreams l WHERE l.startTime = :startTime"),
     @NamedQuery(name = "Livestreams.findByStartDate", query = "SELECT l FROM Livestreams l WHERE l.startDate = :startDate"),
     @NamedQuery(name = "Livestreams.findByDuration", query = "SELECT l FROM Livestreams l WHERE l.duration = :duration"),
     @NamedQuery(name = "Livestreams.findByStartQuestionTime", query = "SELECT l FROM Livestreams l WHERE l.startQuestionTime = :startQuestionTime"),
@@ -68,23 +67,17 @@ public class Livestreams implements Serializable {
     private String link;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "start_time")
-    @Temporal(TemporalType.TIME)
-    @DateTimeFormat(pattern = "HH:mm")
-    private Date startTime;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "start_date")
-    @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date startDate;
     @Basic(optional = false)
     @NotNull
     @Column(name = "duration")
     private int duration;
     @Column(name = "start_question_time")
-    @Temporal(TemporalType.TIME)
     @DateTimeFormat(pattern = "HH:mm")
+    @Temporal(TemporalType.TIME)
     private Date startQuestionTime;
     @Basic(optional = false)
     @NotNull
@@ -93,7 +86,6 @@ public class Livestreams implements Serializable {
 
     @Transient
     private MultipartFile file;
-    
     public Livestreams() {
     }
 
@@ -101,10 +93,9 @@ public class Livestreams implements Serializable {
         this.id = id;
     }
 
-    public Livestreams(Integer id, String title, Date startTime, Date startDate, int duration, int questionDuration) {
+    public Livestreams(Integer id, String title, Date startDate, int duration, int questionDuration) {
         this.id = id;
         this.title = title;
-        this.startTime = startTime;
         this.startDate = startDate;
         this.duration = duration;
         this.questionDuration = questionDuration;
@@ -148,14 +139,6 @@ public class Livestreams implements Serializable {
 
     public void setLink(String link) {
         this.link = link;
-    }
-
-    public Date getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
     }
 
     public Date getStartDate() {

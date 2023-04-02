@@ -18,4 +18,5 @@ public interface LivestreamsRepository {
     public List<Livestreams> getLivestreams(Map<String, String> params);
     public Livestreams getLiveStreamById(String id);
     public boolean addOrUpdateLivestream(Livestreams livestream);
+    public boolean deleteLivestream(String id);
 }

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -22,22 +23,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping(value = "/admin/livestream")
 public class AdminLivestreamController {
-    
+
     @Autowired
     private LivestreamsService livestreamsService;
-    
+
     @GetMapping(value = "/")
     public String index(Model model) {
         List<Livestreams> livestreams = livestreamsService.getLivestreams(null);
-        
+
         model.addAttribute("livestream", new Livestreams());
         model.addAttribute("livestreams", livestreams);
         return "admin-livestream";
     }
-    
+
     @PostMapping(value = "/")
     public String addLivestream(Model model, @ModelAttribute(value = "livestream") Livestreams livestream) {
-        if(livestreamsService.addOrUpdateLivestream(livestream))
-           return "redirect:/admin/livestream/";
+        if (livestreamsService.addOrUpdateLivestream(livestream)) {
+            return "redirect:/admin/livestream/";
+        }
+        return "redirect:/";
+    }
+
+    @GetMapping(value = "/{id}")
+    public String updateLivestream(Model model, @PathVariable(value = "id") String id) {
+        model.addAttribute("livestream", livestreamsService.getLiveStreamById(id));
+        return "admin-livestream";
     }
 }

@@ -6,7 +6,11 @@ package com.java.controllers;
 
 import com.java.pojos.Livestreams;
 import com.java.services.LivestreamsService;
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +31,12 @@ public class LivestreamController {
     
     @GetMapping(value = "/")
     public String index(Model model) {
-        List<Livestreams> livestreams = livestreamsService.getLivestreams(null);
+        Map<String, String> params = new HashMap<>();
+        
+        LocalDate date = LocalDate.now();
+        params.put("date", date.toString());
+        
+        List<Livestreams> livestreams = livestreamsService.getLivestreams(params);
         
         model.addAttribute("livestreams",livestreams);
         

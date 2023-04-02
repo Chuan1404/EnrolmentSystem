@@ -5,8 +5,11 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <c:url var="url" value="/" />
+<c:set var="date" value="<%=new java.util.Date()%>" />
+
 
 <main id="live-stream-detailpage">
     <!--================Blog Area =================-->
@@ -16,7 +19,14 @@
                 <div class="col-lg-10 mx-auto posts-list">
                     <div class="single-post text-center">
                         <div class="feature-img">
-                            <img class="img-fluid w-100" src="${livestream.image}" alt="">
+                            <c:choose>
+                                <c:when test="${date gt livestream.startDate}">
+                                    <iframe width="885" height="498" src="https://www.youtube.com/embed/${livestream.link}" title="ĐỪNG TRUNG THÀNH với công ty, đi làm để KIẾM TIỀN thôi!!! | Nguyễn Hữu Trí" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                                    </c:when>
+                                    <c:otherwise>
+                                    <img class="img-fluid w-100" src="${livestream.image}" alt="">
+                                </c:otherwise>
+                            </c:choose>
                         </div>
                         <div class="blog_details">
                             <h2>${livestream.title}
@@ -25,16 +35,16 @@
                                 <li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
                                 <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
                             </ul>
-                            
+
                             <div class="quote-wrapper">
                                 <div class="quotes">
                                     ${livestream.description}
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
-                 
+
                     <div class="comments-area">
                         <h4>05 Comments</h4>
                         <div class="comment-list">
@@ -46,14 +56,15 @@
                                     <div class="desc">
                                         <p class="comment">
                                             Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
-                                            Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
+                                            Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesserrrr
                                         </p>
                                         <div class="d-flex justify-content-between">
                                             <div class="d-flex align-items-center">
                                                 <h5>
                                                     <a href="#">Emilly Blunt</a>
                                                 </h5>
-                                                <p class="date">December 4, 2017 at 3:12 pm </p>
+                                                <p class="date"><fmt:formatDate pattern = "yyyy-MM-dd 'at' HH:mm" 
+                                                                value = "${date}" /></p></p>
                                             </div>
                                             <div class="reply-btn">
                                                 <a href="#" class="btn-reply text-uppercase">reply</a>
@@ -148,7 +159,7 @@
                         </form>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </section>

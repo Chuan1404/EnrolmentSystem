@@ -59,8 +59,7 @@ CREATE TABLE `livestreams` (
     `description` TEXT DEFAULT NULL,
     `image` TEXT DEFAULT NULL,
     `link` TEXT DEFAULT NULL,
-    `start_time` TIME NOT NULL,
-    `start_date` DATE NOT NULL,
+    `start_date` datetime NOT NULL,
     `duration` INT NOT NULL,
     `start_question_time` TIME DEFAULT NULL,
     `question_duration` INT NOT NULL,
@@ -286,12 +285,12 @@ INSERT INTO `faculties` (`id`, `name`, `article_id`, `video`, `url`) VALUES ('4'
 INSERT INTO `faculties` (`id`, `name`, `article_id`, `video`, `url`) VALUES ('5', 'Ngoại ngữ ', 'zWVCv5qWGw3T9qvpiMIX', '6F6RGmVvfdM','http://it.ou.edu.vn');
 INSERT INTO `faculties` (`id`, `name`, `article_id`, `video`, `url`) VALUES ('6', 'Xây dựng', 'zWVCv5qWGw3T9qvpiMIY', '6F6RGmVvfdM','http://it.ou.edu.vn');
 
-INSERT INTO `livestreams` (`id`, `title`,`description`, `image`, `link`, `start_time`, `start_date`, `duration`, `start_question_time`, `question_duration`) 
-VALUES ('1', 'Tư vấn tuyển sinh ngành công nghệ thông tin', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout', 'https://res.cloudinary.com/dttbj4ypm/image/upload/v1680272340/ztsqjeir1bowet4s3rs7.png', 'https://www.facebook.com/watch/live/?ref=watch_permalink&v=1341649012941254', '9:00:00', '2023-03-20', '55', '9:15:00', '30');
-INSERT INTO `livestreams` (`id`, `title`,`description`, `image`, `link`, `start_time`, `start_date`, `duration`, `start_question_time`, `question_duration`) 
-VALUES ('2', 'Tư vấn tuyển sinh ngành công nghệ thông tin', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout', 'https://res.cloudinary.com/dttbj4ypm/image/upload/v1680272340/ztsqjeir1bowet4s3rs7.png', 'https://www.facebook.com/watch/live/?ref=watch_permalink&v=1341649012941254', '9:00:00', '2023-03-20', '55', '9:15:00', '30');
-INSERT INTO `livestreams` (`id`, `title`,`description`, `image`, `link`, `start_time`, `start_date`, `duration`, `start_question_time`, `question_duration`) 
-VALUES ('3', 'Tư vấn tuyển sinh ngành công nghệ thông tin', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout', 'https://res.cloudinary.com/dttbj4ypm/image/upload/v1680272340/ztsqjeir1bowet4s3rs7.png', 'https://www.facebook.com/watch/live/?ref=watch_permalink&v=1341649012941254', '9:00:00', '2023-03-20', '55', '9:15:00', '30');
+INSERT INTO `livestreams` (`id`, `title`,`description`, `image`, `link`, `start_date`, `duration`, `start_question_time`, `question_duration`) 
+VALUES ('1', 'Tư vấn tuyển sinh ngành công nghệ thông tin', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout', 'https://res.cloudinary.com/dttbj4ypm/image/upload/v1680272340/ztsqjeir1bowet4s3rs7.png', 'AIN0EdV2woI', '2023-03-20', '55', '9:15:00', '30');
+INSERT INTO `livestreams` (`id`, `title`,`description`, `image`, `link`, `start_date`, `duration`, `start_question_time`, `question_duration`) 
+VALUES ('2', 'Tư vấn tuyển sinh ngành công nghệ thông tin', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout', 'https://res.cloudinary.com/dttbj4ypm/image/upload/v1680272340/ztsqjeir1bowet4s3rs7.png', 'AIN0EdV2woI', '2023-03-20', '55', '9:15:00', '30');
+INSERT INTO `livestreams` (`id`, `title`,`description`, `image`, `link`, `start_date`, `duration`, `start_question_time`, `question_duration`) 
+VALUES ('3', 'Tư vấn tuyển sinh ngành công nghệ thông tin', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout', 'https://res.cloudinary.com/dttbj4ypm/image/upload/v1680272340/ztsqjeir1bowet4s3rs7.png', 'AIN0EdV2woI', '2023-03-20', '55', '9:15:00', '30');
 
 INSERT INTO `questions` (`id`, `content`, `user_id`, `livestream_id`) VALUES ('1', 'Dự đoán điểm năm nay ?', 'BxST2aBzsduwWLw1cxEQ', '1');
 

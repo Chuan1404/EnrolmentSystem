@@ -6,6 +6,7 @@ package com.java.repositories.impl;
 
 import com.java.pojos.Livestreams;
 import com.java.repositories.LivestreamsRepository;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.Query;
@@ -39,7 +40,7 @@ public class LivestreamsRepositoryImpl implements LivestreamsRepository{
         query.select(root);
         
         if(params != null) {
-            
+            query.where(builder.greaterThanOrEqualTo(root.get("startDate").as(LocalDate.class), LocalDate.parse(params.get("date"))));
         }
         
         Query q = session.createQuery(query);
@@ -65,7 +66,24 @@ public class LivestreamsRepositoryImpl implements LivestreamsRepository{
         Session session = sessionFactory.getObject().getCurrentSession();
         
         try {
-             session.save(livestream);
+             if(livestream.getId() != null) {
+                 session.update(livestream);
+             }
+             else {
+                 session.save(livestream);
+             }
+             return true;
+        } catch(HibernateError err) {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean deleteLivestream(String id) {
+        Session session = sessionFactory.getObject().getCurrentSession();
+        
+        try {
+             session.delete(this.getLiveStreamById(id));
              return true;
         } catch(HibernateError err) {
             return false;

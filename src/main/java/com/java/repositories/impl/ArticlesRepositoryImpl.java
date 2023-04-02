@@ -52,7 +52,10 @@ public class ArticlesRepositoryImpl implements ArticlesRepository {
     public boolean saveOrUpdateArticles(Articles article) {
         Session s = sessionFactory.getObject().getCurrentSession();
         try {
-            s.save(article);
+            if(article.getId() != null)
+                s.update(article);
+             else
+                s.save(article);
         } catch (HibernateException ex) {
             return false;
         }

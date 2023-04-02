@@ -48,6 +48,8 @@
 
             <c:choose>
                 <c:when test="${not empty article.title}">
+                    <form:hidden path="id" />
+                    <form:hidden path="image" />
                     <button type="submit" class="genric-btn primary update-btn">Update</button>
                 </c:when>
                 <c:otherwise>

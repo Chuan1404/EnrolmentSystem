@@ -9,9 +9,10 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+
 <!DOCTYPE html>
 <main id="admin-livestream">
-    <div class="container py-5">
+    <div class="container-fluid py-5">
         <c:url value="/admin/livestream/" var="action"/>
         <form:form class="col-8 mx-auto" method="post" action="${action}" modelAttribute="livestream" enctype="multipart/form-data">
             <div class="form-group">
@@ -26,14 +27,12 @@
                 <label for="link">Link</label>
                 <form:input class="form-control" path="link" placeholder="Input link here" />
             </div>
-            
+
+            <!--livestream date-->
+            <c:set var="date" value="<%=new java.util.Date()%>" />
             <div class="form-group">
                 <label for="startDate">Ngày livestream</label>
-                <form:input path="startDate" class="form-control" type="date" />
-            </div>
-            <div class="form-group">
-                <label for="startTime">Giờ livestream</label>
-                <form:input path="startTime" class="form-control" type="time" />
+                <form:input path="startDate" min="${date.toLocaleString()}" class="form-control" type="datetime-local" />
             </div>
             <div class="form-group">
                 <label for="duration">Thời lượng livestream (phút)</label>
@@ -42,9 +41,6 @@
             <div class="form-group">
                 <label for="startQuestionTime">Giờ bắt đầu đặt câu hỏi (trong lúc livestream)</label>
                 <form:input path="startQuestionTime" class="form-control" type="time" />
-            </div>            <div class="form-group">
-                <label for="duration">Thời lượng livestream (phút)</label>
-                <form:input path="duration" class="form-control" type="number" />
             </div>
             <div class="form-group">
                 <label for="questionDuration">Giờ kết thúc đặt câu hỏi (trong lúc livestream)</label>
@@ -63,7 +59,9 @@
 
 
             <c:choose>
-                <c:when test="${not empty livestream.title}">
+                <c:when test="${livestream.id != null}">
+                    <form:hidden path="id" />
+                    <form:hidden path="image" />
                     <button type="submit" class="genric-btn primary e-large update-btn">Update</button>
                 </c:when>
                 <c:otherwise>
@@ -89,6 +87,7 @@
                     </tr>
                 </thead>
                 <tbody>
+
                     <c:forEach items="${livestreams}" var="l" varStatus="loop">
                         <tr>
                             <td>${loop.index + 1}</td>
@@ -98,14 +97,14 @@
                             <td>${l.title}</td>
                             <td>${l.description}</td>
                             <td>${l.duration}</td>
-                            <td>${l.startDate} ${l.startTime}</td>
+                            <td><fmt:formatDate pattern="yyyy-MM-dd 'at' HH:mm" value="${l.startDate}" /></td>
                             <td>${l.startQuestionTime} ${l.questionDuration}</td>
                             <td class="d-flex">
-                                <a href="${url}${l.id}">
+                                <a href="<c:url value="/admin/livestream/${l.id}" />">
                                     <button class="genric-btn primary circle update-btn">Update</button>
                                 </a>
 
-                                <button class="genric-btn danger circle" onclick="deleteArticle('<c:url value="/api/article/${a.id}" />')">Delete</button>
+                                <button class="genric-btn danger circle" onclick="deleteLivestream('<c:url value="/api/livestream/${l.id}" />')">Delete</button>
                             </td>
                         </tr>
                     </c:forEach>
@@ -115,3 +114,6 @@
         </div>
     </c:if>
 </main>
+
+<c:url var="url" value="/assets/js" />
+<script src="${url}/pages/livestream.js" />
