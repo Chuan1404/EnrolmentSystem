@@ -13,16 +13,21 @@
             <div class="row align-items-center text-center">
                 <c:set value="${faculties[status.index]}" var="firstItem"/>
                 <c:set value="${faculties[status.index + 1]}" var="secondItem"/>
+                <c:url value="/faculty/${firstItem.id}" var="firstItemLink"/>
+                <c:url value="/faculty/${secondItem.id}" var="secondItemLink"/>
+
                 <div class="col-6 py-lg-5">
-                    <a href="#" class="text-dark h3">${firstItem.name}</a>
+                    <a href="${firstItemLink}" class="text-dark h3">${firstItem.name}</a>
                     <div class="container-fluid mt-3">
-                        <img src="${firstItem.articleId.image}" alt="alt"/>
+                        <a href="${firstItemLink}">
+                            <img src="${firstItem.articleId.image}" alt="alt"/>
+                        </a>
                     </div>
                 </div>
                 <div class="col-6 py-lg-5">
-                    <a href="#" class="text-dark h3">${secondItem.name}</a>
+                    <a href="${secondItemLink}" class="text-dark h3">${secondItem.name}</a>
                     <div class="container-fluid mt-3">
-                        <a href="#">
+                        <a href="${secondItemLink}">
                             <img src="${secondItem.articleId.image}" alt="alt"/>
                         </a>
                     </div>

@@ -302,6 +302,19 @@ INSERT INTO `points` (`year`, `point`, `major_id`) VALUES(2021, 25.90, 3);
 INSERT INTO `points` (`year`, `point`, `major_id`) VALUES(2020, 23.20, 3);
 INSERT INTO `points` (`year`, `point`, `major_id`) VALUES(2019, 18.90, 3);
 INSERT INTO `points` (`year`, `point`, `major_id`) VALUES(2018, null , 3);
+INSERT INTO `points` (`year`, `point`, `major_id`) VALUES(2022, 23.50, 2);
+INSERT INTO `points` (`year`, `point`, `major_id`) VALUES(2021, 25.90, 2);
+INSERT INTO `points` (`year`, `point`, `major_id`) VALUES(2020, 23.20, 2);
+INSERT INTO `points` (`year`, `point`, `major_id`) VALUES(2019, 18.90, 2);
+INSERT INTO `points` (`year`, `point`, `major_id`) VALUES(2018, null , 2);
+INSERT INTO `points` (`year`, `point`, `major_id`) VALUES(2022, 23.50, 1);
+INSERT INTO `points` (`year`, `point`, `major_id`) VALUES(2021, 25.90, 1);
+INSERT INTO `points` (`year`, `point`, `major_id`) VALUES(2020, 23.20, 1);
+INSERT INTO `points` (`year`, `point`, `major_id`) VALUES(2019, 18.90, 1);
+INSERT INTO `points` (`year`, `point`, `major_id`) VALUES(2018, null , 1);
+INSERT INTO `points` (`year`, `point`, `major_id`) VALUES(2017, 20.00 , 1);
+INSERT INTO `points` (`year`, `point`, `major_id`) VALUES(2015, 20.10 , 2);
+INSERT INTO `points` (`year`, `point`, `major_id`) VALUES(2010, 19.50 , 3);
 
 
 

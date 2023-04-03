@@ -23,7 +23,7 @@
         <section>
             <div class="container d-flex justify-content-center mt-5">
                 <iframe width="600" height="300"
-                        src="https://www.youtube.com/embed/tgbNymZ7vqY?autoplay=1&mute=0">
+                        src="https://www.youtube.com/embed/${faculty.video}?autoplay=1&mute=0">
                 </iframe>
 
             </div>
@@ -38,30 +38,40 @@
         <section>
             <h5 class="text-uppercase text-center mt-3">Điểm trung bình 5 năm gần nhất của khoa</h5>
             <table class="table text-dark my-lg-3">
+                <thead>
+                <th>Major</th>
+                    <c:forEach begin="0" end="4" var="index">
+                    <th>${maxYear - index}</th>
+                    </c:forEach>
+                </thead>
                 <tbody>
-                    <tr>
-                        <th>Year</th>
-                        <td>1999</td>
-                        <td>1999</td>
-                        <td>1999</td>
-                        <td>1999</td>
-                        <td>1999</td>
+                    <c:forEach items="${majors}" var="major" varStatus="status">
+                        <c:set value="${pointList[status.index]}" var="points"/>
+                        <tr>
+                            <th>${major.name}</th>
+                                <c:forEach items="${points}" var="p">
+                                    <c:choose>
+                                        <c:when test="${p.point != null && p.point != ''}">
+                                        <td>${p.point}</td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td>--o--</td>
+                                    </c:otherwise>
+                                </c:choose>
 
-                    </tr>
-                    <tr>
-                        <th>Point</th>
-                        <td>2</td>
-                        <td>3</td>
-                        <td>4</td>
-                        <td>5</td>
-                        <td>1</td>
 
-                    </tr>
+
+                                
+                            </c:forEach>
+                        </tr>
+
+                    </c:forEach>
+
                 </tbody>
             </table>
         </section>
         <section class="text-center mt-lg-5">
-            <a href="#" class="btn btn-info">Đến website của khoa ${faculty.name}</a>
+            <a href="${faculty.url}" class="btn btn-info">Đến website của khoa ${faculty.name}</a>
         </section>
 
     </div>
