@@ -51,12 +51,15 @@ public class ArticlesRepositoryImpl implements ArticlesRepository {
     @Override
     public boolean saveOrUpdateArticles(Articles article) {
         Session s = sessionFactory.getObject().getCurrentSession();
+        System.out.println("---------------------------------------");
+        System.out.println(article.getId());
         try {
             if(article.getId() != null)
                 s.update(article);
              else
                 s.save(article);
         } catch (HibernateException ex) {
+            ex.printStackTrace();
             return false;
         }
         return true;

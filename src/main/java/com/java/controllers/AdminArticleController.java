@@ -42,10 +42,9 @@ public class AdminArticleController {
 
     @Autowired
     private UsersService userService;
-    
+
     @Autowired
     private Cloudinary cloudinary;
-
 
     @GetMapping(value = "/")
     public String index(Model model, @RequestParam(required = false) Map<String, String> params) {
@@ -70,14 +69,15 @@ public class AdminArticleController {
     @PostMapping(value = "/")
     public String addArticle(Model model, @ModelAttribute Articles article, BindingResult result) {
         Users user = userService.getUserById("BxST2aBzsduwWLw1cxEQ");
-        
+
         article.setCreatedDate(new Date());
         article.setUpdateDate(new Date());
         article.setUserId(user);
-        
-        articleService.saveOrUpdateArticles(article);
 
-        return "redirect:/admin/article/";
+        if (articleService.saveOrUpdateArticles(article)) {
+            return "redirect:/admin/article/";
+        }
+        else return "redirect:/article/";
     }
 
     @GetMapping(value = "/{id}")
