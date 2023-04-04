@@ -10,6 +10,7 @@ import com.java.repositories.ArticlesRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -51,11 +52,15 @@ public class ArticlesRepositoryImpl implements ArticlesRepository {
     @Override
     public boolean saveOrUpdateArticles(Articles article) {
         Session s = sessionFactory.getObject().getCurrentSession();
+        
         try {
-            if(article.getId() != null)
+            if(article.getId() != null) {
                 s.update(article);
-             else
+            }
+            else {
+                article.setId(UUID.randomUUID().toString());
                 s.save(article);
+            }
         } catch (HibernateException ex) {
             return false;
         }
