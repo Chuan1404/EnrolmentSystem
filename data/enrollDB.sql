@@ -19,13 +19,13 @@ CREATE TABLE `users` (
 
 CREATE TABLE `articles`(
 	`id` VARCHAR(50) NOT NULL,
-    `title` Text NOT NULL,
-    `content` TEXT NOT NULL,
-    `description` TEXT NOT NULL,
-    `image` TEXT NOT NULL,
-    `created_date` DATE NOT NULL,
-    `update_date` DATE NOT NULL,
-    `article_type` VARCHAR(100) NOT NULL,
+    `title` Text DEFAULT NULL,
+    `content` TEXT DEFAULT NULL,
+    `description` TEXT DEFAULT NULL,
+    `image` TEXT DEFAULT NULL,
+    `created_date` DATE DEFAULT NULL,
+    `update_date` DATE DEFAULT NULL,
+    `article_type` VARCHAR(100) DEFAULT NULL,
     `user_id` VARCHAR(50) DEFAULT NULL,
     PRIMARY KEY (`id`),
     CONSTRAINT fk_articles_user_id_users FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL
@@ -45,7 +45,7 @@ CREATE TABLE `comments` (
 CREATE TABLE `faculties` (
 	`id` INT NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(50) NOT NULL,
-    `article_id` VARCHAR(50) NOT NULL,
+    `article_id` VARCHAR(50) DEFAULT NULL,
     `video` VARCHAR(50) DEFAULT NULL,
     `url` VARCHAR(100) DEFAULT NULL,
     PRIMARY KEY(`id`),
