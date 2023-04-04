@@ -81,5 +81,7 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
     <definition name="admin-livestream" extends="admin-base">
         <put-attribute name="content" value="/WEB-INF/admin/livestream.jsp"/>
     </definition>
-    
+    <definition name="admin-faculties" extends="admin-base">
+        <put-attribute name="content" value="/WEB-INF/admin/faculty.jsp"/>
+    </definition>
 </tiles-definitions>

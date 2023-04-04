@@ -36,6 +36,13 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Faculties.findByName", query = "SELECT f FROM Faculties f WHERE f.name = :name")})
 public class Faculties implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id")
+    private Integer id;
+
     @OneToMany(mappedBy = "faculty")
     private Set<Majors> majorsSet;
 
@@ -46,14 +53,7 @@ public class Faculties implements Serializable {
     @Column(name = "url")
     private String url;
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
-    private Integer id;
-    @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 50)
     @Column(name = "name")
     private String name;
@@ -146,5 +146,5 @@ public class Faculties implements Serializable {
     public void setMajorsSet(Set<Majors> majorsSet) {
         this.majorsSet = majorsSet;
     }
-    
+
 }
