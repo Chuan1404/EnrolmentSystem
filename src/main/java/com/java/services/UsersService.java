@@ -6,12 +6,13 @@ package com.java.services;
 
 import com.java.pojos.Users;
 import java.util.List;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
  *
  * @author AnChuPC
  */
-public interface UsersService {
+public interface UsersService extends UserDetailsService{
 
     public Users getUserById(String id);
 
