@@ -54,15 +54,15 @@ public class FacultiesRepositoryImpl implements FacultiesRepository {
     }
 
     @Override
-    public boolean addFaculty(Faculties faculty) {
+    public boolean saveOrUpdateFaculty(Faculties faculty) {
         Session s = sessionFactory.getObject().getCurrentSession();
         try {
-            s.save(faculty);
-            System.out.println("save Complete");
+            if (faculty.getId() == null)
+                s.save(faculty);
+            else
+                s.update(faculty);
         } catch (HibernateException ex) {
-            System.out.println("save failed");
             ex.printStackTrace();
-            
             return false;
         }
         return true;
