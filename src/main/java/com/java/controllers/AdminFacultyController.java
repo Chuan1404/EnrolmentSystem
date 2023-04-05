@@ -9,6 +9,8 @@ import com.java.pojos.Articles;
 import com.java.pojos.Faculties;
 import com.java.services.ArticlesService;
 import com.java.services.FacultiesService;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,21 +35,22 @@ public class AdminFacultyController {
     
     @GetMapping("/") 
     public String faculty(Model model) {
+        List<Faculties> faculties = facultiesService.getFaculties();
         model.addAttribute("faculty", new Faculties());
-        model.addAttribute("facultyArticle", new Articles());
-         Articles article2 = new Articles();
-        System.out.println(article2.getId());
-
+        model.addAttribute("faculties", faculties);
         return "admin-faculties";
     }
     
     @PostMapping("/")
     public String addFaculty(@ModelAttribute("faculty") Faculties faculty) {
         
-        
-        
-       
-        facultiesService.addFaculty(faculty);
+        facultiesService.saveOrUpdateFaculty(faculty);
         return "redirect:/admin/faculties/";
+    }
+    
+    @GetMapping("/{id}")
+    public String updateFaculty(Model model, @ModelAttribute("id") int id) {
+        model.addAttribute("faculty", facultiesService.getFacultyById(id));
+        return "admin-faculties";
     }
 }

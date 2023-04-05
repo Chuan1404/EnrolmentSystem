@@ -40,15 +40,16 @@ public class FacultiesServiceImpl implements FacultiesService {
     }
 
     @Override
-    public boolean addFaculty(Faculties faculty) {
+    public boolean saveOrUpdateFaculty(Faculties faculty) {
         Articles article = new Articles();
         article.setTitle("Thông tin khoa " + faculty.getName());
         article.setArticleType(ArticleType.KHOA.name());
         article.setCreatedDate(new Date());
         article.setUpdateDate(new Date());
-        articlesRepository.saveOrUpdateArticles(article);
+        if (!articlesRepository.saveOrUpdateArticles(article))
+            return false;
         faculty.setArticleId(article);
-        return facultiesRepository.addFaculty(faculty);
+        return facultiesRepository.saveOrUpdateFaculty(faculty);
     }
 
 }
