@@ -58,10 +58,6 @@
                                         <td>--o--</td>
                                     </c:otherwise>
                                 </c:choose>
-
-
-
-                                
                             </c:forEach>
                         </tr>
 

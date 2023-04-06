@@ -121,17 +121,6 @@ CREATE TABLE `points` (
  ) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
-
--- CREATE TABLE `majors_points` (
--- 	`id` INT NOT NULL AUTO_INCREMENT,
--- 	`major_id` INT DEFAULT NULL,
--- 	`point_id` INT DEFAULT NULL,
--- 	PRIMARY KEY (`id`),
--- 	CONSTRAINT fk_majors_points_major_id_majors FOREIGN KEY (`major_id`) REFERENCES `majors` (`id`) ON DELETE CASCADE,
--- 	CONSTRAINT fk_majors_points_point_id_points FOREIGN KEY (`point_id`) REFERENCES `points` (`id`) ON DELETE CASCADE
--- )DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-
 -- INSERT DATA
 
 INSERT INTO `users` (`id`, `username`, `password`, `name`, `avatar`, `email`, `user_role`) VALUES ('I4esDB8GDWMcVW40uA6x', 'cuong.nt', '123456', 'Nguyễn Tấn Cường', 'https://res.cloudinary.com/dis95mx4d/image/upload/v1668643889/sample.jpg', '2051052016@ou.edu.vn', 'THISINH');

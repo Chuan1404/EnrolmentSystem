@@ -14,4 +14,5 @@ import java.util.List;
 public interface FacultiesRepository {
     List<Faculties> getFaculties();
     Faculties getFacultyById(int id);
+    boolean saveOrUpdateFaculty(Faculties faculty);
 }

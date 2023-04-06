@@ -4,9 +4,14 @@
  */
 package com.java.services.impl;
 
+import com.java.enums.ArticleType;
+import com.java.pojos.Articles;
 import com.java.pojos.Faculties;
+import com.java.repositories.ArticlesRepository;
 import com.java.repositories.FacultiesRepository;
+import com.java.services.ArticlesService;
 import com.java.services.FacultiesService;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +26,9 @@ public class FacultiesServiceImpl implements FacultiesService {
     @Autowired
     private FacultiesRepository facultiesRepository;
     
+    @Autowired
+    private ArticlesRepository articlesRepository;
+
     @Override
     public List<Faculties> getFaculties() {
         return facultiesRepository.getFaculties();
@@ -30,5 +38,18 @@ public class FacultiesServiceImpl implements FacultiesService {
     public Faculties getFacultyById(int id) {
         return facultiesRepository.getFacultyById(id);
     }
-    
+
+    @Override
+    public boolean saveOrUpdateFaculty(Faculties faculty) {
+        Articles article = new Articles();
+        article.setTitle("Thông tin khoa " + faculty.getName());
+        article.setArticleType(ArticleType.KHOA.name());
+        article.setCreatedDate(new Date());
+        article.setUpdateDate(new Date());
+        if (!articlesRepository.saveOrUpdateArticles(article))
+            return false;
+        faculty.setArticleId(article);
+        return facultiesRepository.saveOrUpdateFaculty(faculty);
+    }
+
 }

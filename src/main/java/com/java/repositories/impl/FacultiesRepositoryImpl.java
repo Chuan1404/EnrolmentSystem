@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import com.java.repositories.FacultiesRepository;
 import javax.persistence.criteria.Predicate;
+import org.hibernate.HibernateException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -50,6 +51,21 @@ public class FacultiesRepositoryImpl implements FacultiesRepository {
         query.where(p);
         Query q = s.createQuery(query);
         return (Faculties) q.getSingleResult();
+    }
+
+    @Override
+    public boolean saveOrUpdateFaculty(Faculties faculty) {
+        Session s = sessionFactory.getObject().getCurrentSession();
+        try {
+            if (faculty.getId() == null)
+                s.save(faculty);
+            else
+                s.update(faculty);
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+        return true;
     }
     
 }
