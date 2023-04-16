@@ -6,6 +6,7 @@ package com.java.services.impl;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.java.enums.UserRole;
 import com.java.pojos.Users;
 import com.java.repositories.UsersRepository;
 import com.java.services.UsersService;
@@ -19,7 +20,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -33,49 +36,59 @@ public class UsersServiceImpl implements UsersService {
 
     @Autowired
     private Cloudinary cloudinary;
+    
+    @Autowired
+    private PasswordEncoder encoder;
+
     @Override
     public Users getUserById(String id) {
         return usersRepository.getUserById(id);
     }
 
     @Override
-    public boolean addUser(Users u) {
-
+    public boolean addOrUpdateUser(Users u) {
+        
+        // set password and role
+        u.setPassword(encoder.encode((u.getPassword())));
+        u.setUserRole(UserRole.ROLE_USER.name());
+        
         Map response = null;
+        
+        if (u.getFile() != null) {
+            try {
+                response = cloudinary.uploader().upload(u.getFile().getBytes(), ObjectUtils.asMap("resource_type", "auto"));
+            } catch (IOException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
 
-                if (u.getFile() != null) {
-                    try {
-                        response = cloudinary.uploader().upload(u.getFile().getBytes(), ObjectUtils.asMap("resource_type", "auto"));
-                    } catch (IOException ex) {
-                        System.out.println(ex.getMessage());
-                    }
-                }
-                
-                if(response != null) {
-                    u.setAvatar(response.get("secure_url").toString());
-                }
-        return usersRepository.addUser(u);
+        if (response != null) {
+            u.setAvatar(response.get("secure_url").toString());
+        }
+        return usersRepository.addOrUpdateUser(u);
     }
 
     @Override
-    public List<Users> getUsersByUsername(String name) {
+    public Users getUsersByUsername(String name) {
         return usersRepository.getUsersByUsername(name);
     }
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        List<Users> users = this.getUsersByUsername(username);
 
-        if (users.isEmpty()) {
+    @Override
+    @Transactional(readOnly = true)
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Users user = this.getUsersByUsername(username);
+
+        if (user == null) {
             throw new UsernameNotFoundException("User not found !!");
         }
 
-        Users user = users.get(0);
-
         Set<GrantedAuthority> auth = new HashSet<>();
         auth.add(new SimpleGrantedAuthority(user.getUserRole()));
-
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), auth);
     }
-}
 
-   
+    @Override
+    public Users getUserByEmail(String email) {
+        return usersRepository.getUserByEmail(email);
+    }
+}

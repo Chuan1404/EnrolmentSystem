@@ -5,22 +5,19 @@
 package com.java.pojos;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -44,7 +41,6 @@ public class Users implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 50)
     @Column(name = "id")
     private String id;
     @Basic(optional = false)
@@ -54,7 +50,7 @@ public class Users implements Serializable {
     private String username;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 50)
+    @Size(min = 1, max = 200)
     @Column(name = "password")
     private String password;
     @Basic(optional = false)
@@ -71,24 +67,20 @@ public class Users implements Serializable {
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 100)
     @Column(name = "email")
     private String email;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 30)
     @Column(name = "user_role")
     private String userRole;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
-    private Collection<Comments> commentsCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
-    private Collection<Questions> questionsCollection;
-    @OneToMany(mappedBy = "userId")
-    private Collection<Articles> articlesCollection;
 
     @Transient
     private MultipartFile file;
-    
+
+    @NotNull(message = "{user.error.null}")
+    @Transient
+    private String confirmPassword;
+
     public Users() {
     }
 
@@ -162,33 +154,6 @@ public class Users implements Serializable {
         this.userRole = userRole;
     }
 
-    @XmlTransient
-    public Collection<Comments> getCommentsCollection() {
-        return commentsCollection;
-    }
-
-    public void setCommentsCollection(Collection<Comments> commentsCollection) {
-        this.commentsCollection = commentsCollection;
-    }
-
-    @XmlTransient
-    public Collection<Questions> getQuestionsCollection() {
-        return questionsCollection;
-    }
-
-    public void setQuestionsCollection(Collection<Questions> questionsCollection) {
-        this.questionsCollection = questionsCollection;
-    }
-
-    @XmlTransient
-    public Collection<Articles> getArticlesCollection() {
-        return articlesCollection;
-    }
-
-    public void setArticlesCollection(Collection<Articles> articlesCollection) {
-        this.articlesCollection = articlesCollection;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -227,5 +192,19 @@ public class Users implements Serializable {
     public void setFile(MultipartFile file) {
         this.file = file;
     }
-    
+
+    /**
+     * @return the confirmPassword
+     */
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    /**
+     * @param confirmPassword the confirmPassword to set
+     */
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
+
 }

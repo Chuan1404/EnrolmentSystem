@@ -1,12 +1,15 @@
- /*
+/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.java.repositories.impl;
 
+import com.java.enums.UserRole;
 import com.java.pojos.Users;
 import com.java.repositories.UsersRepository;
 import java.util.List;
+import java.util.UUID;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -44,10 +47,17 @@ public class UsersRepositoryImpl implements UsersRepository {
     }
 
     @Override
-    public boolean addUser(Users u) {
+    public boolean addOrUpdateUser(Users u) {
         Session session = sessionFactory.getObject().getCurrentSession();
         try {
-            session.save(u);
+
+            if (u.getId() != null) {
+                session.update(u);
+            } else {
+                u.setId(UUID.randomUUID().toString());
+                u.setUserRole(UserRole.ROLE_USER.name());
+                session.save(u);
+            }
             return true;
 
         } catch (Exception err) {
@@ -56,7 +66,7 @@ public class UsersRepositoryImpl implements UsersRepository {
     }
 
     @Override
-    public List<Users> getUsersByUsername(String name) {
+    public Users getUsersByUsername(String name) {
         Session session = sessionFactory.getObject().getCurrentSession();
 
         CriteriaBuilder b = session.getCriteriaBuilder();
@@ -69,8 +79,34 @@ public class UsersRepositoryImpl implements UsersRepository {
             query.where(b.equal(root.get("username"), name));
         }
 
-        Query q = session.createQuery(query);
-        return q.getResultList();
+        try {
+            Query q = session.createQuery(query);
+            return (Users) q.getSingleResult();
+        } catch (NoResultException err) {
+            return null;
+        }
+    }
+
+    @Override
+    public Users getUserByEmail(String email) {
+        Session session = sessionFactory.getObject().getCurrentSession();
+
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Users> query = b.createQuery(Users.class);
+        Root<Users> root = query.from(Users.class);
+
+        query.select(root);
+
+        if (!email.isEmpty()) {
+            query.where(b.equal(root.get("email"), email));
+        }
+
+        try {
+            Query q = session.createQuery(query);
+            return (Users) q.getSingleResult();
+        } catch (NoResultException err) {
+            return null;
+        }
     }
 
 }

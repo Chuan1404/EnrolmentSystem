@@ -64,15 +64,20 @@ Author     : AnChuPC
                             <div class="header-right f-right d-none d-lg-block">
                                 <!-- Heder social -->
                                 <ul class="header-social">    
-                                    <li><a href="https://www.fb.com/sai4ull"><i class="fab fa-facebook-f"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                                    <li> <a href="#"><i class="fab fa-youtube"></i></a></li>
+
+
+                                    <c:choose>
+                                        <c:when test="${pageContext.request.userPrincipal.name != null}">
+                                            <li> <a href="#">Chào ${pageContext.request.userPrincipal.name}</a></li>
+                                            <li> <a href="<c:url value="/logout" />">Đăng xuất</a></li>
+                                            </c:when>
+                                            <c:otherwise>
+                                            <li> <a href="<c:url value="/auth/login" />">Đăng nhập</a></li>
+                                            <li> <a href="<c:url value="/auth/register" />">Đăng kí</a></li>
+                                            </c:otherwise>
+                                        </c:choose>
                                 </ul>
-                                <!-- Search Nav -->
-                                <div class="nav-search search-switch">
-                                    <i class="fa fa-search"></i>
-                                </div>
+
                             </div>
                         </div>
                         <!-- Mobile Menu -->

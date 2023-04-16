@@ -4,6 +4,8 @@
  */
 package com.java.configs;
 
+import com.java.handlers.LoginSuccessHandler;
+import com.java.handlers.LogoutSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -24,13 +26,21 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableWebSecurity
 @EnableTransactionManagement
 @ComponentScan(basePackages = {
+    "com.java.controllers",
     "com.java.repositories",
-    "com.java.services"
+    "com.java.services",
+    "com.java.handlers"
 })
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserDetailsService userDetailsService;
+
+    @Autowired
+    private LoginSuccessHandler loginHandler;
+
+    @Autowired
+    private LogoutSuccessHandler logoutHandler;
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -45,7 +55,28 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//        super.configure(http); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+
+        // form login
+        http.formLogin()
+                .loginPage("/auth/login")
+                .usernameParameter("username")
+                .passwordParameter("password");
+
+//        http.formLogin().defaultSuccessUrl("/")
+//                .failureUrl("/auth/login?error");
+        http.formLogin().successHandler(loginHandler).failureUrl("/auth/login?error");
+
+//        http.logout().logoutSuccessUrl("/");
+        http.logout().addLogoutHandler(logoutHandler);
+
+        // authorize
+        http.exceptionHandling()
+                .accessDeniedPage("/auth/login/?accessDenied");
+        http.authorizeRequests()
+                .antMatchers("/").permitAll()
+                .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')");
+        http.csrf().disable();
+
     }
 
 }
