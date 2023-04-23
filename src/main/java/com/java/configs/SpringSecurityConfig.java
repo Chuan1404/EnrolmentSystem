@@ -80,8 +80,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .clientRegistrationRepository(clientRegistrationRepository())
                 .and()
-                .oauth2Client()
-                .and()
                 .logout().addLogoutHandler(logoutHandler);
        
         // authorize
