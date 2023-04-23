@@ -65,10 +65,10 @@ Author     : AnChuPC
                                 <!-- Heder social -->
                                 <ul class="header-social">    
 
-
+                                    <c:set var="currentUser" value="${pageContext.request.session.getAttribute('currentUser')}" />
                                     <c:choose>
                                         <c:when test="${pageContext.request.userPrincipal.name != null}">
-                                            <li> <a href="#">Chào ${pageContext.request.userPrincipal.name}</a></li>
+                                            <li> <a href="#">Chào ${currentUser.name}</a></li>
                                             <li> <a href="<c:url value="/logout" />">Đăng xuất</a></li>
                                             </c:when>
                                             <c:otherwise>

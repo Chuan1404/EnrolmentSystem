@@ -14,7 +14,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -49,7 +48,6 @@ public class Users implements Serializable {
     @Column(name = "username")
     private String username;
     @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 200)
     @Column(name = "password")
     private String password;
@@ -67,6 +65,7 @@ public class Users implements Serializable {
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 100)
     @Column(name = "email")
     private String email;
     @Basic(optional = false)
@@ -77,10 +76,9 @@ public class Users implements Serializable {
     @Transient
     private MultipartFile file;
 
-    @NotNull(message = "{user.error.null}")
     @Transient
     private String confirmPassword;
-
+    
     public Users() {
     }
 
@@ -176,11 +174,11 @@ public class Users implements Serializable {
 
     @Override
     public String toString() {
-        return "com.java.pojos.Users[ id=" + id + " ]";
+        return id + "-" + name + "-" + email + "-" + username + "-" + userRole + "-" + avatar;
     }
 
     /**
-     * @return the file
+     * @return the fil
      */
     public MultipartFile getFile() {
         return file;

@@ -7,7 +7,6 @@ package com.java.repositories.impl;
 import com.java.enums.UserRole;
 import com.java.pojos.Users;
 import com.java.repositories.UsersRepository;
-import java.util.List;
 import java.util.UUID;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;

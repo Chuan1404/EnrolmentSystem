@@ -9,7 +9,7 @@ USE enrolment_system;
 CREATE TABLE `users` (
 	`id` VARCHAR(50) NOT NULL,
     `username` VARCHAR(50) UNIQUE NOT NULL,
-    `password` VARCHAR(200) NOT NULL,
+    `password` VARCHAR(200),
     `name` VARCHAR(50) NOT NULL,
     `avatar` TEXT NOT NULL,
     `email` VARCHAR(100) NOT NULL,

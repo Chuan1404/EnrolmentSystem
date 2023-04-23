@@ -54,15 +54,14 @@
                                                 ></a>
                                         </div>
                                         <div class="pt-1 mb-4 col-md-6 col-12 text-center">
-                                            <a id="google-btn" class="btn btn-primary" style="background: #dd4b39;" href="#!" role="button"
+                                            <a id="google-btn" class="btn btn-primary" style="background: #dd4b39;" href="<c:url value="/oauth2/authorization/google" />" role="button"
                                                ><i class="fab fa-google"></i
                                                 ></a>
                                         </div>
                                     </div>
 
 
-                                    <a class="small text-muted" href="#!">Forgot password?</a>
-                                    <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account? <a href="#!"
+                                            <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account? <a href="<c:url value="/auth/register" />"
                                                                                                               style="color: #393f81;">Register here</a></p>
                                 </div>
                             </div>
