@@ -67,5 +67,18 @@ public class FacultiesRepositoryImpl implements FacultiesRepository {
         }
         return true;
     }
+
+    @Override
+    public boolean deleteFaculty(Faculties faculty) {
+        Session session = sessionFactory.getObject().getCurrentSession();
+        
+        try {
+            session.delete(faculty);
+            return true;
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
     
 }

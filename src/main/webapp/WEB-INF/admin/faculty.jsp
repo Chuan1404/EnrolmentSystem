@@ -34,7 +34,7 @@
                     <button type="submit" class="genric-btn danger e-large">Update</button>
                 </c:otherwise>
             </c:choose>
-            
+
         </form:form>
     </div>
     <c:if test="${not empty faculties}">
@@ -54,15 +54,20 @@
                         <td class="align-middle">${status.index + 1}</td>
                         <td class="align-middle">${f.name}</td>
                         <td class="align-middle"><iframe width="300" height="200"
-                        src="https://www.youtube.com/embed/${f.video}?autoplay=&mute=0&controls=1">
-                        </iframe></td>
+                                                         src="https://www.youtube.com/embed/${f.video}?autoplay=&mute=0&controls=1">
+                            </iframe></td>
                         <td class="align-middle"><a href="${f.url}" class="text-dark" target="blank">Trang web khoa ${f.name}</a></td>
-                        <td class="align-middle"><button class="genric-btn info e-large">Cập nhật bài viết</button></td>
+                        <td class="align-middle">
+                            <a href="<c:url value="/admin/article/${f.articleId.id}"/>"
+                               <button class="genric-btn info e-large">Cập nhật bài viết</button>
+                            </a>
+                        </td>
                         <td class="align-middle">
                             <a href="<c:url value="/admin/faculties/${f.id}"/>">
                                 <button class="genric-btn primary circle update-btn">Update</button>
                             </a>
-                            <button class="genric-btn danger circle update-btn">Delete</button>
+
+                            <button class="genric-btn danger circle update-btn" onclick="deleteFaculty('<c:url value="/api/faculties/${f.id}"/>')">Delete</button>
                         </td>
                     </tr>
                 </c:forEach>
@@ -72,3 +77,6 @@
         </table>
     </c:if>
 </main>
+
+<c:url var="url" value="/assets/js" />
+<script src="${url}/pages/faculties.js" />

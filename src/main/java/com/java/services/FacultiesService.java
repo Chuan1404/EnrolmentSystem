@@ -15,4 +15,5 @@ public interface FacultiesService {
     List<Faculties> getFaculties();
     Faculties getFacultyById(int id);
     boolean saveOrUpdateFaculty(Faculties faculty);
+    boolean deleteFaculty(Faculties faculty);
 }

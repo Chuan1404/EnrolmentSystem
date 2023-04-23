@@ -52,4 +52,11 @@ public class FacultiesServiceImpl implements FacultiesService {
         return facultiesRepository.saveOrUpdateFaculty(faculty);
     }
 
+    @Override
+    public boolean deleteFaculty(Faculties faculty) {
+        if (!articlesRepository.deleteArticle(faculty.getArticleId().getId()))
+            return false;
+        return facultiesRepository.deleteFaculty(faculty);
+    }
+
 }

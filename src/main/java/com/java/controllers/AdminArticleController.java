@@ -11,13 +11,9 @@ import com.java.pojos.Users;
 import com.java.services.ArticlesService;
 import com.java.services.UsersService;
 //import com.java.services.UsersService;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.hibernate.HibernateError;
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -57,7 +53,6 @@ public class AdminArticleController {
         }
 
         List<Articles> articles = articleService.getArticles(params);
-        System.out.println(totalArticle);
         model.addAttribute("article", new Articles());
         model.addAttribute("articles", articles);
         model.addAttribute("articleType", ArticleType.values());
