@@ -6,6 +6,8 @@ package com.java.configs;
 
 import com.java.handlers.LoginSuccessHandler;
 import com.java.handlers.LogoutSuccessHandler;
+import com.java.services.GoogleOAuth2UserService;
+import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -16,6 +18,11 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.client.registration.ClientRegistration;
+import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
+import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
+import org.springframework.security.oauth2.core.AuthorizationGrantType;
+import org.springframework.security.oauth2.core.oidc.IdTokenClaimNames;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
@@ -37,6 +44,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     private UserDetailsService userDetailsService;
 
     @Autowired
+    private GoogleOAuth2UserService googleOAuth2UserService;
+
+    @Autowired
     private LoginSuccessHandler loginHandler;
 
     @Autowired
@@ -51,32 +61,56 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService)
                 .passwordEncoder(passwordEncoder());
+
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
-        // form login
+        // authentication
         http.formLogin()
                 .loginPage("/auth/login")
                 .usernameParameter("username")
-                .passwordParameter("password");
-
-//        http.formLogin().defaultSuccessUrl("/")
-//                .failureUrl("/auth/login?error");
-        http.formLogin().successHandler(loginHandler).failureUrl("/auth/login?error");
-
-//        http.logout().logoutSuccessUrl("/");
-        http.logout().addLogoutHandler(logoutHandler);
-
+                .passwordParameter("password")
+                .successHandler(loginHandler)
+                .failureUrl("/auth/login?error")
+                .and()
+                .oauth2Login()
+                .userInfoEndpoint()
+                .userService(googleOAuth2UserService)
+                .and()
+                .clientRegistrationRepository(clientRegistrationRepository())
+                .and()
+                .oauth2Client()
+                .and()
+                .logout().addLogoutHandler(logoutHandler);
+       
         // authorize
         http.exceptionHandling()
                 .accessDeniedPage("/auth/login/?accessDenied");
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')");
-        http.csrf().disable();
 
+        http.csrf().disable();
+    }
+
+    @Bean
+    public ClientRegistrationRepository clientRegistrationRepository() {
+        System.out.println("clientRegistrationRepository");
+        return new InMemoryClientRegistrationRepository(
+                ClientRegistration.withRegistrationId("google")
+                        .clientId("128479845058-anu704t9t483ohtf7ok3p67t6iau78sf.apps.googleusercontent.com")
+                        .clientSecret("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")
+                        .scope(Arrays.asList("email", "profile").toArray(new String[0]))
+                        .authorizationUri("https://accounts.google.com/o/oauth2/v2/auth")
+                        .tokenUri("https://www.googleapis.com/oauth2/v4/token")
+                        .jwkSetUri("https://www.googleapis.com/oauth2/v3/certs")
+                        .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+                        .redirectUri("http://localhost:8080/EnrolmentSystem/auth/login-google")
+                        .userInfoUri("https://www.googleapis.com/oauth2/v3/userinfo")
+                        .userNameAttributeName(IdTokenClaimNames.SUB)
+                        .clientName("Google")
+                        .build());
     }
 
 }

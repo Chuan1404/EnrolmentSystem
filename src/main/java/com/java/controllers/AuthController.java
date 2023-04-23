@@ -4,14 +4,16 @@
  */
 package com.java.controllers;
 
-import com.cloudinary.Cloudinary;
+import com.java.pojos.UserCredential;
 import com.java.pojos.Users;
+//import com.java.services.GoogleOAuth2UserService;
+import com.java.services.GoogleOAuthService;
 import com.java.services.UsersService;
+import com.mysql.cj.callback.UsernameCallback;
+import com.nimbusds.jose.proc.SecurityContext;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,6 +21,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
  *
@@ -29,13 +36,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AuthController {
 
     @Autowired
+    GoogleOAuthService googleService;
+
+    @Autowired
     private UsersService usersService;
+
+    @GetMapping(value = "/login-google")
+    public String loginGoogle(@RequestParam("code") String code,
+            @RequestParam("state") String state,
+            HttpSession session) {
+        
+        // get token
+        UserCredential userCredential = googleService.getAccessToken(code, state);
+        session.setAttribute("userCredential", userCredential);
+        // get user by token
+        UserDetails userDetails = usersService.loadUsersByGoogle(userCredential.getAccessToken());
+        Authentication authentication  = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        return "redirect:/";
+    }
 
     @GetMapping(value = "/login")
     public String index(Model model, HttpSession session) {
 
-        if(session.getAttribute("currentUser") != null)
+        if (session.getAttribute("currentUser") != null) {
             return "redirect:/";
+        }
         model.addAttribute("user", new Users());
         return "login";
     }
@@ -59,17 +85,25 @@ public class AuthController {
         if (!result.getFieldValue("password").equals(result.getFieldValue("confirmPassword"))) {
             result.rejectValue("confirmPassword", "user.error.confirmPassword");
         }
-        
+
         // validate empty file
         if (u.getFile().isEmpty()) {
             result.rejectValue("file", "user.error.null");
         }
-        
+
         // check has error ? (pass id, avatar, userrole)
-        if (result.getAllErrors().toArray().length - 3 > 0)
-        {
+        if (result.getAllErrors().toArray().length - 3 > 0) {
             return "register";
         }
+
+        // check email exist ?
+//        boolean isValid = EmailValidator.getInstance().isValid(u.getEmail());
+//        System.out.println(isValid);
+//
+//        if (!isValid) { 
+//            model.addAttribute("errCode", "user.error.email");
+//            return "register";
+//        }
 
         // check has exist accout ?
         if (usersService.getUserByEmail(u.getEmail()) != null || usersService.getUsersByUsername(u.getUsername()) != null) {
@@ -80,6 +114,6 @@ public class AuthController {
         } else {
             usersService.addOrUpdateUser(u);
         }
-        return "index";
+        return "redirect:/";
     }
 }

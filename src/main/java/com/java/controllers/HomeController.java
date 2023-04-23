@@ -8,7 +8,6 @@ import com.java.pojos.Homepage;
 import com.java.pojos.Images;
 import com.java.services.HomepageService;
 import com.java.services.ImagesService;
-import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +26,8 @@ public class HomeController {
     
     @Autowired
     private ImagesService imagesService;
+    
+    
     
     @RequestMapping(path = "/")
     public String index(Model model) {

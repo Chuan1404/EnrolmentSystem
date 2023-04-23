@@ -99,7 +99,7 @@ uri="http://www.springframework.org/tags" %>
                                     </div>
 
 
-                                    <p class="mb-5 pb-lg-2" style="color: #393f81;">Already have account? <a href="#!"
+                                        <p class="mb-5 pb-lg-2" style="color: #393f81;">Already have account? <a href="<c:url value="/auth/login" />"
                                                                                                              style="color: #393f81;">Login here</a></p>
                                 </div>
                             </div>
