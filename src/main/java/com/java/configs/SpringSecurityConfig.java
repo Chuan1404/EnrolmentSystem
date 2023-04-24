@@ -108,7 +108,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                         .tokenUri("https://www.googleapis.com/oauth2/v4/token")
                         .jwkSetUri("https://www.googleapis.com/oauth2/v3/certs")
                         .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-                        .redirectUri("http://localhost:8080/EnrolmentSystem/auth/login")
+                        .redirectUri("http://localhost:8080/EnrolmentSystem/auth/login-google")
                         .userInfoUri("https://www.googleapis.com/oauth2/v3/userinfo")
                         .userNameAttributeName(IdTokenClaimNames.SUB)
                         .clientName("Google")
