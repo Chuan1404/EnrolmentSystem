@@ -4,13 +4,14 @@
  */
 package com.java.controllers;
 
+import com.java.handlers.LoginSuccessHandler;
 import com.java.pojos.UserCredential;
 import com.java.pojos.Users;
 //import com.java.services.GoogleOAuth2UserService;
 import com.java.services.GoogleOAuthService;
 import com.java.services.UsersService;
-import com.mysql.cj.callback.UsernameCallback;
-import com.nimbusds.jose.proc.SecurityContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,10 +42,13 @@ public class AuthController {
     @Autowired
     private UsersService usersService;
 
+    @Autowired
+    private LoginSuccessHandler loginHandler;
+    
     @GetMapping(value = "/login-google")
     public String loginGoogle(@RequestParam("code") String code,
             @RequestParam("state") String state,
-            HttpSession session) {
+            HttpSession session, HttpServletRequest request, HttpServletResponse response) {
         
         // get token
         UserCredential userCredential = googleService.getAccessToken(code, state);
@@ -53,6 +57,7 @@ public class AuthController {
         UserDetails userDetails = usersService.loadUsersByGoogle(userCredential.getAccessToken());
         Authentication authentication  = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authentication);
+        
         return "redirect:/";
     }
 

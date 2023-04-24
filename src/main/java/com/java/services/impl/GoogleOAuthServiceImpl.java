@@ -45,8 +45,7 @@ public class GoogleOAuthServiceImpl implements GoogleOAuthService {
         UserCredential userCredential = new UserCredential();
         userCredential.setAccessToken((String) response.getBody().get("access_token"));
         userCredential.setRefreshToken((String) response.getBody().get("refresh_token"));
-
-        Double d = (Double) response.getBody().get("expires_in");
+        Double d = Double.valueOf(response.getBody().get("expires_in").toString());
         userCredential.setExpiresIn(d.longValue());
         return userCredential;
     }
