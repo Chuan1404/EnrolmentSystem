@@ -4,13 +4,11 @@
  */
 package com.java.controllers;
 
-import com.java.pojos.UserCredential;
+import com.java.handlers.LoginSuccessHandler;
 import com.java.pojos.Users;
-//import com.java.services.GoogleOAuth2UserService;
 import com.java.services.GoogleOAuthService;
 import com.java.services.UsersService;
-import com.mysql.cj.callback.UsernameCallback;
-import com.nimbusds.jose.proc.SecurityContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
  *
@@ -41,19 +35,23 @@ public class AuthController {
     @Autowired
     private UsersService usersService;
 
-    @GetMapping(value = "/login-google")
-    public String loginGoogle(@RequestParam("code") String code,
-            @RequestParam("state") String state,
-            HttpSession session) {
-        
-        // get token
-        UserCredential userCredential = googleService.getAccessToken(code, state);
-        session.setAttribute("userCredential", userCredential);
-        // get user by token
-        UserDetails userDetails = usersService.loadUsersByGoogle(userCredential.getAccessToken());
-        Authentication authentication  = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        return "redirect:/";
+    @Autowired
+    private LoginSuccessHandler loginHandler;
+
+    @GetMapping("/login-google")
+    public String googleCallback(HttpServletRequest request) {
+        String code = request.getParameter("code");
+        String state = request.getParameter("state");
+        if (code != null) {
+            String accessToken = googleService.getAccessToken(code, state).getAccessToken();
+            if (accessToken != null) {
+                // Lấy access token thành công, xử lý dữ liệu ở đây
+                System.out.println("OK");
+                return "redirect:/";
+            }
+        }
+        // Xác thực không thành công, chuyển hướng về trang đăng nhập
+        return "redirect:/login?error=true";
     }
 
     @GetMapping(value = "/login")
@@ -104,7 +102,6 @@ public class AuthController {
 //            model.addAttribute("errCode", "user.error.email");
 //            return "register";
 //        }
-
         // check has exist accout ?
         if (usersService.getUserByEmail(u.getEmail()) != null || usersService.getUsersByUsername(u.getUsername()) != null) {
 
