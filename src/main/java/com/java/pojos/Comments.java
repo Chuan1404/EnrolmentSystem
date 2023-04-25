@@ -4,12 +4,16 @@
  */
 package com.java.pojos;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -40,6 +44,11 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Comments.findByCreatedDate", query = "SELECT c FROM Comments c WHERE c.createdDate = :createdDate")})
 public class Comments implements Serializable {
 
+    @JoinColumn(name = "article_id", referencedColumnName = "id")
+    @ManyToOne
+    @JsonIgnore
+    private Articles articleId;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,10 +66,12 @@ public class Comments implements Serializable {
     @Column(name = "created_date")
     @Temporal(TemporalType.DATE)
     private Date createdDate;
-    @OneToMany(mappedBy = "baseCommentId")
+    @OneToMany(mappedBy = "baseCommentId", fetch = FetchType.EAGER)
+    @JsonManagedReference
     private Collection<Comments> commentsCollection;
     @JoinColumn(name = "base_comment_id", referencedColumnName = "id")
-    @ManyToOne
+    @ManyToOne()
+    @JsonBackReference
     private Comments baseCommentId;
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
@@ -151,6 +162,14 @@ public class Comments implements Serializable {
     @Override
     public String toString() {
         return "com.java.pojos.Comments[ id=" + id + " ]";
+    }
+
+    public Articles getArticleId() {
+        return articleId;
+    }
+
+    public void setArticleId(Articles articleId) {
+        this.articleId = articleId;
     }
     
 }

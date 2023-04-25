@@ -35,11 +35,13 @@ CREATE TABLE `comments` (
 	`id` INT NOT NULL AUTO_INCREMENT,
     `content` TEXT NOT NULL,
 	`created_date` DATE NOT NULL,
+    `article_id` VARCHAR(50) DEFAULT NULL,
     `user_id` VARCHAR(50) NOT NULL,
     `base_comment_id` INT DEFAULT NULL,
     PRIMARY KEY (`id`),
     CONSTRAINT fk_comment_user_id_users FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
-    CONSTRAINT fk_comments_base_comment_id_comments FOREIGN KEY(`base_comment_id`) REFERENCES `comments` (`id`) ON DELETE CASCADE
+    CONSTRAINT fk_comments_base_comment_id_comments FOREIGN KEY(`base_comment_id`) REFERENCES `comments` (`id`) ON DELETE CASCADE,
+    CONSTRAINT fk_comments_article_id_articles FOREIGN KEY(`article_id`) REFERENCES `articles`(`id`) ON DELETE CASCADE
 ) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `faculties` (
