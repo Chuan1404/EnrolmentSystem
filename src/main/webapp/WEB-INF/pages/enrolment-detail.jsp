@@ -103,4 +103,15 @@
     <!-- About US End -->
 
 
+
 </main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js"></script>
+<c:url value="/api/article/${article.id}/comments" var="url"/>
+<c:url value="/assets/js" var="path"/>
+<script src="${path}/pages/comments.js"></script>
+<script>
+    window.onload = function () {
+        loadComments('${url}');
+    };
+</script>
