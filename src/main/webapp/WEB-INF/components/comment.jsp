@@ -42,6 +42,7 @@
                                 <textarea class="form-control" id="comment-content" rows="2" name="comment-content"></textarea>
                             </div>
                             <div class="d-flex justify-content-between mt-3">
+                                <c:url value="/api/article/${article.id}/comments" var="url"/>
                                 <button type="button" class="btn btn-danger" onclick="addComment('${url}');">
                                     Send <i class="fas fa-long-arrow-alt-right ms-1"></i>
                                 </button>
@@ -52,7 +53,10 @@
             </div>
         </div>
     </div>
-</div>
+
+
+<c:url value="/assets/js" var="path"/>
+<script src="${path}/pages/comments.js"></script>
 
 
 

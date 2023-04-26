@@ -68,5 +68,17 @@ public class CommentRepositoryImpl implements CommentRepository {
         Query q = session.createQuery(query);
         return q.getResultList();
     }
+
+    @Override
+    public Comments getCommentById(int id) {
+        Session session = sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Comments> query = builder.createQuery(Comments.class);
+        Root root = query.from(Comments.class);
+        Predicate p = builder.equal(root.get("id"), id);
+        query.where(p);
+        Query q = session.createQuery(query);
+        return (Comments) q.getSingleResult();
+    }
     
 }
