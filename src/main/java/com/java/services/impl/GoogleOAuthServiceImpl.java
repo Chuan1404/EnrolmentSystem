@@ -4,7 +4,7 @@
  */
 package com.java.services.impl;
 
-import com.java.pojos.UserCredential;
+import com.java.models.UserCredential;
 import com.java.services.GoogleOAuthService;
 import java.util.Map;
 import org.springframework.http.HttpEntity;

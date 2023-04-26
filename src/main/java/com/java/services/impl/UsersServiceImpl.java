@@ -9,7 +9,7 @@ import com.cloudinary.utils.ObjectUtils;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.java.enums.UserRole;
-import com.java.pojos.GoogleResponse;
+import com.java.models.GoogleResponse;
 import com.java.pojos.Users;
 import com.java.repositories.UsersRepository;
 import com.java.services.UsersService;

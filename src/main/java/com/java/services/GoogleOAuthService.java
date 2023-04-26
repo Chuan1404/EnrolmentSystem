@@ -4,7 +4,7 @@
  */
 package com.java.services;
 
-import com.java.pojos.UserCredential;
+import com.java.models.UserCredential;
 
 /**
  *
