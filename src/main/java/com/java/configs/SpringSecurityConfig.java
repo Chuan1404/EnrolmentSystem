@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -72,16 +73,20 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .successHandler(loginHandler)
-                .failureUrl("/auth/login?error")
-                .and()
-                .oauth2Login()
+                .failureUrl("/auth/login?error");
+
+        http.oauth2Login()
+                .loginPage("/auth/login")
+                .clientRegistrationRepository(clientRegistrationRepository())
                 .userInfoEndpoint()
                 .userService(googleOAuth2UserService)
                 .and()
-                .clientRegistrationRepository(clientRegistrationRepository())
-                .and()
-                .logout().addLogoutHandler(logoutHandler);
-       
+                .successHandler(loginHandler)
+                .failureUrl("/auth/login?error");
+
+        http
+                .logout()
+                .addLogoutHandler(logoutHandler);
         // authorize
         http.exceptionHandling()
                 .accessDeniedPage("/auth/login/?accessDenied");
@@ -94,7 +99,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public ClientRegistrationRepository clientRegistrationRepository() {
-        System.out.println("clientRegistrationRepository");
         return new InMemoryClientRegistrationRepository(
                 ClientRegistration.withRegistrationId("google")
                         .clientId("128479845058-anu704t9t483ohtf7ok3p67t6iau78sf.apps.googleusercontent.com")
