@@ -91,6 +91,10 @@ public class AuthController {
     public String register(Model model, @ModelAttribute(value = "user") @Valid Users u, BindingResult result) {
 
         // validate confirm password
+        if (result.getFieldValue("password").toString().isEmpty()) {
+            result.rejectValue("password", "user.error.passwordLength");
+        }
+        
         if (!result.getFieldValue("password").equals(result.getFieldValue("confirmPassword"))) {
             result.rejectValue("confirmPassword", "user.error.confirmPassword");
         }
