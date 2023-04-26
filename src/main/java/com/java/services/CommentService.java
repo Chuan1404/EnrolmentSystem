@@ -16,4 +16,5 @@ import java.util.List;
 public interface CommentService {
     List<Comments> getComments(Articles articles);
     Comments addComments(Comments comment);
+    Comments getCommentById(int id);
 }
