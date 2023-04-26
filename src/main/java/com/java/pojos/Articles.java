@@ -6,6 +6,7 @@ package com.java.pojos;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 import java.util.UUID;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -17,6 +18,7 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -25,6 +27,7 @@ import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -41,6 +44,9 @@ import org.springframework.web.multipart.MultipartFile;
     @NamedQuery(name = "Articles.findByUpdateDate", query = "SELECT a FROM Articles a WHERE a.updateDate = :updateDate"),
     @NamedQuery(name = "Articles.findByArticleType", query = "SELECT a FROM Articles a WHERE a.articleType = :articleType")})
 public class Articles implements Serializable {
+
+    @OneToMany(mappedBy = "articleId")
+    private Set<Comments> commentsSet;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -224,6 +230,15 @@ public class Articles implements Serializable {
      */
     public void setFile(MultipartFile file) {
         this.file = file;
+    }
+
+    @XmlTransient
+    public Set<Comments> getCommentsSet() {
+        return commentsSet;
+    }
+
+    public void setCommentsSet(Set<Comments> commentsSet) {
+        this.commentsSet = commentsSet;
     }
     
 }

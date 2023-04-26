@@ -4,19 +4,24 @@
  */
 package com.java.pojos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
+import java.util.Set;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -36,6 +41,13 @@ import org.springframework.web.multipart.MultipartFile;
     @NamedQuery(name = "Users.findByUserRole", query = "SELECT u FROM Users u WHERE u.userRole = :userRole")})
 public class Users implements Serializable {
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
+    @JsonIgnore
+    private Set<Comments> commentsSet;
+    @OneToMany(mappedBy = "userId")
+    @JsonIgnore
+    private Set<Articles> articlesSet;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -49,6 +61,7 @@ public class Users implements Serializable {
     private String username;
     @Basic(optional = false)
     @Column(name = "password")
+    @JsonIgnore
     private String password;
     @Basic(optional = false)
     @NotNull
@@ -202,6 +215,24 @@ public class Users implements Serializable {
      */
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
+    }
+
+    @XmlTransient
+    public Set<Comments> getCommentsSet() {
+        return commentsSet;
+    }
+
+    public void setCommentsSet(Set<Comments> commentsSet) {
+        this.commentsSet = commentsSet;
+    }
+
+    @XmlTransient
+    public Set<Articles> getArticlesSet() {
+        return articlesSet;
+    }
+
+    public void setArticlesSet(Set<Articles> articlesSet) {
+        this.articlesSet = articlesSet;
     }
 
 }
