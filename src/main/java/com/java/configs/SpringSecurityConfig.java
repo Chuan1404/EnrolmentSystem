@@ -6,7 +6,6 @@ package com.java.configs;
 
 import com.java.handlers.LoginSuccessHandler;
 import com.java.handlers.LogoutSuccessHandler;
-import com.java.services.GoogleOAuth2UserService;
 import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -45,9 +44,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     private UserDetailsService userDetailsService;
 
     @Autowired
-    private GoogleOAuth2UserService googleOAuth2UserService;
-
-    @Autowired
     private LoginSuccessHandler loginHandler;
 
     @Autowired
@@ -77,12 +73,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.oauth2Login()
                 .loginPage("/auth/login")
-                .clientRegistrationRepository(clientRegistrationRepository())
-                .userInfoEndpoint()
-                .userService(googleOAuth2UserService)
-                .and()
-                .successHandler(loginHandler)
-                .failureUrl("/auth/login?error");
+                .clientRegistrationRepository(clientRegistrationRepository());
 
         http
                 .logout()

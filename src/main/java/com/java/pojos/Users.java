@@ -48,7 +48,6 @@ public class Users implements Serializable {
     @Column(name = "username")
     private String username;
     @Basic(optional = false)
-    @Size(min = 1, max = 200)
     @Column(name = "password")
     private String password;
     @Basic(optional = false)

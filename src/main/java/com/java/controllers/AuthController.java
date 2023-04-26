@@ -5,10 +5,16 @@
 package com.java.controllers;
 
 import com.java.handlers.LoginSuccessHandler;
+import com.java.pojos.UserCredential;
 import com.java.pojos.Users;
 import com.java.services.GoogleOAuthService;
 import com.java.services.UsersService;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +26,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
  *
@@ -39,19 +49,24 @@ public class AuthController {
     private LoginSuccessHandler loginHandler;
 
     @GetMapping("/login-google")
-    public String googleCallback(HttpServletRequest request) {
+    public void loginGoogle(HttpSession session, HttpServletRequest request , HttpServletResponse response) {
         String code = request.getParameter("code");
         String state = request.getParameter("state");
-        if (code != null) {
-            String accessToken = googleService.getAccessToken(code, state).getAccessToken();
-            if (accessToken != null) {
-                // Lấy access token thành công, xử lý dữ liệu ở đây
-                System.out.println("OK");
-                return "redirect:/";
-            }
+        // get token
+        UserCredential userCredential = googleService.getAccessToken(code, state);
+        session.setAttribute("userCredential", userCredential);
+        // get user by token
+        UserDetails userDetails = usersService.loadUsersByGoogle(userCredential.getAccessToken());
+        Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        
+        try {
+            loginHandler.onAuthenticationSuccess(request, response, authentication);
+        } catch (IOException ex) {
+            Logger.getLogger(AuthController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ServletException ex) {
+            Logger.getLogger(AuthController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        // Xác thực không thành công, chuyển hướng về trang đăng nhập
-        return "redirect:/login?error=true";
     }
 
     @GetMapping(value = "/login")
@@ -64,10 +79,6 @@ public class AuthController {
         return "login";
     }
 
-    @PostMapping(value = "/login")
-    public String login(@ModelAttribute Users user) {
-        return "index";
-    }
 
     @GetMapping(value = "/register")
     public String register(Model model) {
