@@ -44,7 +44,7 @@
         <tiles:insertAttribute name="texteditor"/>
 
 
-        <div id="chatbox-icon"></div>
+        <div id="chatbox-icon"><i class="ti-comment"></i></div>
         <div id="chatbox-popup" class="hidden">
             <div class="card" id="chat1" style="border-radius: 15px;">
                 <div

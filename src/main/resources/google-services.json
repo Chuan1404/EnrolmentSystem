@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "128479845058",
+    "project_id": "enrolmentsystem-383911",
+    "storage_bucket": "enrolmentsystem-383911.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:128479845058:android:849f9de3875bd00970f95b",
+        "android_client_info": {
+          "package_name": "com.java.EnrolmentSystem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "128479845058-anu704t9t483ohtf7ok3p67t6iau78sf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7maFotyTWWbJKdo0Kk8Yp7mgFxKkEvGw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "128479845058-anu704t9t483ohtf7ok3p67t6iau78sf.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "128479845058-i30fo9cnqfknc2td1mri3hing7mu8dkm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.java.EnrolmentSystem"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

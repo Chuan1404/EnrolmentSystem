@@ -5,10 +5,12 @@
 package com.java.controllers;
 
 import com.google.firebase.FirebaseApp;
-import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingException;
-import com.google.firebase.messaging.Message;
+import com.java.models.ChatMessage;
+import com.java.services.FirebaseService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -16,29 +18,19 @@ import org.springframework.web.bind.annotation.GetMapping;
  *
  * @author AnChuPC
  */
+@Controller
 public class FirebaseController {
+
     @Autowired
     private FirebaseApp firebaseApp;
 
+    @Autowired
+    private FirebaseService firebaseService;
+    
     @GetMapping("/send-notification")
-    public String sendNotification(Model model) throws FirebaseMessagingException {
-
-        // Get the registration token from the client
-        String registrationToken = "<client-registration-token>";
-
-        // See documentation on defining a message payload.
-        Message message = Message.builder()
-            .putData("score", "850")
-            .putData("time", "2:45")
-            .setToken(registrationToken)
-            .build();
-
-        // Send a message to the device corresponding to the provided
-        // registration token.
-        String response = FirebaseMessaging.getInstance(firebaseApp).send(message);
-
-        model.addAttribute("message", response);
-
-        return "index";
+    public void sendNotification(Model model) throws FirebaseMessagingException {
+        firebaseService.getRooms("0");
+        firebaseService.getMessage("0");
+        
     }
 }

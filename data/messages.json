@@ -1,0 +1,18 @@
+{
+    "messages": [
+        {
+            "id": "0",
+            "message": "This is test message",
+            "roomId": "0",
+            "timestamp": 12345
+        }
+        
+    ],
+    "rooms": [
+        {
+            "id": "0",
+            "userId": "0",
+            "counselorID": "0"
+        }
+    ]
+}

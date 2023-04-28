@@ -7,10 +7,12 @@ package com.java.configs;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
+import com.google.firebase.messaging.FirebaseMessaging;
 import java.io.FileInputStream;
 import java.io.IOException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
 
 /**
  *
@@ -21,13 +23,19 @@ public class FirebaseConfig {
 
     @Bean
     public FirebaseApp firebaseApp() throws IOException {
-        FileInputStream serviceAccount = new FileInputStream("classpath:serviceAccountKey.json");
+        ClassPathResource resource = new ClassPathResource("serviceAccountKey.json");
+        FileInputStream serviceAccount = new FileInputStream(resource.getFile());
 
         FirebaseOptions options = new FirebaseOptions.Builder()
                 .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-                .setDatabaseUrl("https://enrolmentsystem-383911.firebaseio.com")
+                .setDatabaseUrl("https://enrolmentsystem-383911-default-rtdb.firebaseio.com")
                 .build();
-        FirebaseApp.initializeApp(options);
-        return FirebaseApp.getInstance();
+
+        return FirebaseApp.initializeApp(options);
+    }
+
+    @Bean
+    public FirebaseMessaging firebaseMessaging(FirebaseApp firebaseApp) {
+        return FirebaseMessaging.getInstance(firebaseApp);
     }
 }
