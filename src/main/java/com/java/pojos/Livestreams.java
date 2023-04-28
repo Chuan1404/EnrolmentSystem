@@ -6,15 +6,20 @@ package com.java.pojos;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -22,6 +27,7 @@ import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -41,6 +47,14 @@ import org.springframework.web.multipart.MultipartFile;
     @NamedQuery(name = "Livestreams.findByStartQuestionTime", query = "SELECT l FROM Livestreams l WHERE l.startQuestionTime = :startQuestionTime"),
     @NamedQuery(name = "Livestreams.findByQuestionDuration", query = "SELECT l FROM Livestreams l WHERE l.questionDuration = :questionDuration")})
 public class Livestreams implements Serializable {
+
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @ManyToOne
+    private Users userId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "livestreamId")
+    private Set<Answers> answersSet;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "livestreamId")
+    private Set<Questions> questionsSet;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -210,6 +224,32 @@ public class Livestreams implements Serializable {
      */
     public void setFile(MultipartFile file) {
         this.file = file;
+    }
+
+    public Users getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Users userId) {
+        this.userId = userId;
+    }
+
+    @XmlTransient
+    public Set<Answers> getAnswersSet() {
+        return answersSet;
+    }
+
+    public void setAnswersSet(Set<Answers> answersSet) {
+        this.answersSet = answersSet;
+    }
+
+    @XmlTransient
+    public Set<Questions> getQuestionsSet() {
+        return questionsSet;
+    }
+
+    public void setQuestionsSet(Set<Questions> questionsSet) {
+        this.questionsSet = questionsSet;
     }
     
 }

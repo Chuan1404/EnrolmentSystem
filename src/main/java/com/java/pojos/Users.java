@@ -41,6 +41,13 @@ import org.springframework.web.multipart.MultipartFile;
     @NamedQuery(name = "Users.findByUserRole", query = "SELECT u FROM Users u WHERE u.userRole = :userRole")})
 public class Users implements Serializable {
 
+    @OneToMany(mappedBy = "userId")
+    private Set<Livestreams> livestreamsSet;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
+    private Set<Answers> answersSet;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
+    private Set<Questions> questionsSet;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     @JsonIgnore
     private Set<Comments> commentsSet;
@@ -234,6 +241,33 @@ public class Users implements Serializable {
 
     public void setArticlesSet(Set<Articles> articlesSet) {
         this.articlesSet = articlesSet;
+    }
+
+    @XmlTransient
+    public Set<Livestreams> getLivestreamsSet() {
+        return livestreamsSet;
+    }
+
+    public void setLivestreamsSet(Set<Livestreams> livestreamsSet) {
+        this.livestreamsSet = livestreamsSet;
+    }
+
+    @XmlTransient
+    public Set<Answers> getAnswersSet() {
+        return answersSet;
+    }
+
+    public void setAnswersSet(Set<Answers> answersSet) {
+        this.answersSet = answersSet;
+    }
+
+    @XmlTransient
+    public Set<Questions> getQuestionsSet() {
+        return questionsSet;
+    }
+
+    public void setQuestionsSet(Set<Questions> questionsSet) {
+        this.questionsSet = questionsSet;
     }
 
 }

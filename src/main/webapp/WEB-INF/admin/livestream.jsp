@@ -46,6 +46,22 @@
                 <label for="questionDuration">Giờ kết thúc đặt câu hỏi (trong lúc livestream)</label>
                 <form:input path="questionDuration" class="form-control" type="number" />
             </div>
+            <div class="form-group">
+                <label for="userId" class="label">Tư vấn viên phụ trách</label>
+                <form:select path="userId" class="form-control w-100" id="userId" name="userId">
+                    <c:forEach items="${users}" var="u">
+                        <c:choose>
+                            <c:when test="${livestream.userId.id == u.id}">
+                                <option value="${u.id}" selected>${u.name}</option>
+                            </c:when>
+                                <c:otherwise>
+                                    <option value="${u.id}">${u.name}</option>
+                                </c:otherwise>
+                        </c:choose>
+                    </c:forEach>>
+                    </form:select>
+                    
+            </div>
 
             <c:if test="${not empty livestream.image}">
                 <div class="form-group input-group mb-3">

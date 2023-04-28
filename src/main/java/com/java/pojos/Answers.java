@@ -5,9 +5,7 @@
 package com.java.pojos;
 
 import java.io.Serializable;
-import java.util.Set;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,31 +16,22 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author AnChuPC
+ * @author jackc
  */
 @Entity
-@Table(name = "questions")
+@Table(name = "answers")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Questions.findAll", query = "SELECT q FROM Questions q"),
-    @NamedQuery(name = "Questions.findById", query = "SELECT q FROM Questions q WHERE q.id = :id")})
-public class Questions implements Serializable {
-
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "questionId")
-    private Answers answers;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "questionId")
-    private Set<Answers> answersSet;
+    @NamedQuery(name = "Answers.findAll", query = "SELECT a FROM Answers a"),
+    @NamedQuery(name = "Answers.findById", query = "SELECT a FROM Answers a WHERE a.id = :id")})
+public class Answers implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -59,18 +48,21 @@ public class Questions implements Serializable {
     @JoinColumn(name = "livestream_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Livestreams livestreamId;
+    @JoinColumn(name = "question_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Questions questionId;
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Users userId;
 
-    public Questions() {
+    public Answers() {
     }
 
-    public Questions(Integer id) {
+    public Answers(Integer id) {
         this.id = id;
     }
 
-    public Questions(Integer id, String content) {
+    public Answers(Integer id, String content) {
         this.id = id;
         this.content = content;
     }
@@ -99,6 +91,14 @@ public class Questions implements Serializable {
         this.livestreamId = livestreamId;
     }
 
+    public Questions getQuestionId() {
+        return questionId;
+    }
+
+    public void setQuestionId(Questions questionId) {
+        this.questionId = questionId;
+    }
+
     public Users getUserId() {
         return userId;
     }
@@ -117,10 +117,10 @@ public class Questions implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Questions)) {
+        if (!(object instanceof Answers)) {
             return false;
         }
-        Questions other = (Questions) object;
+        Answers other = (Answers) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -129,24 +129,7 @@ public class Questions implements Serializable {
 
     @Override
     public String toString() {
-        return "com.java.pojos.Questions[ id=" + id + " ]";
-    }
-
-    @XmlTransient
-    public Set<Answers> getAnswersSet() {
-        return answersSet;
-    }
-
-    public void setAnswersSet(Set<Answers> answersSet) {
-        this.answersSet = answersSet;
-    }
-
-    public Answers getAnswers() {
-        return answers;
-    }
-
-    public void setAnswers(Answers answers) {
-        this.answers = answers;
+        return "com.java.pojos.Answers[ id=" + id + " ]";
     }
     
 }

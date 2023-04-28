@@ -4,7 +4,9 @@
  */
 package com.java.services;
 
+import com.java.enums.UserRole;
 import com.java.pojos.Users;
+import java.util.List;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
@@ -23,5 +25,7 @@ public interface UsersService extends UserDetailsService {
     public Users getUserByEmail(String email);
 
     public UserDetails loadUsersByGoogle(String accessToken);
+    
+    public List<Users> getUsersByUserRole(UserRole userRole);
 
 }
