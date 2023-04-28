@@ -16,6 +16,14 @@ import com.java.repositories.FirebaseRepository;
 import com.java.repositories.UsersRepository;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -32,8 +40,9 @@ public class FirbaseRepositoryImpl implements FirebaseRepository {
     @Override
     public Room getRoomById(String id) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("/rooms");
+        CountDownLatch latch = new CountDownLatch(1);
         Room room = new Room();
-        ref.addValueEventListener(new ValueEventListener() {
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot ds) {
                 for (DataSnapshot childSnapshot : ds.getChildren()) {
@@ -45,13 +54,22 @@ public class FirbaseRepositoryImpl implements FirebaseRepository {
                         room.setCounselor(counselor);
                     }
                 }
+//                latch.countDown();
+//                System.out.println("down");
+
             }
 
             @Override
             public void onCancelled(DatabaseError de) {
+//                latch.countDown();
             }
         });
 
+//        try {
+//            latch.await();
+//        } catch (InterruptedException ex) {
+//            Logger.getLogger(FirbaseRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
+//        }
         return room;
     }
 
@@ -63,16 +81,19 @@ public class FirbaseRepositoryImpl implements FirebaseRepository {
         List<Room> rooms = new ArrayList<>();
 
         if (counselor != null) {
+
             ref.orderByChild("counselorId").equalTo(counselorId).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot ds) {
                     for (DataSnapshot childSnapshot : ds.getChildren()) {
                         String id = childSnapshot.child("id").getValue(String.class);
-                        Room room = getRoomById(id);
-                        if (room != null) {
-                            rooms.add(room);
-                        }
+                        String userId = childSnapshot.child("userId").getValue(String.class);
+
+                        Users user = userRepository.getUserById(userId);
+                        Room room = new Room(id, user, counselor);
+                        rooms.add(room);
                     }
+//                    latch.countDown();
                 }
 
                 @Override
@@ -86,35 +107,50 @@ public class FirbaseRepositoryImpl implements FirebaseRepository {
     }
 
     @Override
-    public synchronized List<ChatMessage> getMessage(String roomId) {
+    public List<ChatMessage> getMessage(String roomId) {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("/messages");
         List<ChatMessage> messages = new ArrayList<>();
 
-        System.out.println("begin");
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("/messages");
+        CountDownLatch latch = new CountDownLatch(1);
+        ExecutorService executor = Executors.newSingleThreadExecutor();
         ref.orderByChild("roomId").equalTo(roomId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
-                    String id = childSnapshot.child("id").getValue(String.class);
-                    String message1 = childSnapshot.child("message").getValue(String.class);
-                    Long timestamp = childSnapshot.child("timestamp").getValue(Long.class);
-                    Room room = getRoomById(id);
-                    ChatMessage message = new ChatMessage(id, message1, room, timestamp);
-                    if (room != null) {
-                        messages.add(message);
-                    }
+                    try {
+                        Future<ChatMessage> messageFuture = executor.submit(() -> {
+                            String id = childSnapshot.child("id").getValue(String.class);
+                            String message1 = childSnapshot.child("message").getValue(String.class);
+                            Long timestamp = childSnapshot.child("timestamp").getValue(Long.class);
+                            Room room = getRoomById(id);
+                            ChatMessage message = new ChatMessage(id, message1, room, timestamp);
+                            return message;
+                        });
 
+                        // add message to list
+                        messages.add(messageFuture.get());
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(FirbaseRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ExecutionException ex) {
+                        Logger.getLogger(FirbaseRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
+                latch.countDown();
+                executor.close();
             }
 
             @Override
             public void onCancelled(DatabaseError de) {
+                latch.countDown();
             }
         }
         );
-        System.out.println("end");
+        try {
+            latch.await();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(FirbaseRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-        System.out.println("return");
         return messages;
     }
 
