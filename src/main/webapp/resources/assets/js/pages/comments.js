@@ -92,8 +92,21 @@ function loadComments(endpoint) {
         let comment = document.getElementById('comment');
         comment.innerHTML = cont;
         let replies = document.getElementsByClassName('btn-repl');
+        let authorized = true;
+        fetch('http://localhost:8080/EnrolmentSystem/api/curr-user').
+                then(res => { return res.json();}).then(data => {
+                    if (!data){
+                        for (let el of replies) {
+                            el.style.display = "none";
+                            authorized = false;
+                        }
+                    }
+        });
+        
+        if (authorized === false) return;
         for (let rep of replies) {
             let body = rep.closest('.media-body');
+            
             rep.addEventListener("click", function () {
                 let curr = document.getElementById('reply-box');
                 if (curr !== null) {
@@ -104,9 +117,6 @@ function loadComments(endpoint) {
             <div class="col-12">
                 <div class="card">
                     <div class="d-flex flex-start w-100">
-                        <img class="rounded-circle shadow-1-strong mr-3"
-                             src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(21).webp" alt="avatar" width="65"
-                             height="65" />
                         <div class="w-100">
                             <div class="form-outline">
                                 <label class="form-label" for="reply-content">Reply to this comment</label>
@@ -127,6 +137,7 @@ function loadComments(endpoint) {
     </div>
     `;
             }, {once: false});
+            
         }
     });
 }
@@ -144,6 +155,8 @@ function addReply(endpoint) {
         window.location.reload();
     });
 }
+    
+
 
 
 
