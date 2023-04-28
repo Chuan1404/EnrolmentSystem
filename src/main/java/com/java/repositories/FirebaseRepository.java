@@ -13,6 +13,7 @@ import java.util.List;
  * @author AnChuPC
  */
 public interface FirebaseRepository {
+    public Room getRoomById(String id);
     public List<Room> getRooms(String counselorId);
     public List<ChatMessage> getMessage(String roomId);
 }

@@ -25,6 +25,12 @@ public class Room {
         this.user = user;
     }
     
+    public Room(String id, Users user, Users counselor) {
+        this.id = id;
+        this.counselor = counselor;
+        this.user = user;
+    }
+    
     @Override
     public String toString() {
         return String.format("%s - %s - %s", id, user.getId(), counselor.getId());

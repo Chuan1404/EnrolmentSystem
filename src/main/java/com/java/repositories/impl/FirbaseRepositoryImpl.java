@@ -30,8 +30,34 @@ public class FirbaseRepositoryImpl implements FirebaseRepository {
     private UsersRepository userRepository;
 
     @Override
+    public Room getRoomById(String id) {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("/rooms");
+        Room room = new Room();
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot ds) {
+                for (DataSnapshot childSnapshot : ds.getChildren()) {
+                    Users counselor = userRepository.getUserById(childSnapshot.child("counselorId").getValue(String.class));
+                    Users user = userRepository.getUserById(childSnapshot.child("userId").getValue(String.class));
+                    if (childSnapshot.child("id").equals(id)) {
+                        room.setId(id);
+                        room.setUser(user);
+                        room.setCounselor(counselor);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError de) {
+            }
+        });
+
+        return room;
+    }
+
+    @Override
     public List<Room> getRooms(String counselorId) {
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("/rooms/");
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("/rooms");
 
         Users counselor = userRepository.getUserById(counselorId);
         List<Room> rooms = new ArrayList<>();
@@ -41,7 +67,11 @@ public class FirbaseRepositoryImpl implements FirebaseRepository {
                 @Override
                 public void onDataChange(DataSnapshot ds) {
                     for (DataSnapshot childSnapshot : ds.getChildren()) {
-                        System.out.println(childSnapshot.getValue());
+                        String id = childSnapshot.child("id").getValue(String.class);
+                        Room room = getRoomById(id);
+                        if (room != null) {
+                            rooms.add(room);
+                        }
                     }
                 }
 
@@ -56,14 +86,24 @@ public class FirbaseRepositoryImpl implements FirebaseRepository {
     }
 
     @Override
-    public List<ChatMessage> getMessage(String roomId) {
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("/messages");
+    public synchronized List<ChatMessage> getMessage(String roomId) {
         List<ChatMessage> messages = new ArrayList<>();
+
+        System.out.println("begin");
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("/messages");
         ref.orderByChild("roomId").equalTo(roomId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
-                   System.out.println(childSnapshot.getValue());
+                    String id = childSnapshot.child("id").getValue(String.class);
+                    String message1 = childSnapshot.child("message").getValue(String.class);
+                    Long timestamp = childSnapshot.child("timestamp").getValue(Long.class);
+                    Room room = getRoomById(id);
+                    ChatMessage message = new ChatMessage(id, message1, room, timestamp);
+                    if (room != null) {
+                        messages.add(message);
+                    }
+
                 }
             }
 
@@ -72,6 +112,9 @@ public class FirbaseRepositoryImpl implements FirebaseRepository {
             }
         }
         );
+        System.out.println("end");
+
+        System.out.println("return");
         return messages;
     }
 

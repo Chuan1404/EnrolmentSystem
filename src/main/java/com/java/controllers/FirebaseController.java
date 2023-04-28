@@ -6,7 +6,9 @@ package com.java.controllers;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.messaging.FirebaseMessagingException;
+import com.google.firebase.messaging.Message;
 import com.java.models.ChatMessage;
+import com.java.models.Room;
 import com.java.services.FirebaseService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,11 +28,13 @@ public class FirebaseController {
 
     @Autowired
     private FirebaseService firebaseService;
-    
+
     @GetMapping("/send-notification")
     public void sendNotification(Model model) throws FirebaseMessagingException {
-        firebaseService.getRooms("0");
-        firebaseService.getMessage("0");
+//        List<Room> rooms = firebaseService.getRooms("a9c9a08e-afc2-4b92-b8af-b848de70da70");
+        List<ChatMessage> messages = firebaseService.getMessage("0");
         
+//        rooms.forEach(item -> System.out.println(item));
+        messages.forEach(item -> System.out.println(item));
     }
 }

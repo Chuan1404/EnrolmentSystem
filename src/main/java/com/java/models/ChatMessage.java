@@ -4,6 +4,8 @@
  */
 package com.java.models;
 
+import java.util.UUID;
+
 /**
  *
  * @author AnChuPC
@@ -19,6 +21,13 @@ public class ChatMessage {
 
     }
 
+    public ChatMessage(String message, Room room, Long timestamp) {
+        this.id = UUID.randomUUID().toString();
+        this.message = message;
+        this.timestamp = timestamp;
+        this.room = room;
+    }
+    
     public ChatMessage(String id, String message, Room room, Long timestamp) {
         this.id = id;
         this.message = message;

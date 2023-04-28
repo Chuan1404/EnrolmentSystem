@@ -5,14 +5,36 @@
             "message": "This is test message",
             "roomId": "0",
             "timestamp": 12345
+        },
+        {
+            "id": "0",
+            "message": "This is test message",
+            "roomId": "1",
+            "timestamp": 12345
+        },
+        {
+            "id": "0",
+            "message": "This is test message",
+            "roomId": "1",
+            "timestamp": 12345
         }
         
     ],
     "rooms": [
         {
             "id": "0",
-            "userId": "0",
-            "counselorID": "0"
+            "userId": "UgT5veP8Nc8HUoGva1Kc",
+            "counselorId": "a9c9a08e-afc2-4b92-b8af-b848de70da70"
+        },
+        {
+            "id": "1",
+            "userId": "UgT5veP8Nc8HUoGva1Kc",
+            "counselorId": "BxST2aBzsduwWLw1cxEQ"
+        },
+         {
+            "id": "2",
+            "userId": "UgT5veP8Nc8HUoGva1Kc",
+            "counselorId": "a9c9a08e-afc2-4b92-b8af-b848de70da70"
         }
     ]
 }
