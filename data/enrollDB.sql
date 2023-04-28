@@ -65,7 +65,9 @@ CREATE TABLE `livestreams` (
     `duration` INT NOT NULL,
     `start_question_time` TIME DEFAULT NULL,
     `question_duration` INT NOT NULL,
-    PRIMARY KEY (`id`)
+    `user_id` VARCHAR(50) DEFAULT NULL,
+    PRIMARY KEY (`id`),
+    CONSTRAINT fk_livestreams_consult_id_user FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL
 ) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
@@ -78,6 +80,19 @@ CREATE TABLE `questions` (
     PRIMARY KEY (`id`),
     CONSTRAINT fk_questions_user_id_users FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
     CONSTRAINT fk_questions_livestream_id_livestreams FOREIGN KEY (`livestream_id`) REFERENCES `livestreams` (`id`) ON DELETE CASCADE
+) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `answers` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+    `content` TEXT NOT NULL,
+    `user_id` VARCHAR(50) NOT NULL,
+    `livestream_id` INT NOT NULL,
+    `question_id` INT NOT NULL,
+    PRIMARY KEY(`id`),
+    CONSTRAINT fk_answers_user_id_users FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE,
+    CONSTRAINT fk_answers_livestream_id_livestream FOREIGN KEY (`livestream_id`) REFERENCES `livestreams`(`id`) ON DELETE CASCADE,
+    CONSTRAINT fk_answers_question_id_questions FOREIGN KEY (`question_id`) REFERENCES `questions`(`id`) ON DELETE CASCADE,
+    CONSTRAINT uq_answers_question_id UNIQUE(`question_id`)
 ) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `banners` (
@@ -126,8 +141,8 @@ CREATE TABLE `points` (
 -- INSERT DATA
 
 INSERT INTO `users` (`id`, `username`, `password`, `name`, `avatar`, `email`, `user_role`) VALUES ('I4esDB8GDWMcVW40uA6x', 'cuong.nt', '123456', 'Nguyễn Tấn Cường', 'https://res.cloudinary.com/dis95mx4d/image/upload/v1668643889/sample.jpg', '2051052016@ou.edu.vn', 'THISINH');
-INSERT INTO `users` (`id`, `username`, `password`, `name`, `avatar`, `email`, `user_role`) VALUES ('BxST2aBzsduwWLw1cxEQ', 'an.cp', '123456', 'Nguyễn Chu Phước Ân', 'https://res.cloudinary.com/dis95mx4d/image/upload/v1668643889/sample.jpg', '2051052006an@ou.edu.vn', 'TUVANVIEN');
-INSERT INTO `users` (`id`, `username`, `password`, `name`, `avatar`, `email`, `user_role`) VALUES ('UgT5veP8Nc8HUoGva1Kc', 'a.lv', '123456', 'Lê Văn A', 'https://res.cloudinary.com/dis95mx4d/image/upload/v1668643889/sample.jpg', 'a.lv@gmail.com', 'ADMIN');
+INSERT INTO `users` (`id`, `username`, `password`, `name`, `avatar`, `email`, `user_role`) VALUES ('BxST2aBzsduwWLw1cxEQ', 'an.cp', '123456', 'Nguyễn Chu Phước Ân', 'https://res.cloudinary.com/dis95mx4d/image/upload/v1668643889/sample.jpg', '2051052006an@ou.edu.vn', 'ROLE_TUVAN');
+INSERT INTO `users` (`id`, `username`, `password`, `name`, `avatar`, `email`, `user_role`) VALUES ('UgT5veP8Nc8HUoGva1Kc', 'a.lv', '123456', 'Lê Văn A', 'https://res.cloudinary.com/dis95mx4d/image/upload/v1668643889/sample.jpg', 'a.lv@gmail.com', 'ROLE_TUVAN');
 
 
 INSERT INTO `comments` (`id`, `content`, `created_date`, `user_id`, `base_comment_id`) VALUES ('1', 'Bạn tên gì ?', '2023-03-21', 'I4esDB8GDWMcVW40uA6x', null);
