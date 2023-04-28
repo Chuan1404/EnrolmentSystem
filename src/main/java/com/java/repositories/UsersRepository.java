@@ -4,6 +4,7 @@
  */
 package com.java.repositories;
 
+import com.java.enums.UserRole;
 import com.java.pojos.Users;
 import java.util.List;
 
@@ -17,5 +18,5 @@ public interface UsersRepository {
     public boolean addOrUpdateUser(Users u);
     public Users getUsersByUsername(String name);
     public Users getUserByEmail(String email);
-    
+    List<Users> getUsersByUserRole(UserRole userRole);
 }

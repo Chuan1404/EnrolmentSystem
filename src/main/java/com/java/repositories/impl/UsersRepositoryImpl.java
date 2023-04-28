@@ -7,11 +7,13 @@ package com.java.repositories.impl;
 import com.java.enums.UserRole;
 import com.java.pojos.Users;
 import com.java.repositories.UsersRepository;
+import java.util.List;
 import java.util.UUID;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,7 @@ public class UsersRepositoryImpl implements UsersRepository {
 
     @Autowired
     LocalSessionFactoryBean sessionFactory;
+    
 
     @Override
     public Users getUserById(String id) {
@@ -107,5 +110,16 @@ public class UsersRepositoryImpl implements UsersRepository {
             return null;
         }
     }
+    @Override
+    public List<Users> getUsersByUserRole(UserRole userRole) {
+        Session session = sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Users> query = builder.createQuery(Users.class);
+        Root root = query.from(Users.class);
+        Predicate p = builder.equal(root.get("userRole"), userRole.toString());
+        query.where(p);
+        Query q = session.createQuery(query);
+        return q.getResultList();
+    } 
 
 }
