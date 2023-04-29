@@ -15,4 +15,5 @@ import java.util.List;
 public interface QuestionsService {
     boolean addQuestion(Questions question);
     List<Questions> getQuestionsByLivestreamId(Livestreams livestreams);
+    Questions getQuestionById(int id);
 }
