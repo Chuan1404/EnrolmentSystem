@@ -14,26 +14,26 @@ import java.util.UUID;
 public class Room {
     private String id;
     private Users user;
-    private Users counselor;
+    private Users advisor;
 
     public Room() {
         
     }
-    public Room(Users user, Users counselor) {
+    public Room(Users user, Users advisor) {
         this.id = UUID.randomUUID().toString();
-        this.counselor = counselor;
+        this.advisor = advisor;
         this.user = user;
     }
     
-    public Room(String id, Users user, Users counselor) {
+    public Room(String id, Users user, Users advisor) {
         this.id = id;
-        this.counselor = counselor;
+        this.advisor = advisor;
         this.user = user;
     }
     
     @Override
     public String toString() {
-        return String.format("%s - %s - %s", id, user.getId(), counselor.getId());
+        return String.format("%s - %s - %s", id, user.getId(), advisor.getId());
     }
     /**
      * @return the id
@@ -64,16 +64,16 @@ public class Room {
     }
 
     /**
-     * @return the counselor
+     * @return the advisor
      */
     public Users getCounselor() {
-        return counselor;
+        return advisor;
     }
 
     /**
-     * @param counselor the counselor to set
+     * @param advisor the advisor to set
      */
-    public void setCounselor(Users counselor) {
-        this.counselor = counselor;
+    public void setCounselor(Users advisor) {
+        this.advisor = advisor;
     }
 }

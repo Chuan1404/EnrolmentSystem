@@ -40,7 +40,7 @@ public class LivestreamsRepositoryImpl implements LivestreamsRepository{
         query.select(root);
         
         if(params != null) {
-            query.where(builder.greaterThanOrEqualTo(root.get("startDate").as(LocalDate.class), LocalDate.parse(params.get("date"))));
+//            query.where(builder.greaterThanOrEqualTo(root.get("startDate").as(LocalDate.class), LocalDate.parse(params.get("date"))));
         }
         
         Query q = session.createQuery(query);

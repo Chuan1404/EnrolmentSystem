@@ -28,8 +28,8 @@ public class FirebaseServiceImpl implements FirebaseService {
     }
 
     @Override
-    public List<Room> getRooms(String counselorId) {
-        return firebaseRepository.getRooms(counselorId);
+    public List<Room> getRooms(String advisorId) {
+        return firebaseRepository.getRooms(advisorId);
     }
     
 

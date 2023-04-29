@@ -24,17 +24,17 @@
         {
             "id": "0",
             "userId": "UgT5veP8Nc8HUoGva1Kc",
-            "counselorId": "a9c9a08e-afc2-4b92-b8af-b848de70da70"
+            "advisorId": "a9c9a08e-afc2-4b92-b8af-b848de70da70"
         },
         {
             "id": "1",
             "userId": "UgT5veP8Nc8HUoGva1Kc",
-            "counselorId": "BxST2aBzsduwWLw1cxEQ"
+            "advisorId": "BxST2aBzsduwWLw1cxEQ"
         },
          {
             "id": "2",
             "userId": "UgT5veP8Nc8HUoGva1Kc",
-            "counselorId": "a9c9a08e-afc2-4b92-b8af-b848de70da70"
+            "advisorId": "a9c9a08e-afc2-4b92-b8af-b848de70da70"
         }
     ]
 }

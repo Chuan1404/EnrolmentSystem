@@ -14,6 +14,6 @@ import java.util.List;
  */
 public interface FirebaseRepository {
     public Room getRoomById(String id);
-    public List<Room> getRooms(String counselorId);
+    public List<Room> getRooms(String advisorId);
     public List<ChatMessage> getMessage(String roomId);
 }

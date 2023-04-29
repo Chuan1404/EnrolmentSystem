@@ -28,9 +28,11 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler{
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication a) throws IOException, ServletException {
         Users u = userService.getUsersByUsername(a.getName());
+        
         request.getSession().setAttribute("currentUser", u);
-        System.out.println("onAuthenticationSuccess");
+        request.getSession().setAttribute("roomId", "");
         response.sendRedirect(request.getContextPath());
+        
     }
     
 }

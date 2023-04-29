@@ -3,31 +3,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/JavaScript.js to edit this template
  */
 
-let icon = document.getElementById("chatbox-icon");
-let chatbox = document.getElementById("chatbox-popup");
-let closeBtn = chatbox.getElementsByClassName("close-icon")[0];
-
-animate();
-console.log("here");
-
-var stompClient = Stomp.over(new SockJS('http://localhost:8080/EnrolmentSystem/chat'));
-stompClient.connect({}, function (frame) {
-    console.log('Connected: ' + frame);
-    stompClient.subscribe('/topic/messages', function (message) {
-        console.log(message);
-    });
-});
-
-function animate() {
-    icon.addEventListener("click", function () {
-        chatbox.classList.toggle("hidden");
-    })
+window.onload = () => {
+    let chatbox = document.getElementById("chatbox-popup");
+    let closeBtn = chatbox.getElementsByClassName("close-icon")[0];
     closeBtn.addEventListener("click", function () {
-        chatbox.classList.toggle("hidden");
+        chatbox.classList.remove("hidden");
     })
+
+}
+function iconClicked() {
+    let chatbox = document.getElementById("chatbox-popup");
+    chatbox.classList.toggle("hidden");
+    var socket = new SockJS('/ws');
+    console.log(socket)
 }
 
-function sendMessage() {
-    var message = document.getElementById('message').value;
-    stompClient.send("/app/chat", {}, JSON.stringify({'message': message}));
-}

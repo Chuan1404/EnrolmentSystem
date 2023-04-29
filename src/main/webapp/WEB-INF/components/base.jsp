@@ -33,8 +33,8 @@
         <link rel="stylesheet" href="<c:url value="/css/comment.css" />">
         <link rel="stylesheet" href="<c:url value="/css/chatbox.css" />">
         <link rel="stylesheet" href="<c:url value="/css/style.css" />">
-        <script src="https://cdn.jsdelivr.net/sockjs/1.5.1/sockjs.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/stomp.js/2.3.4/stomp.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js" integrity="sha512-1QvjE7BtotQjkq8PxLeF6P46gEpBRXuskzIVgjFpekzFVF4yjRgrQvTG1MTOJ3yQgvTteKAcO7DSZI92+u/yZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js" integrity="sha512-iKDtgDyTHjAitUDdLljGhenhPwrbBfqTKWO1mkhSFH3A7blITC9MhYon6SjnMhp4o0rADGw9yAC6EW4t5a4K3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     </head>
     <body>
         <tiles:insertAttribute name="header" />
@@ -44,7 +44,7 @@
         <tiles:insertAttribute name="texteditor"/>
 
 
-        <div id="chatbox-icon"><i class="ti-comment"></i></div>
+        <div id="chatbox-icon" onclick="iconClicked()"><i class="ti-comment"></i></div>
         <div id="chatbox-popup" class="hidden">
             <div class="card" id="chat1" style="border-radius: 15px;">
                 <div

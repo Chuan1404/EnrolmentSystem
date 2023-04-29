@@ -46,43 +46,35 @@ public class FirbaseRepositoryImpl implements FirebaseRepository {
             @Override
             public void onDataChange(DataSnapshot ds) {
                 for (DataSnapshot childSnapshot : ds.getChildren()) {
-                    Users counselor = userRepository.getUserById(childSnapshot.child("counselorId").getValue(String.class));
+                    Users advisor = userRepository.getUserById(childSnapshot.child("advisorId").getValue(String.class));
                     Users user = userRepository.getUserById(childSnapshot.child("userId").getValue(String.class));
                     if (childSnapshot.child("id").equals(id)) {
                         room.setId(id);
                         room.setUser(user);
-                        room.setCounselor(counselor);
+                        room.setCounselor(advisor);
                     }
                 }
-//                latch.countDown();
-//                System.out.println("down");
 
             }
 
             @Override
             public void onCancelled(DatabaseError de) {
-//                latch.countDown();
             }
         });
 
-//        try {
-//            latch.await();
-//        } catch (InterruptedException ex) {
-//            Logger.getLogger(FirbaseRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
-//        }
         return room;
     }
 
     @Override
-    public List<Room> getRooms(String counselorId) {
+    public List<Room> getRooms(String advisorId) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("/rooms");
 
-        Users counselor = userRepository.getUserById(counselorId);
+        Users advisor = userRepository.getUserById(advisorId);
         List<Room> rooms = new ArrayList<>();
 
-        if (counselor != null) {
+        if (advisor != null) {
 
-            ref.orderByChild("counselorId").equalTo(counselorId).addListenerForSingleValueEvent(new ValueEventListener() {
+            ref.orderByChild("advisorId").equalTo(advisorId).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot ds) {
                     for (DataSnapshot childSnapshot : ds.getChildren()) {
@@ -90,7 +82,7 @@ public class FirbaseRepositoryImpl implements FirebaseRepository {
                         String userId = childSnapshot.child("userId").getValue(String.class);
 
                         Users user = userRepository.getUserById(userId);
-                        Room room = new Room(id, user, counselor);
+                        Room room = new Room(id, user, advisor);
                         rooms.add(room);
                     }
 //                    latch.countDown();
