@@ -11,6 +11,7 @@ import com.java.services.QuestionsService;
 import com.java.services.UsersService;
 import java.security.Principal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -75,7 +76,12 @@ public class LivestreamController {
     }
     
     @GetMapping(value = "/{id}/questions")
-    public String questions() {
+    public String questions(@PathVariable("id") String id, Model model) {
+        List<Questions> questions = questionService.getQuestionsByLivestreamId(livestreamsService.getLiveStreamById(id));
+        if (questions == null) {
+            questions = new ArrayList<>();
+        }
+        model.addAttribute("questions", questions);
         return "livestream-questions";
     }
 }

@@ -4,8 +4,16 @@
  */
 package com.java.repositories.impl;
 
+import com.java.pojos.Livestreams;
 import com.java.pojos.Questions;
 import com.java.repositories.QuestionsRepository;
+import java.util.List;
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +42,18 @@ public class QuestionsRepositoryImpl implements QuestionsRepository{
             ex.printStackTrace();
             return false;
         }
+    }
+
+    @Override
+    public List<Questions> getQuestionsByLivestream(Livestreams livestream) {
+        Session session = sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Questions> query = builder.createQuery(Questions.class);
+        Root root = query.from(Questions.class);
+        Predicate p = builder.equal(root.get("livestreamId").as(Livestreams.class), livestream);
+        query.where(p);
+        Query q = session.createQuery(query);
+        return q.getResultList();
     }
     
 }

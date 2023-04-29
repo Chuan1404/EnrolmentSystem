@@ -4,9 +4,11 @@
  */
 package com.java.services.impl;
 
+import com.java.pojos.Livestreams;
 import com.java.pojos.Questions;
 import com.java.repositories.QuestionsRepository;
 import com.java.services.QuestionsService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,11 @@ public class QuestionsServiceImpl implements QuestionsService {
     @Override
     public boolean addQuestion(Questions question) {
         return questionRepository.addQuestion(question);
+    }
+
+    @Override
+    public List<Questions> getQuestionsByLivestreamId(Livestreams livestreams) {
+        return questionRepository.getQuestionsByLivestream(livestreams);
     }
     
 }

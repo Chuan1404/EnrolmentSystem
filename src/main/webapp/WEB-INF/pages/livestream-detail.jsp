@@ -67,7 +67,8 @@
                             </div>
                         </sec:authorize>
                         <sec:authorize access="hasRole('ROLE_TUVAN')">
-                            <button class="button button-contactForm boxed-btn">Đến xem câu hỏi</button>
+                            <c:url value="/livestream/${livestream.id}/questions" var="questions"/>
+                            <button class="button button-contactForm boxed-btn"><a href="${questions}" class="text-danger">Đến xem câu hỏi</a></button>
                         </sec:authorize>
                     </sec:authorize>
                 </div>
