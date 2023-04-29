@@ -59,6 +59,10 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="title" value="Livestream" />
         <put-attribute name="content" value="/WEB-INF/pages/livestream-detail.jsp" />
     </definition>
+    <definition name="livestream-questions" extends="base">
+        <put-attribute name="title" value="Livestream" />
+        <put-attribute name="content" value="/WEB-INF/pages/livestream-questions.jsp" />
+    </definition>
     <definition name="faculty" extends="base">
         <put-attribute name="title" value="Faculty"/>
         <put-attribute name="content" value="/WEB-INF/pages/faculty.jsp"/>
