@@ -6,6 +6,8 @@ package com.java.controllers;
 
 import com.java.pojos.Livestreams;
 import com.java.pojos.Questions;
+import com.java.pojos.Users;
+import com.java.services.EmailService;
 import com.java.services.LivestreamsService;
 import com.java.services.QuestionsService;
 import com.java.services.UsersService;
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -41,6 +44,9 @@ public class LivestreamController {
     
     @Autowired
     private QuestionsService questionService;
+    
+    @Autowired
+    private EmailService emailService;
     
     
     
@@ -70,20 +76,32 @@ public class LivestreamController {
     @PostMapping(value = "/{id}/question")
     public String addQuestion(@ModelAttribute Questions question, @PathVariable(value="id") String streamId,
             Principal principal) {
-        question.setUserId(userService.getUsersByUsername(principal.getName()));
-        question.setLivestreamId(livestreamsService.getLiveStreamById(streamId));
-        if (questionService.addQuestion(question))
+        Users user = userService.getUsersByUsername(principal.getName());
+        Livestreams livestream = livestreamsService.getLiveStreamById(streamId);
+        question.setUserId(user);
+        question.setLivestreamId(livestream);
+        
+        if (questionService.addQuestion(question)) {
+            String subject = "Câu hỏi mới từ livestream \"" + livestream.getTitle() + "";
+            String content = "Bạn nhận được câu hỏi mới từ bạn " + user.getName()
+                    + "\n đến xem câu hỏi tại đường link " 
+                    + "http://localhost:8080/EnrolmentSystem/livestream/" 
+                    + livestream.getId()+ "/questions";
+            emailService.sendEmail(livestream.getUserId().getEmail(), subject, content);
             return "redirect:/livestream/";
+        }
         return "redirect:/";
     }
     
     @GetMapping(value = "/{id}/questions")
-    public String questions(@PathVariable("id") String id, Model model) {
+    public String questions(@PathVariable("id") String id, Model model, @RequestParam(value = "page", required = false) Integer page) {
         List<Questions> questions = questionService.getQuestionsByLivestreamId(livestreamsService.getLiveStreamById(id));
         if (questions == null) {
             questions = new ArrayList<>();
         }
         model.addAttribute("questions", questions);
+        model.addAttribute("pageLimit",Math.ceil(questions.size() / 25));
+        model.addAttribute("activePage", page);
         return "livestream-questions";
     }
     
