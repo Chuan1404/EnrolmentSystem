@@ -129,8 +129,12 @@
             <artifactId>spring-security-oauth2-autoconfigure</artifactId>
             <version>2.6.8</version>
         </dependency>
-
-<!--        <dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+            <version>5.5.1</version>
+        </dependency>
+        <!--        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-websocket</artifactId>
             <version>6.0.6</version>
@@ -143,24 +147,24 @@
             <version>8.0.0</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-messaging -->
-<!--        <dependency>
+        <!--        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-messaging</artifactId>
             <version>6.0.6</version>
         </dependency>-->
         <!-- https://mvnrepository.com/artifact/org.webjars/webjars-locator-core -->
-<!--        <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>webjars-locator-core</artifactId>
-            <version>0.52</version>
-        </dependency>
-         https://mvnrepository.com/artifact/org.webjars/sockjs-client -->
-<!--        <dependency>
+        <!--        <dependency>
+           <groupId>org.webjars</groupId>
+           <artifactId>webjars-locator-core</artifactId>
+           <version>0.52</version>
+       </dependency>
+        https://mvnrepository.com/artifact/org.webjars/sockjs-client -->
+        <!--        <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>sockjs-client</artifactId>
             <version>1.5.1</version>
         </dependency>-->
-<!--         https://mvnrepository.com/artifact/org.webjars/stomp-websocket 
+        <!--         https://mvnrepository.com/artifact/org.webjars/stomp-websocket 
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>stomp-websocket</artifactId>
