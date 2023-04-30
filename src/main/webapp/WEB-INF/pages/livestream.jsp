@@ -7,6 +7,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+<style>
+    #live-streampage .blog_item_img img {
+        max-height: 400px;
+        object-fit: contain;
+    }
+</style>
+
 <c:url var="url" value="/" />
 <main id="live-streampage">
     <section class="blog_area section-padding">
@@ -31,10 +38,6 @@
                                         <h2>${l.title}</h2>
                                     </a>
                                     <p>${l.description}</p>
-                                    <ul class="blog-info-link">
-                                        <li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
-                                        <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
-                                    </ul>
                                 </div>
                             </article>
                         </c:forEach> 

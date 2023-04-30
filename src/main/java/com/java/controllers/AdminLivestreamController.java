@@ -10,9 +10,11 @@ import com.java.pojos.Users;
 import com.java.services.LivestreamsService;
 import com.java.services.UsersService;
 import java.util.List;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,7 +31,7 @@ public class AdminLivestreamController {
 
     @Autowired
     private LivestreamsService livestreamsService;
-    
+
     @Autowired
     private UsersService userService;
 
@@ -44,7 +46,21 @@ public class AdminLivestreamController {
     }
 
     @PostMapping(value = "/")
-    public String addLivestream(Model model, @ModelAttribute(value = "livestream") Livestreams livestream) {
+    public String addLivestream(Model model, @ModelAttribute(value = "livestream") @Valid Livestreams livestream, BindingResult result) {
+
+        if(livestream.getFile().isEmpty() && livestream.getId() == null) {
+            result.rejectValue("file", "form.error.null");
+        }
+        
+        if (result.hasErrors()) {
+            List<Livestreams> livestreams = livestreamsService.getLivestreams(null);
+            List<Users> users = userService.getUsersByUserRole(UserRole.ROLE_TUVAN);
+            model.addAttribute("users", users);
+            model.addAttribute("livestream", livestream);
+            model.addAttribute("livestreams", livestreams);
+            return "admin-livestream";
+        }
+
         if (livestreamsService.addOrUpdateLivestream(livestream)) {
             return "redirect:/admin/livestream/";
         }
@@ -57,6 +73,5 @@ public class AdminLivestreamController {
         model.addAttribute("users", userService.getUsersByUserRole(UserRole.ROLE_TUVAN));
         return "admin-livestream";
     }
-    
-    
+
 }

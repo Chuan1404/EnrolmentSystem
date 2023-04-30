@@ -45,7 +45,10 @@
                     <img width = "120" src="${article.image}" />
                 </div>
             </c:if>
-            <form:errors path="file" cssClass="text-danger" />
+            <c:if test="${empty article.id}">
+                <form:errors path="file" cssClass="text-danger" />
+            </c:if>
+            
             <div class="form-group input-group mb-3">
                 <label for="file">Image</label>
                 <form:input type="file" path="file" class="form-control-file" id="file" />

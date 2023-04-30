@@ -14,6 +14,7 @@ import com.java.services.UsersService;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -60,19 +61,19 @@ public class AdminArticleController {
     }
 
     @PostMapping(value = "/")
-    public String addArticle(Model model, @ModelAttribute(value = "article") @Valid Articles article, BindingResult result, @RequestParam(required = false) Map<String, String> params) {
+    public String addArticle(Model model, @ModelAttribute(value = "article") @Valid Articles article, BindingResult result, @RequestParam(required = false) Map<String, String> params, HttpSession session) {
 
-        Users user = userService.getUserById("BxST2aBzsduwWLw1cxEQ");
-        
-        if (article.getFile().isEmpty()) {
+        Users user = (Users) session.getAttribute("currentUser");
+
+        if (article.getFile().isEmpty() && article.getId() == null) {
             result.rejectValue("file", "form.error.null");
         }
-        
-        System.err.println(result.getAllErrors().toArray().length);
+
         if (result.hasErrors()) {
             Long totalArticle = articleService.getTotalRow(null);
 
             params.put("limit", "10");
+            params.put("totalArticles", totalArticle.toString());
             if (params.get("page") == null) {
                 params.put("page", "1");
             }

@@ -13,7 +13,6 @@ import com.java.services.ArticlesService;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +36,7 @@ public class ArticlesServiceImpl implements ArticlesService {
 
     @Override
     public boolean saveOrUpdateArticles(Articles article) {
-        if (article.getFile() != null) {
+        if (!article.getFile().isEmpty()) {
             try {
                 Map res = this.cloudinary.uploader().upload(article.getFile().getBytes(), ObjectUtils.asMap("resource_type", "auto"));
                 article.setImage(res.get("secure_url").toString());
