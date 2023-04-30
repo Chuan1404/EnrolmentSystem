@@ -4,10 +4,8 @@
  */
 package com.java.controllers;
 
-import com.java.pojos.Answers;
 import com.java.pojos.Livestreams;
 import com.java.pojos.Questions;
-import com.java.services.AnswersService;
 import com.java.services.LivestreamsService;
 import com.java.services.QuestionsService;
 import com.java.services.UsersService;
@@ -44,8 +42,7 @@ public class LivestreamController {
     @Autowired
     private QuestionsService questionService;
     
-    @Autowired
-    private AnswersService answersService;
+    
     
     @GetMapping(value = "/")
     public String index(Model model, Principal principal) {
@@ -87,34 +84,8 @@ public class LivestreamController {
             questions = new ArrayList<>();
         }
         model.addAttribute("questions", questions);
-        model.addAttribute("answer", new Answers());
         return "livestream-questions";
     }
     
-    @GetMapping(value = "/{id}/questions/{questionId}/answer")
-    public String answer(@PathVariable("id") String id, @PathVariable("questionId") String questionId, Model model, Principal principal) {
-        List<Questions> questions = questionService.getQuestionsByLivestreamId(livestreamsService.getLiveStreamById(id));
-        if (questions == null) {
-            questions = new ArrayList<>();
-        }
-        Questions question = questionService.getQuestionById(Integer.parseInt(questionId));
-        Answers answer = new Answers();
-        answer.setLivestreamId(livestreamsService.getLiveStreamById(id));
-        answer.setQuestionId(question);
-        answer.setUserId(userService.getUsersByUsername(principal.getName()));
-        model.addAttribute("questions", questions);
-        model.addAttribute("answer", answer);
-        
-        return "livestream-questions";
-        
-    }
     
-    @PostMapping(value = "/answer")
-    public String answer(@ModelAttribute("answer") Answers answer) {
-        
-        if (answersService.saveAnswer(answer)) {
-            return "redirect:/livestream";
-        }
-        return "redirect:/";
-    }
 }

@@ -32,10 +32,7 @@
                                             </h5>
                                             <!--<p class="date">December 4, 2017 at 3:12 pm </p>-->
                                         </div>
-                                        <div class="reply-btn">
-                                            <c:url value="/livestream/${q.livestreamId.id}/questions/${q.id}/answer" var="action"/>
-                                            <a href="${action}" class="btn-reply text-uppercase">reply</a>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -45,26 +42,5 @@
             </c:if>
         </div>
     </div>
-    <div class="row">
-        <c:url value="/livestream/answer" var="sendAnswer"/>
-        <form:form class="form-contact comment_form" action="${sendAnswer}" modelAttribute="answer" method="post">
-            <div class="row">
-                <h3>Trả lời câu hỏi</h3>
-                <form:hidden path="livestreamId.id" value="${answer.livestreamId.id}"/>
-                <form:hidden path="questionId.id" value="${answer.questionId.id}"/>
-                <form:hidden path="userId.id" value="${answer.userId.id}"/>
-                
-                <div class="col-12">
-                    <div class="form-group">
-                        <form:textarea class="form-control w-100" name="content" id="content" cols="100" rows="9"
-                                       placeholder="Write Comment" path="content"></form:textarea>
-                    </div>
-                </div>
-
-            </div>
-            <div class="form-group">
-                <button type="submit" class="button button-contactForm boxed-btn">Gửi</button>
-            </div>
-        </form:form>
-    </div>
+    
 </div>
