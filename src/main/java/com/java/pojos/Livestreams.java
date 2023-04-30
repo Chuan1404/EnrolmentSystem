@@ -51,8 +51,7 @@ public class Livestreams implements Serializable {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne
     private Users userId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "livestreamId")
-    private Set<Answers> answersSet;
+   
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "livestreamId")
     private Set<Questions> questionsSet;
 
@@ -234,14 +233,7 @@ public class Livestreams implements Serializable {
         this.userId = userId;
     }
 
-    @XmlTransient
-    public Set<Answers> getAnswersSet() {
-        return answersSet;
-    }
-
-    public void setAnswersSet(Set<Answers> answersSet) {
-        this.answersSet = answersSet;
-    }
+   
 
     @XmlTransient
     public Set<Questions> getQuestionsSet() {

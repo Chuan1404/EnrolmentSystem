@@ -43,8 +43,7 @@ public class Users implements Serializable {
 
     @OneToMany(mappedBy = "userId")
     private Set<Livestreams> livestreamsSet;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
-    private Set<Answers> answersSet;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private Set<Questions> questionsSet;
 
@@ -251,14 +250,6 @@ public class Users implements Serializable {
         this.livestreamsSet = livestreamsSet;
     }
 
-    @XmlTransient
-    public Set<Answers> getAnswersSet() {
-        return answersSet;
-    }
-
-    public void setAnswersSet(Set<Answers> answersSet) {
-        this.answersSet = answersSet;
-    }
 
     @XmlTransient
     public Set<Questions> getQuestionsSet() {

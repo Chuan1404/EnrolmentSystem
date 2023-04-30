@@ -82,19 +82,6 @@ CREATE TABLE `questions` (
     CONSTRAINT fk_questions_livestream_id_livestreams FOREIGN KEY (`livestream_id`) REFERENCES `livestreams` (`id`) ON DELETE CASCADE
 ) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE `answers` (
-	`id` INT NOT NULL AUTO_INCREMENT,
-    `content` TEXT NOT NULL,
-    `user_id` VARCHAR(50) NOT NULL,
-    `livestream_id` INT NOT NULL,
-    `question_id` INT NOT NULL,
-    PRIMARY KEY(`id`),
-    CONSTRAINT fk_answers_user_id_users FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE,
-    CONSTRAINT fk_answers_livestream_id_livestream FOREIGN KEY (`livestream_id`) REFERENCES `livestreams`(`id`) ON DELETE CASCADE,
-    CONSTRAINT fk_answers_question_id_questions FOREIGN KEY (`question_id`) REFERENCES `questions`(`id`) ON DELETE CASCADE,
-    CONSTRAINT uq_answers_question_id UNIQUE(`question_id`)
-) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 CREATE TABLE `banners` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	PRIMARY KEY (`id`)
