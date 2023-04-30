@@ -42,68 +42,6 @@
         <tiles:insertAttribute name="comment" />
         <tiles:insertAttribute name="footer" />
         <tiles:insertAttribute name="texteditor"/>
-
-
-        <div id="chatbox-icon" onclick="iconClicked()"><i class="ti-comment"></i></div>
-        <div id="chatbox-popup" class="hidden">
-            <div class="card" id="chat1" style="border-radius: 15px;">
-                <div
-                    class="card-header d-flex justify-content-between align-items-center p-3 bg-info text-white border-bottom-0"
-                    style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
-                    <i class="fas fa-angle-left"></i>
-                    <p class="mb-0 fw-bold">Live chat</p>
-                    <i class="close-icon fas fa-times"></i>
-                </div>
-                <div class="card-body">
-
-                    <div class="d-flex flex-row justify-content-start mb-4">
-                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
-                             alt="avatar 1" style="width: 45px; height: 100%;">
-                        <div class="p-3 ms-3" style="border-radius: 15px; background-color: rgba(57, 192, 237,.2);">
-                            <p class="small mb-0">Hello and thank you for visiting MDBootstrap. Please click the video
-                                below.</p>
-                        </div>
-                    </div>
-
-                    <div class="d-flex flex-row justify-content-end mb-4">
-                        <div class="p-3 me-3 border" style="border-radius: 15px; background-color: #fbfbfb;">
-                            <p class="small mb-0">Thank you, I really like your product.</p>
-                        </div>
-                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava2-bg.webp"
-                             alt="avatar 1" style="width: 45px; height: 100%;">
-                    </div>
-
-                    <div class="d-flex flex-row justify-content-start mb-4">
-                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
-                             alt="avatar 1" style="width: 45px; height: 100%;">
-                        <div class="ms-3" style="border-radius: 15px;">
-                            <div class="bg-image">
-                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/screenshot1.webp"
-                                     style="border-radius: 15px;" alt="video">
-                                <a href="#!">
-                                    <div class="mask"></div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="d-flex flex-row justify-content-start mb-4">
-                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
-                             alt="avatar 1" style="width: 45px; height: 100%;">
-                        <div class="p-3 ms-3" style="border-radius: 15px; background-color: rgba(57, 192, 237,.2);">
-                            <p class="small mb-0">...</p>
-                        </div>
-                    </div>
-
-                    <div class="form-outline">
-                        <textarea id="message" class="form-control" id="textAreaExample" rows="4"></textarea>
-                        <label class="form-label" for="textAreaExample">Type your message</label>
-                    </div>
-                    <button onclick="sendMessage()" class="btn btn-primary">Send</button>
-                </div>
-            </div>
-        </div>
-
     </body>
 
     <!-- JS here -->
@@ -142,7 +80,6 @@
 
     <!-- Jquery Plugins, main Jquery -->	
     <script src="${url}/plugins.js"></script>
-    <script src="${url}/chatbox.js"></script>
     <script src="${url}/main.js"></script>
 
 </html>

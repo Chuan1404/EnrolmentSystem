@@ -95,11 +95,6 @@
             <artifactId>spring-security-config</artifactId>
             <version>5.2.1.RELEASE</version>
         </dependency>
-        <!--        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-core</artifactId>
-            <version>5.5.0</version>
-        </dependency>-->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-oauth2-core</artifactId>
@@ -135,11 +130,11 @@
             <version>2.6.8</version>
         </dependency>
 
-        <dependency>
+<!--        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-websocket</artifactId>
             <version>6.0.6</version>
-        </dependency>
+        </dependency>-->
 
         <!-- https://mvnrepository.com/artifact/com.google.firebase/firebase-admin -->
         <dependency>
@@ -148,29 +143,29 @@
             <version>8.0.0</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-messaging -->
-        <dependency>
+<!--        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-messaging</artifactId>
             <version>6.0.6</version>
-        </dependency>
+        </dependency>-->
         <!-- https://mvnrepository.com/artifact/org.webjars/webjars-locator-core -->
-        <dependency>
+<!--        <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>webjars-locator-core</artifactId>
             <version>0.52</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.webjars/sockjs-client -->
-        <dependency>
+         https://mvnrepository.com/artifact/org.webjars/sockjs-client -->
+<!--        <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>sockjs-client</artifactId>
             <version>1.5.1</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.webjars/stomp-websocket -->
+        </dependency>-->
+<!--         https://mvnrepository.com/artifact/org.webjars/stomp-websocket 
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>stomp-websocket</artifactId>
             <version>2.3.4</version>
-        </dependency>
+        </dependency>-->
 
         <dependency>
             <groupId>com.google.guava</groupId>

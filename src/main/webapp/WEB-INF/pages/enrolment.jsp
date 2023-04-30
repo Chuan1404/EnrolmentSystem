@@ -42,7 +42,6 @@
                                                         <div class="whates-caption">
                                                             <h4><a href="${article.data[0].id}"> ${article.data[0].title}</a></h4>
 
-                                                            <span>by Alice cloe   -   Jun 19, 2020</span>
                                                             <p>${article.data[0].description}</p>
 
                                                         </div>
@@ -58,10 +57,9 @@
                                                                         <img src="${item.image}" alt="">
                                                                     </div>
                                                                     <div class="whats-right-cap">
-                                                                        <span class="colorb">FASHION</span>
+                                                                        <span class="colorb">${item.articleType}</span>
                                                                         <h4><a href="${item.id}">${item.title}</a></h4>
 
-                                                                        <p>Jun 19, 2020</p> 
                                                                     </div>
                                                                 </div>
                                                             </div>

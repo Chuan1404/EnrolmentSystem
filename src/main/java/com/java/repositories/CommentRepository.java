@@ -16,4 +16,5 @@ public interface CommentRepository {
     List<Comments> getComments(Articles articles);
     Comments addComment(Comments comment);
     List<Comments> getReplies(Comments comment);
+    Comments getCommentById(int id);
 }

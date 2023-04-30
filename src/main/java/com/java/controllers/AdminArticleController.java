@@ -14,6 +14,7 @@ import com.java.services.UsersService;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,9 +40,6 @@ public class AdminArticleController {
     @Autowired
     private UsersService userService;
 
-    @Autowired
-    private Cloudinary cloudinary;
-
     @GetMapping(value = "/")
     public String index(Model model, @RequestParam(required = false) Map<String, String> params) {
         Long totalArticle = articleService.getTotalRow(null);
@@ -62,8 +60,30 @@ public class AdminArticleController {
     }
 
     @PostMapping(value = "/")
-    public String addArticle(Model model, @ModelAttribute Articles article, BindingResult result) {
+    public String addArticle(Model model, @ModelAttribute(value = "article") @Valid Articles article, BindingResult result, @RequestParam(required = false) Map<String, String> params) {
+
         Users user = userService.getUserById("BxST2aBzsduwWLw1cxEQ");
+        
+        if (article.getFile().isEmpty()) {
+            result.rejectValue("file", "form.error.null");
+        }
+        
+        System.err.println(result.getAllErrors().toArray().length);
+        if (result.hasErrors()) {
+            Long totalArticle = articleService.getTotalRow(null);
+
+            params.put("limit", "10");
+            if (params.get("page") == null) {
+                params.put("page", "1");
+            }
+            List<Articles> articles = articleService.getArticles(params);
+            model.addAttribute("article", article);
+            model.addAttribute("articles", articles);
+            model.addAttribute("articleType", ArticleType.values());
+            model.addAttribute("totalPage", Math.ceil((double) totalArticle / Integer.parseInt(params.get("limit"))));
+            model.addAttribute("currentPage", Integer.parseInt(params.get("page")));
+            return "admin-article";
+        }
 
         article.setCreatedDate(new Date());
         article.setUpdateDate(new Date());
@@ -71,8 +91,9 @@ public class AdminArticleController {
 
         if (articleService.saveOrUpdateArticles(article)) {
             return "redirect:/admin/article/";
+        } else {
+            return "redirect:/article/";
         }
-        else return "redirect:/article/";
     }
 
     @GetMapping(value = "/{id}")

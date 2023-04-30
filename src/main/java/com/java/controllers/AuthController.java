@@ -101,7 +101,7 @@ public class AuthController {
 
         // validate empty file
         if (u.getFile().isEmpty()) {
-            result.rejectValue("file", "user.error.null");
+            result.rejectValue("file", "form.error.null");
         }
 
         // check has error ? (pass id, avatar, userrole)

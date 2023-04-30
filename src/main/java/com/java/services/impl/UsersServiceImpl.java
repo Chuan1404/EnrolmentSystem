@@ -137,4 +137,9 @@ public class UsersServiceImpl implements UsersService {
         UserDetails userDetails = new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
         return userDetails;
     }
+
+    @Override
+    public List<Users> getUsersByUserRole(UserRole userRole) {
+        return usersRepository.getUsersByUserRole(userRole);
+    }
 }
