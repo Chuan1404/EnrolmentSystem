@@ -4,7 +4,9 @@
  */
 package com.java.repositories;
 
+import com.java.pojos.Livestreams;
 import com.java.pojos.Questions;
+import java.util.List;
 
 /**
  *
@@ -12,4 +14,6 @@ import com.java.pojos.Questions;
  */
 public interface QuestionsRepository {
     boolean addQuestion(Questions question);
+    List<Questions> getQuestionsByLivestream(Livestreams livestream);
+    Questions getQuestionById(int id);
 }

@@ -14,7 +14,6 @@
 
 
 <main id="live-stream-detailpage">
-    <!--================Blog Area =================-->
     <section class="blog_area single-post-area section-padding">
         <div class="container">
             <div class="row">
@@ -67,7 +66,8 @@
                             </div>
                         </sec:authorize>
                         <sec:authorize access="hasRole('ROLE_TUVAN')">
-                            <button class="button button-contactForm boxed-btn">Đến xem câu hỏi</button>
+                            <c:url value="/livestream/${livestream.id}/questions" var="questions"/>
+                            <button class="button button-contactForm boxed-btn"><a href="${questions}" class="text-danger">Đến xem câu hỏi</a></button>
                         </sec:authorize>
                     </sec:authorize>
                 </div>
