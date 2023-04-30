@@ -38,11 +38,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Questions.findById", query = "SELECT q FROM Questions q WHERE q.id = :id")})
 public class Questions implements Serializable {
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "questionId")
-    private Answers answers;
+    
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "questionId")
-    private Set<Answers> answersSet;
+   
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -132,21 +130,5 @@ public class Questions implements Serializable {
         return "com.java.pojos.Questions[ id=" + id + " ]";
     }
 
-    @XmlTransient
-    public Set<Answers> getAnswersSet() {
-        return answersSet;
-    }
-
-    public void setAnswersSet(Set<Answers> answersSet) {
-        this.answersSet = answersSet;
-    }
-
-    public Answers getAnswers() {
-        return answers;
-    }
-
-    public void setAnswers(Answers answers) {
-        this.answers = answers;
-    }
     
 }
