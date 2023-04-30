@@ -44,7 +44,6 @@
                                                         </div>
                                                         <div class="whates-caption whates-caption2">
                                                             <h4><a href="${url}enrolment/${a.id}">${a.title}</a></h4>
-                                                            <span>by Alice cloe   -   Jun 19, 2020</span>
                                                             <p>${a.description}</p>
                                                         </div>
                                                     </div>

@@ -4,12 +4,15 @@
  */
 package com.java.services;
 
-import com.java.models.UserCredential;
+import com.java.models.ChatMessage;
+import com.java.models.Room;
+import java.util.List;
 
 /**
  *
  * @author AnChuPC
  */
-public interface GoogleOAuthService {
-    public UserCredential getAccessToken(String code, String state);
+public interface FirebaseService {
+    public List<Room> getRooms(String advisorId);
+    public List<ChatMessage> getMessage(String roomId);
 }

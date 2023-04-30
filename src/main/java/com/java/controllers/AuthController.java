@@ -5,7 +5,7 @@
 package com.java.controllers;
 
 import com.java.handlers.LoginSuccessHandler;
-import com.java.pojos.UserCredential;
+import com.java.models.UserCredential;
 import com.java.pojos.Users;
 import com.java.services.GoogleOAuthService;
 import com.java.services.UsersService;
@@ -101,7 +101,7 @@ public class AuthController {
 
         // validate empty file
         if (u.getFile().isEmpty()) {
-            result.rejectValue("file", "user.error.null");
+            result.rejectValue("file", "form.error.null");
         }
 
         // check has error ? (pass id, avatar, userrole)

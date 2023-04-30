@@ -8,7 +8,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
-
+<h1>${message}</h1>
 <main id="homepage">
     <!-- Trending Area Start -->
     <div class="trending-area fix pt-25 gray-bg">

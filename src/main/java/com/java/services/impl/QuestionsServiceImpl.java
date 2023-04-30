@@ -30,5 +30,10 @@ public class QuestionsServiceImpl implements QuestionsService {
     public List<Questions> getQuestionsByLivestreamId(Livestreams livestreams) {
         return questionRepository.getQuestionsByLivestream(livestreams);
     }
+
+    @Override
+    public Questions getQuestionById(int id) {
+        return questionRepository.getQuestionById(id);
+    }
     
 }

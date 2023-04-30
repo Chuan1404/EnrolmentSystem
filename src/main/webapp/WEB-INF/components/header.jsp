@@ -43,7 +43,7 @@ Author     : AnChuPC
                             <div class="main-menu d-none d-md-block">
                                 <nav>                  
                                     <ul id="navigation">
-                                        <li><a href="/">TRANG CHỦ</a></li>
+                                        <li><a href="${url}">TRANG CHỦ</a></li>
 
                                         <li><a href="${url}enrolment/">THÔNG TIN TUYỂN SINH</a></li>
                                         <li><a href="${url}faculty/">THÔNG TIN KHOA</a></li>

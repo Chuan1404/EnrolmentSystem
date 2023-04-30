@@ -55,5 +55,17 @@ public class QuestionsRepositoryImpl implements QuestionsRepository{
         Query q = session.createQuery(query);
         return q.getResultList();
     }
+
+    @Override
+    public Questions getQuestionById(int id) {
+        Session session = sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Questions> query = builder.createQuery(Questions.class);
+        Root root = query.from(Questions.class);
+        Predicate p = builder.equal(root.get("id"), id);
+        query.where(p);
+        Query q = session.createQuery(query);
+        return (Questions) q.getSingleResult();
+    }
     
 }
