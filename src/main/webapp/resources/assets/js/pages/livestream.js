@@ -4,6 +4,7 @@
  */
 
 
+<<<<<<< HEAD
 
 window.onload = function () {
     let startDate = document.getElementById("startDate");
@@ -41,6 +42,8 @@ window.onload = function () {
     }
 }
 
+=======
+>>>>>>> e26311bdbe29f65489905e2505d475a8f8f4b660
 function deleteLivestream(endPoint) {
     if (confirm("Xác nhận xóa?"))
         fetch(endPoint, {
