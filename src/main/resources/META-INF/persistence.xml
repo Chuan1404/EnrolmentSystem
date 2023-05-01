@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="com.java_EnrolmentSystem_war_1.0-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>com.java.pojos.Articles</class>
+    <class>com.java.pojos.Comments</class>
+    <class>com.java.pojos.Livestreams</class>
+    <class>com.java.pojos.Users</class>
+    <class>com.java.pojos.Faculties</class>
+    <class>com.java.pojos.Questions</class>
+    <class>com.java.pojos.Homepage</class>
+    <class>com.java.pojos.Images</class>
+    <class>com.java.pojos.Banners</class>
+    <class>com.java.pojos.Majors</class>
+    <class>com.java.pojos.Points</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/enrolment_system?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="Admin@123"/>
+    </properties>
+  </persistence-unit>
+</persistence>

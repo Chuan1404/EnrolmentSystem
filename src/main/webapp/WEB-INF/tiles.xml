@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache
+Software Foundation//DTD Tiles Configuration 3.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+    <definition name="base" template="/WEB-INF/components/base.jsp">
+        <put-attribute name="title" value="" />
+        <put-attribute name="header" value="/WEB-INF/components/header.jsp" />
+        <put-attribute name="content" value="" />
+        <put-attribute name="comment" value="" />
+        <put-attribute name="footer" value="/WEB-INF/components/footer.jsp" />
+        <put-attribute name="texteditor" value="" />
+    </definition>
+    
+    <definition name="index" extends="base">
+        <put-attribute name="title" value="Trang chủ" />
+        <put-attribute name="content" value="/WEB-INF/pages/index.jsp" />
+    </definition>
+    
+    <definition name="login" extends="base">
+        <put-attribute name="title" value="Đăng nhập" />
+        <put-attribute name="header" value="" />
+        <put-attribute name="content" value="/WEB-INF/pages/login.jsp" />
+        <put-attribute name="footer" value="" />
+    </definition>
+    
+    <definition name="register" extends="base">
+        <put-attribute name="title" value="Resgister" />
+        <put-attribute name="header" value="" />
+        <put-attribute name="content" value="/WEB-INF/pages/register.jsp" />
+        <put-attribute name="footer" value="" />
+    </definition>
+    <definition name="article" extends="base">
+        <put-attribute name="title" value="Bài viết" />
+        <put-attribute name="header" value=""/>
+        <put-attribute name="content" value="/WEB-INF/pages/article.jsp"/>
+        <put-attribute name="footer" value=""/>
+        <!--<put-attribute name="texteditor" value="/WEB-INF/components/texteditor.jsp"/>-->
+    </definition>
+    <definition name="enrolment" extends="base">
+        <put-attribute name="title" value="Enrolment" />
+        <put-attribute name="content" value="/WEB-INF/pages/enrolment.jsp"/>
+    </definition>
+    <definition name="enrolment-detail" extends="base">
+        <put-attribute name="title" value="Enrolment" />
+        <put-attribute name="content" value="/WEB-INF/pages/enrolment-detail.jsp"/>
+        <put-attribute name="comment" value="/WEB-INF/components/comment.jsp" />
+    </definition>
+    <definition name="enrolment-list" extends="base">
+        <put-attribute name="title" value="Enrolment List" />
+        <put-attribute name="content" value="/WEB-INF/pages/enrolment-list.jsp"/>
+    </definition>
+    <definition name="livestream" extends="base">
+        <put-attribute name="title" value="Livestream" />
+        <put-attribute name="content" value="/WEB-INF/pages/livestream.jsp"/>
+    </definition>
+    <definition name="livestream-detail" extends="base">
+        <put-attribute name="title" value="Livestream" />
+        <put-attribute name="content" value="/WEB-INF/pages/livestream-detail.jsp" />
+    </definition>
+    <definition name="livestream-questions" extends="base">
+        <put-attribute name="title" value="Livestream" />
+        <put-attribute name="content" value="/WEB-INF/pages/livestream-questions.jsp" />
+    </definition>
+    <definition name="faculty" extends="base">
+        <put-attribute name="title" value="Faculty"/>
+        <put-attribute name="content" value="/WEB-INF/pages/faculty.jsp"/>
+    </definition>
+    <definition name="faculty-detail" extends="base">
+        <put-attribute name="title" value="Faculty Detail"/>
+        <put-attribute name="content" value="/WEB-INF/pages/faculty-detail.jsp"/>
+    </definition>
+    <!--Admin page here-->
+    <definition name="admin-base" template="/WEB-INF/components/admin-base.jsp">
+        <put-attribute name="title" value="Admin page"/>
+        <put-attribute name="content" value=""/>
+    </definition>
+    <definition name="admin-article" extends="admin-base">
+        <put-attribute name="content" value="/WEB-INF/admin/article.jsp"/>
+    </definition>
+    <definition name="admin-homepage" extends="admin-base">
+        <put-attribute name="content" value="/WEB-INF/admin/homepage.jsp"/>
+    </definition>
+    <definition name="admin-livestream" extends="admin-base">
+        <put-attribute name="content" value="/WEB-INF/admin/livestream.jsp"/>
+    </definition>
+    <definition name="admin-faculties" extends="admin-base">
+        <put-attribute name="content" value="/WEB-INF/admin/faculty.jsp"/>
+    </definition>
+    
+    <definition name="googleLogin" extends="base">
+        <put-attribute name="content" value="/WEB-INF/admin/faculty.jsp"/>
+    </definition>
+</tiles-definitions>
