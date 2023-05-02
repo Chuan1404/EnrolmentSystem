@@ -42,11 +42,8 @@ public class LivestreamsServiceImpl implements LivestreamsService {
 
     @Override
     public boolean addOrUpdateLivestream(Livestreams livestream) {
-<<<<<<< HEAD
         if (!livestream.getFile().isEmpty()) {
-=======
-        if (livestream.getFile() != null) {
->>>>>>> e26311bdbe29f65489905e2505d475a8f8f4b660
+
             try {
                 Map res = cloudinary.uploader().upload(livestream.getFile().getBytes(), ObjectUtils.asMap("resource_type", "auto"));
                 livestream.setImage(res.get("secure_url").toString());

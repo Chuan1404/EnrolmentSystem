@@ -4,8 +4,6 @@
  */
 
 
-<<<<<<< HEAD
-
 window.onload = function () {
     let startDate = document.getElementById("startDate");
     let duration = document.getElementById("duration");
@@ -40,17 +38,4 @@ window.onload = function () {
         questionDuration.max = (edate.getTime() - sdate.getTime()) / 60000;
         
     }
-}
-
-=======
->>>>>>> e26311bdbe29f65489905e2505d475a8f8f4b660
-function deleteLivestream(endPoint) {
-    if (confirm("Xác nhận xóa?"))
-        fetch(endPoint, {
-            method: "delete"
-        })
-                .then(() => {
-                    location.reload();
-                }
-                );
 }

@@ -47,29 +47,18 @@ public class AdminLivestreamController {
 
     @PostMapping(value = "/")
     public String addLivestream(Model model, @ModelAttribute(value = "livestream") @Valid Livestreams livestream, BindingResult result) {
-<<<<<<< HEAD
         if (livestream.getFile().isEmpty() && livestream.getId() == null) {
             result.rejectValue("file", "form.error.null");
         }
 
-=======
-
-        if(livestream.getFile().isEmpty() && livestream.getId() == null) {
-            result.rejectValue("file", "form.error.null");
-        }
         
->>>>>>> e26311bdbe29f65489905e2505d475a8f8f4b660
         if (result.hasErrors()) {
             List<Livestreams> livestreams = livestreamsService.getLivestreams(null);
             List<Users> users = userService.getUsersByUserRole(UserRole.ROLE_TUVAN);
             model.addAttribute("users", users);
             model.addAttribute("livestream", livestream);
             model.addAttribute("livestreams", livestreams);
-<<<<<<< HEAD
-            System.out.println("--------------------------");
-            System.out.println(livestream.getDuration());
-=======
->>>>>>> e26311bdbe29f65489905e2505d475a8f8f4b660
+
             return "admin-livestream";
         }
 
