@@ -9,8 +9,14 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-
 <!DOCTYPE html>
+<style>
+    #admin-livestream input.disable,
+    #admin-livestream select.disable {
+        pointer-events: none;
+        background: #ddd;
+    }
+</style>
 <main id="admin-livestream">
     <div class="container-fluid py-5">
         <c:url value="/admin/livestream/" var="action"/>
@@ -45,21 +51,21 @@
             <form:errors path="duration" cssClass="text-danger" />
             <div class="form-group">
                 <label for="duration">Thời lượng livestream (phút)</label>
-                <form:input path="duration" class="form-control" type="number" disabled="true"/>
+                <form:input path="duration" class="form-control disable" type="number"/>
 
             </div>
 
             <form:errors path="startQuestionTime" cssClass="text-danger" />
             <div class="form-group">
                 <label for="startQuestionTime">Giờ bắt đầu đặt câu hỏi (trong lúc livestream)</label>
-                <form:input path="startQuestionTime" class="form-control" type="time" disabled="true"/>
+                <form:input path="startQuestionTime" class="form-control disable" type="time"/>
 
             </div>
 
             <form:errors path="questionDuration" cssClass="text-danger" />
             <div class="form-group">
                 <label for="questionDuration">Giờ kết thúc đặt câu hỏi (trong lúc livestream)</label>
-                <form:input path="questionDuration" class="form-control" type="number" disabled="true"/>
+                <form:input path="questionDuration" class="form-control disable" type="number"/>
             </div>
 
             <div class="form-group">

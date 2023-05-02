@@ -13,6 +13,7 @@ import com.java.services.QuestionsService;
 import com.java.services.UsersService;
 import java.security.Principal;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -35,64 +36,70 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping(value = "/livestream")
 public class LivestreamController {
-    
+
     @Autowired
     private LivestreamsService livestreamsService;
-    
+
     @Autowired
     private UsersService userService;
-    
+
     @Autowired
     private QuestionsService questionService;
-    
+
     @Autowired
     private EmailService emailService;
-    
-    
-    
+
     @GetMapping(value = "/")
     public String index(Model model, Principal principal) {
         Map<String, String> params = new HashMap<>();
-        
+
         LocalDate date = LocalDate.now();
         params.put("date", date.toString());
-        
+
         List<Livestreams> livestreams = livestreamsService.getLivestreams(params);
-        
-        
-        model.addAttribute("livestreams",livestreams);
-        
-        
+
+        model.addAttribute("livestreams", livestreams);
+
         return "livestream";
     }
-    
+
     @GetMapping(value = "/{id}")
     public String detail(Model model, @PathVariable(value = "id") String id) {
-        model.addAttribute("livestream", livestreamsService.getLiveStreamById(id));
+        Livestreams livestream = livestreamsService.getLiveStreamById(id);
+        
+        Date sTime = new Date(livestream.getStartQuestionTime().getTime());
+        Date nTime = new Date((LocalTime.now().getHour() - 8) * 60 * 60000 + LocalTime.now().getMinute() * 60000);
+        Date eTime = new Date(sTime.getTime() + livestream.getQuestionDuration() * 60000);
+
+
+        model.addAttribute("livestream", livestream);
+        model.addAttribute("eTime", eTime);
+        model.addAttribute("nTime", nTime);
+        model.addAttribute("sTime", sTime);
         model.addAttribute("question", new Questions());
         return "livestream-detail";
     }
-    
+
     @PostMapping(value = "/{id}/question")
-    public String addQuestion(@ModelAttribute Questions question, @PathVariable(value="id") String streamId,
+    public String addQuestion(@ModelAttribute Questions question, @PathVariable(value = "id") String streamId,
             Principal principal) {
         Users user = userService.getUsersByUsername(principal.getName());
         Livestreams livestream = livestreamsService.getLiveStreamById(streamId);
         question.setUserId(user);
         question.setLivestreamId(livestream);
-        
+
         if (questionService.addQuestion(question)) {
             String subject = "Câu hỏi mới từ livestream \"" + livestream.getTitle() + "";
             String content = "Bạn nhận được câu hỏi mới từ bạn " + user.getName()
-                    + "\n đến xem câu hỏi tại đường link " 
-                    + "http://localhost:8080/EnrolmentSystem/livestream/" 
-                    + livestream.getId()+ "/questions";
+                    + "\n đến xem câu hỏi tại đường link "
+                    + "http://localhost:8080/EnrolmentSystem/livestream/"
+                    + livestream.getId() + "/questions";
             emailService.sendEmail(livestream.getUserId().getEmail(), subject, content);
             return "redirect:/livestream/";
         }
         return "redirect:/";
     }
-    
+
     @GetMapping(value = "/{id}/questions")
     public String questions(@PathVariable("id") String id, Model model, @RequestParam(value = "page", required = false) Integer page) {
         List<Questions> questions = questionService.getQuestionsByLivestreamId(livestreamsService.getLiveStreamById(id));
@@ -100,10 +107,9 @@ public class LivestreamController {
             questions = new ArrayList<>();
         }
         model.addAttribute("questions", questions);
-        model.addAttribute("pageLimit",Math.ceil(questions.size() / 25));
+        model.addAttribute("pageLimit", Math.ceil(questions.size() / 25));
         model.addAttribute("activePage", page);
         return "livestream-questions";
     }
-    
-    
+
 }

@@ -42,34 +42,37 @@
 
                         </div>
                     </div>
-                   
-                    <sec:authorize access="isAuthenticated()">
-                        <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_USER')">
-                            <div class="comment-form">
-                                <h4>Leave a Question</h4>
 
-                                <c:url value="/livestream/${livestream.id}/question" var="action"/>
-                                <form:form class="form-contact comment_form" action="${action}" modelAttribute="question">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="form-group">
-                                                <form:textarea class="form-control w-100" name="content" id="content" cols="30" rows="9"
-                                                               placeholder="Write Comment" path="content"></form:textarea>
+                    <c:if test="${date gt livestream.startDate && sTime.getTime() <= nTime.getTime() && nTime.getTime() <= eTime.getTime() || date lt livestream.startDate}">
+                        <sec:authorize access="isAuthenticated()">
+                            <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_USER')">
+                                <div class="comment-form">
+                                    <h4>Leave a Question</h4>
+
+                                    <c:url value="/livestream/${livestream.id}/question" var="action"/>
+                                    <form:form class="form-contact comment_form" action="${action}" modelAttribute="question">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <form:textarea class="form-control w-100" name="content" id="content" cols="30" rows="9"
+                                                                   placeholder="Write Comment" path="content"></form:textarea>
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                        </div>
-                                        <div class="form-group">
-                                            <button type="submit" class="button button-contactForm btn_1 boxed-btn">Gửi câu hỏi</button>
-                                        </div>
-                                </form:form>
-                            </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <button type="submit" class="button button-contactForm btn_1 boxed-btn">Gửi câu hỏi</button>
+                                            </div>
+                                    </form:form>
+                                </div>
+                            </sec:authorize>
+                            <sec:authorize access="hasRole('ROLE_TUVAN')">
+                                <c:url value="/livestream/${livestream.id}/questions" var="questions"/>
+                                <button class="button button-contactForm boxed-btn"><a href="${questions}" class="text-danger">Đến xem câu hỏi</a></button>
+                            </sec:authorize>
                         </sec:authorize>
-                        <sec:authorize access="hasRole('ROLE_TUVAN')">
-                            <c:url value="/livestream/${livestream.id}/questions" var="questions"/>
-                            <button class="button button-contactForm boxed-btn"><a href="${questions}" class="text-danger">Đến xem câu hỏi</a></button>
-                        </sec:authorize>
-                    </sec:authorize>
+                    </c:if>
+
                 </div>
 
 

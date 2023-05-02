@@ -11,10 +11,11 @@ window.onload = function () {
     let questionDuration = document.getElementById("questionDuration");
     startDate.onchange = function (e) {
         duration.disabled = false;
+        duration.classList.remove("disable")
     }
 
     duration.onchange = function (e) {
-        startQuestionTime.disabled = false;
+        startQuestionTime.classList.remove("disable");
 
         let sdate = new Date(startDate.value);
         startQuestionTime.min = sdate.getHours() + ":" + sdate.getMinutes();
@@ -24,7 +25,7 @@ window.onload = function () {
     }
 
     startQuestionTime.onchange = function (e) {
-        questionDuration.disabled = false;
+        questionDuration.classList.remove("disable")
 
         let hour = e.target.value.split(":")[0];
         let minute = e.target.value.split(":")[1];
