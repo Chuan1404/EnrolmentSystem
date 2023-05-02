@@ -51,6 +51,7 @@ public class AdminLivestreamController {
             result.rejectValue("file", "form.error.null");
         }
 
+        System.out.println("--------------------------------");
         System.out.println(livestream.getQuestionDuration());
         if (result.hasErrors()) {
             List<Livestreams> livestreams = livestreamsService.getLivestreams(null);
