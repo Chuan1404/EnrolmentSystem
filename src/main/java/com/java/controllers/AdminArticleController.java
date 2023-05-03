@@ -71,7 +71,6 @@ public class AdminArticleController {
 
         if (result.hasErrors()) {
             Long totalArticle = articleService.getTotalRow(null);
-
             params.put("limit", "10");
             params.put("totalArticles", totalArticle.toString());
             if (params.get("page") == null) {
