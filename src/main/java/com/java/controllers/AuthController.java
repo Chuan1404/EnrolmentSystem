@@ -86,6 +86,15 @@ public class AuthController {
 
         // get user by token
         UserDetails userDetails = usersService.loadUsersByFacebook(userCredential.getAccessToken());
+        Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        try {
+            loginHandler.onAuthenticationSuccess(request, response, authentication);
+        } catch (IOException ex) {
+            Logger.getLogger(AuthController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ServletException ex) {
+            Logger.getLogger(AuthController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @GetMapping(value = "/login")

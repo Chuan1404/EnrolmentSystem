@@ -48,7 +48,7 @@ public class AdminFacultyController {
     @PostMapping("/")
     public String addFaculty(@ModelAttribute("faculty") @Valid Faculties faculty, Model model, BindingResult result) {
         System.out.println(faculty);
-        
+
 //        System.out.println("CONTROLLER");
 //        if (result.hasErrors()) {
 //            System.out.println("ERROR");
@@ -62,7 +62,7 @@ public class AdminFacultyController {
 //        if (facultiesService.saveOrUpdateFaculty(faculty)) {
 //            return "redirect:/admin/faculties/";
 //        }
-model.addAttribute("faculty", new Faculties());
+        model.addAttribute("faculty", new Faculties());
         return "admin-faculties";
 
     }

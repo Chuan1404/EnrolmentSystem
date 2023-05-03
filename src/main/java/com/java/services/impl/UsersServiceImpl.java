@@ -148,12 +148,34 @@ public class UsersServiceImpl implements UsersService {
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> request = new HttpEntity<>(headers);
 
-        String url = "https://graph.facebook.com/v12.0/me?fields=id,name,phone,email,picture&access_token=" + accessToken;
+        String url = "https://graph.facebook.com/v12.0/me?fields=id,name,email,picture&access_token=" + accessToken;
 
         ResponseEntity<Map> response = restTemplate.exchange(url, HttpMethod.GET, request, Map.class);
         Map responseBody = response.getBody();
 
         System.out.println(responseBody);
-        return null;
+        Map picture = (Map) responseBody.get("picture");
+        Map data = (Map) picture.get("data");
+        Users user = getUserByEmail(responseBody.get("email").toString());
+        // email khong ton tai tren database
+        if (user == null) {
+            user = new Users();
+            user.setAvatar(data.get("url").toString());
+            user.setUsername(responseBody.get("email").toString());
+            user.setName(responseBody.get("name").toString());
+            user.setEmail(responseBody.get("email").toString());
+            user.setPassword("");
+
+            boolean isSuccess = usersRepository.addOrUpdateUser(user);
+            if (isSuccess) {
+                user = getUserByEmail(responseBody.get("email").toString());
+            } else {
+                return null;
+            }
+        }
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority(user.getUserRole()));
+        UserDetails userDetails = new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
+        return userDetails;
     }
 }

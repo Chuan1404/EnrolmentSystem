@@ -2,11 +2,16 @@ package com.java.configs;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.java.formatter.ArticlesFormatter;
+import com.java.formatter.MajorsFormatter;
+import com.java.formatter.UsersFormatter;
+import com.java.pojos.Majors;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
@@ -84,5 +89,11 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
         return validator();
     }
 
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addFormatter(new UsersFormatter());
+        registry.addFormatter(new ArticlesFormatter());
+        registry.addFormatter(new MajorsFormatter());
+    }
 
 }

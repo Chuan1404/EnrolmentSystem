@@ -102,7 +102,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         return ClientRegistration.withRegistrationId("google")
                 .clientId("128479845058-anu704t9t483ohtf7ok3p67t6iau78sf.apps.googleusercontent.com")
                 .clientSecret("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")
-                .scope(Arrays.asList("email", "profile", "phone").toArray(new String[0]))
+                .scope(Arrays.asList("email", "profile").toArray(new String[0]))
                 .authorizationUri("https://accounts.google.com/o/oauth2/v2/auth")
                 .tokenUri("https://www.googleapis.com/oauth2/v4/token")
                 .jwkSetUri("https://www.googleapis.com/oauth2/v3/certs")
