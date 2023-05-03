@@ -84,20 +84,6 @@
 
                                     </form:form>
 
-                                    <div class="row">
-                                        <div class="pt-1 mb-4 col-md-6 col-12 text-center">
-                                            <a id="facebook-btn" class="btn btn-primary" style="background: #3b5998;" href="#!" role="button"
-                                               ><i class="fab fa-facebook-f"></i
-                                                ></a>
-                                        </div>
-                                        <div class="pt-1 mb-4 col-md-6 col-12 text-center">
-                                            <a id="google-btn" class="btn btn-primary" style="background: #dd4b39;" href="#!" role="button"
-                                               ><i class="fab fa-google"></i
-                                                ></a>
-                                        </div>
-                                    </div>
-
-
                                         <p class="mb-5 pb-lg-2" style="color: #393f81;">Already have account? <a href="<c:url value="/auth/login" />"
                                                                                                              style="color: #393f81;">Login here</a></p>
                                 </div>

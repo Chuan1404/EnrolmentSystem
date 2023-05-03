@@ -49,7 +49,7 @@
 
                                     <div class="row">
                                         <div class="pt-1 mb-4 col-md-6 col-12 text-center">
-                                            <a id="facebook-btn" class="btn btn-primary" style="background: #3b5998;" href="#!" role="button"
+                                            <a id="facebook-btn" class="btn btn-primary" style="background: #3b5998;" href="<c:url value="/oauth2/authorization/facebook" />" role="button"
                                                ><i class="fab fa-facebook-f"></i
                                                 ></a>
                                         </div>

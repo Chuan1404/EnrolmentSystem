@@ -26,6 +26,8 @@ public interface UsersService extends UserDetailsService {
 
     public UserDetails loadUsersByGoogle(String accessToken);
     
+    public UserDetails loadUsersByFacebook(String accessToken);
+    
     public List<Users> getUsersByUserRole(UserRole userRole);
 
 }

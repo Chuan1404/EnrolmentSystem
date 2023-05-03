@@ -7,6 +7,7 @@ package com.java.controllers;
 import com.java.handlers.LoginSuccessHandler;
 import com.java.models.UserCredential;
 import com.java.pojos.Users;
+import com.java.services.FacebookOAuthService;
 import com.java.services.GoogleOAuthService;
 import com.java.services.UsersService;
 import java.io.IOException;
@@ -42,23 +43,29 @@ public class AuthController {
     GoogleOAuthService googleService;
 
     @Autowired
+    FacebookOAuthService facebookService;
+
+    @Autowired
     private UsersService usersService;
 
     @Autowired
     private LoginSuccessHandler loginHandler;
 
     @GetMapping("/login-google")
-    public void loginGoogle(HttpSession session, HttpServletRequest request , HttpServletResponse response) {
+    public void loginGoogle(HttpSession session, HttpServletRequest request, HttpServletResponse response) {
         String code = request.getParameter("code");
         String state = request.getParameter("state");
         // get token
         UserCredential userCredential = googleService.getAccessToken(code, state);
+
+        //saveTOken
         session.setAttribute("userCredential", userCredential);
+
         // get user by token
         UserDetails userDetails = usersService.loadUsersByGoogle(userCredential.getAccessToken());
         Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        
+
         try {
             loginHandler.onAuthenticationSuccess(request, response, authentication);
         } catch (IOException ex) {
@@ -66,6 +73,19 @@ public class AuthController {
         } catch (ServletException ex) {
             Logger.getLogger(AuthController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @GetMapping("/login-facebook")
+    public void loginFacebook(HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+        String code = request.getParameter("code");
+        // get token
+        UserCredential userCredential = facebookService.getAccessToken(code);
+
+        //saveTOken
+        session.setAttribute("userCredential", userCredential);
+
+        // get user by token
+        UserDetails userDetails = usersService.loadUsersByFacebook(userCredential.getAccessToken());
     }
 
     @GetMapping(value = "/login")
@@ -77,7 +97,6 @@ public class AuthController {
         model.addAttribute("user", new Users());
         return "login";
     }
-
 
     @GetMapping(value = "/register")
     public String register(Model model) {
@@ -93,7 +112,7 @@ public class AuthController {
         if (result.getFieldValue("password").toString().isEmpty()) {
             result.rejectValue("password", "user.error.passwordLength");
         }
-        
+
         if (!result.getFieldValue("password").equals(result.getFieldValue("confirmPassword"))) {
             result.rejectValue("confirmPassword", "user.error.confirmPassword");
         }

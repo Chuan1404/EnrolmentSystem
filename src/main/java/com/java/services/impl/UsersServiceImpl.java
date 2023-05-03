@@ -6,25 +6,23 @@ package com.java.services.impl;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.java.enums.UserRole;
+import com.java.models.FacebookResponse;
 import com.java.models.GoogleResponse;
 import com.java.pojos.Users;
 import com.java.repositories.UsersRepository;
 import com.java.services.UsersService;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -141,5 +139,21 @@ public class UsersServiceImpl implements UsersService {
     @Override
     public List<Users> getUsersByUserRole(UserRole userRole) {
         return usersRepository.getUsersByUserRole(userRole);
+    }
+
+    @Override
+    public UserDetails loadUsersByFacebook(String accessToken) {
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<String> request = new HttpEntity<>(headers);
+
+        String url = "https://graph.facebook.com/v12.0/me?fields=id,name,phone,email,picture&access_token=" + accessToken;
+
+        ResponseEntity<Map> response = restTemplate.exchange(url, HttpMethod.GET, request, Map.class);
+        Map responseBody = response.getBody();
+
+        System.out.println(responseBody);
+        return null;
     }
 }
