@@ -11,9 +11,13 @@ import com.java.services.ArticlesService;
 import com.java.services.FacultiesService;
 import java.util.ArrayList;
 import java.util.List;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,28 +30,43 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/admin/faculties")
 public class AdminFacultyController {
-    
+
     @Autowired
     private FacultiesService facultiesService;
-    
+
     @Autowired
     private ArticlesService articlesService;
-    
-    @GetMapping("/") 
+
+    @GetMapping("/")
     public String faculty(Model model) {
         List<Faculties> faculties = facultiesService.getFaculties();
         model.addAttribute("faculty", new Faculties());
         model.addAttribute("faculties", faculties);
         return "admin-faculties";
     }
-    
+
     @PostMapping("/")
-    public String addFaculty(@ModelAttribute("faculty") Faculties faculty) {
+    public String addFaculty(@ModelAttribute("faculty") @Valid Faculties faculty, Model model, BindingResult result) {
+        System.out.println(faculty);
         
-        facultiesService.saveOrUpdateFaculty(faculty);
-        return "redirect:/admin/faculties/";
+//        System.out.println("CONTROLLER");
+//        if (result.hasErrors()) {
+//            System.out.println("ERROR");
+//
+//            List<Faculties> faculties = facultiesService.getFaculties();
+//            model.addAttribute("faculty", new Faculties());
+//            model.addAttribute("faculties", faculties);
+//            return "admin-faculties";
+//        }
+//
+//        if (facultiesService.saveOrUpdateFaculty(faculty)) {
+//            return "redirect:/admin/faculties/";
+//        }
+model.addAttribute("faculty", new Faculties());
+        return "admin-faculties";
+
     }
-    
+
     @GetMapping("/{id}")
     public String updateFaculty(Model model, @ModelAttribute("id") int id) {
         model.addAttribute("faculty", facultiesService.getFacultyById(id));
