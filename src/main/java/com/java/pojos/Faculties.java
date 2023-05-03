@@ -18,6 +18,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -45,10 +46,11 @@ public class Faculties implements Serializable {
 
     @OneToMany(mappedBy = "faculty")
     private Set<Majors> majorsSet;
-
-    @Size(max = 50)
+    @NotNull
+    @Size(min = 11)
     @Column(name = "video")
     private String video;
+    @NotNull
     @Size(max = 100)
     @Column(name = "url")
     private String url;
@@ -56,6 +58,7 @@ public class Faculties implements Serializable {
     @Basic(optional = false)
     @Size(min = 1, max = 50)
     @Column(name = "name")
+    @NotNull
     private String name;
     @JoinColumn(name = "article_id", referencedColumnName = "id")
     @OneToOne(optional = false)

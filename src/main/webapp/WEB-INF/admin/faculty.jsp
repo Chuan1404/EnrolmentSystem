@@ -12,22 +12,26 @@
         <c:url value="/admin/faculties/" var="action"/>
         <form:form class="col-8 mx-auto" action="${action}" method="post" modelAttribute="faculty">
 
-            <div class="form-group">
-                <label for="name">Name</label>
-                <form:input path="name" class="form-control" placeholder="Enter faculty's name here..."/>
-            </div>
+            
 
+            <form:errors path="video" cssClass="text-danger"/>
             <div class="form-group">
                 <label for="video">Video</label>
                 <form:input path="video" class="form-control" placeholder="Enter faculty's video here..."/>
             </div>
+            
+            <form:errors path="url" cssClass="text-danger"/>
             <div class="form-group">
                 <label for="url">URL</label>
                 <form:input path="url" class="form-control" placeholder="Enter faculty's website link here..."/>
             </div>
+            <form:errors path="name" cssClass="text-danger"/>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <form:input path="name" class="form-control" placeholder="Enter faculty's name here..."/>
+            </div>
             <c:choose>
-                <c:when test="${faculty.id != null}">
-                    <form:hidden path="id"/>
+                <c:when test="${faculty.id == null}">
                     <button type="submit" class="genric-btn primary e-large">Submit</button>
                 </c:when>
                 <c:otherwise>
