@@ -134,11 +134,6 @@
             <artifactId>spring-security-taglibs</artifactId>
             <version>5.5.1</version>
         </dependency>
-        <!--        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-websocket</artifactId>
-            <version>6.0.6</version>
-        </dependency>-->
 
         <!-- https://mvnrepository.com/artifact/com.google.firebase/firebase-admin -->
         <dependency>
@@ -146,30 +141,6 @@
             <artifactId>firebase-admin</artifactId>
             <version>8.0.0</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.springframework/spring-messaging -->
-        <!--        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-messaging</artifactId>
-            <version>6.0.6</version>
-        </dependency>-->
-        <!-- https://mvnrepository.com/artifact/org.webjars/webjars-locator-core -->
-        <!--        <dependency>
-           <groupId>org.webjars</groupId>
-           <artifactId>webjars-locator-core</artifactId>
-           <version>0.52</version>
-       </dependency>
-        https://mvnrepository.com/artifact/org.webjars/sockjs-client -->
-        <!--        <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>sockjs-client</artifactId>
-            <version>1.5.1</version>
-        </dependency>-->
-        <!--         https://mvnrepository.com/artifact/org.webjars/stomp-websocket 
-        <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>stomp-websocket</artifactId>
-            <version>2.3.4</version>
-        </dependency>-->
 
         <dependency>
             <groupId>com.google.guava</groupId>
@@ -186,6 +157,13 @@
             <artifactId>mail</artifactId>
             <version>1.4.7</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.sun.mail/javax.mail -->
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>1.6.2</version>
+        </dependency>
+
 
 
     </dependencies>

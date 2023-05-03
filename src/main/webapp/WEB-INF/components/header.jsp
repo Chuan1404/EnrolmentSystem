@@ -48,14 +48,6 @@ Author     : AnChuPC
                                         <li><a href="${url}enrolment/">THÔNG TIN TUYỂN SINH</a></li>
                                         <li><a href="${url}faculty/">THÔNG TIN KHOA</a></li>
                                         <li><a href="${url}livestream/">Thông tin Livestream</a></li>
-                                        <!--                                        <li><a href="#">Pages</a>
-                                                                                    <ul class="submenu">
-                                                                                        <li><a href="blog.html">Blog</a></li>
-                                                                                        <li><a href="blog_details.html">Blog Details</a></li>
-                                                                                        <li><a href="elements.html">Element</a></li>
-                                                                                    </ul>
-                                                                                </li>-->
-
                                     </ul>
                                 </nav>
                             </div>
@@ -63,13 +55,14 @@ Author     : AnChuPC
                         <div class="col-xl-4 col-lg-4 col-md-4">
                             <div class="header-right f-right d-none d-lg-block">
                                 <!-- Heder social -->
-                                <ul class="header-social">    
+                                <ul class="header-social d-flex">    
 
                                     <c:set var="currentUser" value="${pageContext.request.session.getAttribute('currentUser')}" />
                                     <c:choose>
                                         <c:when test="${pageContext.request.userPrincipal.name != null}">
-                                            <li> <a href="#">Chào ${currentUser.name}</a></li>
-                                            <li> <a href="<c:url value="/logout" />">Đăng xuất</a></li>
+                                            <li class="mr-1"><img width="50" src="${currentUser.avatar}" /></li>
+                                            <li> <a class="p-0" href="#">Chào, ${currentUser.name}</a></li>
+                                            <li style="white-space: nowrap;"> <a href="<c:url value="/logout" />">Đăng xuất</a></li>
                                             </c:when>
                                             <c:otherwise>
                                             <li> <a href="<c:url value="/auth/login" />">Đăng nhập</a></li>
