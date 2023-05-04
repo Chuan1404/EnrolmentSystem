@@ -47,11 +47,11 @@ public class Faculties implements Serializable {
     @OneToMany(mappedBy = "faculty")
     private Set<Majors> majorsSet;
     @NotNull
-    @Size(min = 11)
+    @Size(min = 11, max = 11)
     @Column(name = "video")
     private String video;
     @NotNull
-    @Size(max = 100)
+    @Size(min = 1,max = 100)
     @Column(name = "url")
     private String url;
 

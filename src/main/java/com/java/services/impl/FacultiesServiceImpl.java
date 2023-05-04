@@ -42,7 +42,7 @@ public class FacultiesServiceImpl implements FacultiesService {
     @Override
     public boolean saveOrUpdateFaculty(Faculties faculty) {
         Articles article = new Articles();
-        article.setTitle("Thông tin khoa " + faculty.getName());
+        article.setTitle("Thong tin khoa " + faculty.getName());
         article.setArticleType(ArticleType.KHOA.name());
         article.setCreatedDate(new Date());
         article.setUpdateDate(new Date());
