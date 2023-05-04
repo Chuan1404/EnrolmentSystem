@@ -11,6 +11,7 @@ import com.java.services.ArticlesService;
 import com.java.services.FacultiesService;
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,22 +47,20 @@ public class AdminFacultyController {
     }
 
     @PostMapping("/")
-    public String addFaculty(@ModelAttribute("faculty") @Valid Faculties faculty, Model model, BindingResult result) {
-        System.out.println(faculty);
+    public String addFaculty(@Valid @ModelAttribute("faculty") Faculties faculty, BindingResult result, HttpSession session, Model model) {
+        
+        if (result.hasErrors()) {
+            
 
-//        System.out.println("CONTROLLER");
-//        if (result.hasErrors()) {
-//            System.out.println("ERROR");
-//
-//            List<Faculties> faculties = facultiesService.getFaculties();
-//            model.addAttribute("faculty", new Faculties());
-//            model.addAttribute("faculties", faculties);
-//            return "admin-faculties";
-//        }
-//
-//        if (facultiesService.saveOrUpdateFaculty(faculty)) {
-//            return "redirect:/admin/faculties/";
-//        }
+            List<Faculties> faculties = facultiesService.getFaculties();
+            model.addAttribute("faculty", faculty);
+            model.addAttribute("faculties", faculties);
+            return "admin-faculties";
+        }
+
+        if (facultiesService.saveOrUpdateFaculty(faculty)) {
+            return "redirect:/admin/faculties/";
+        }
         model.addAttribute("faculty", new Faculties());
         return "admin-faculties";
 
